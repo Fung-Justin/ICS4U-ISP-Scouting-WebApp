@@ -6,21 +6,21 @@
           <div class="card text-light mx-auto">
             <form>
               <div class="mb-3">
-                <h2 class="form-label fw-bold my-4">Username</h2>
+                <h3 class="form-label fw-bold my-4">New Username</h3>
                 <input
                   type="username"
                   class="form-control mx-auto auth"
                   id="username"
-                  placeholder="Enter Username"
+                  placeholder="Enter New Username"
                 />
               </div>
               <div class="mb-3">
-                <h2 class="form-label fw-bold my-4">Password</h2>
+                <h3 class="form-label fw-bold my-4">New Password</h3>
                 <input
                   type="password"
                   class="form-control mx-auto auth"
                   id="password"
-                  placeholder="Enter Password"
+                  placeholder="Enter New Password"
                 />
                 <input
                   class="ml-3 form-check-input"
@@ -33,16 +33,32 @@
                   Show Password
                 </label>
               </div>
-              <router-link id="link" class="h5" to="/create-account"
-                >Create a new account</router-link
-              >
+              <div class="mb-3">
+                <h3 class="form-label fw-bold my-4">Confirm New Password</h3>
+                <input
+                  type="password"
+                  class="form-control mx-auto auth"
+                  id="repeat-password"
+                  placeholder="Confirm Password"
+                />
+                <input
+                  class="ml-3 form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="repeat-checkbox"
+                  v-on:click="checkValue()"
+                />
+                <label class="form-check-label box-text" for="flexCheckDefault">
+                  Show Password
+                </label>
+              </div>
               <div>
                 <button
-                  id="login"
+                  id="create"
                   type="button"
                   class="btn px-3 mt-3 mb-4 btn-lg"
                 >
-                  Login
+                  Create
                 </button>
               </div>
             </form>
@@ -55,25 +71,45 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "Create Account",
   methods: {
     checkValue() {
       let check = document.querySelector("#checkbox");
       let password = document.querySelector("#password");
+      let confirmCheck = document.querySelector("#repeat-checkbox");
+      let confirmPassword = document.querySelector("#repeat-password");
 
       if (check.checked == true) {
         password.type = "textbox";
       } else if (check.checked == false) {
         password.type = "password";
       }
+
+      if (confirmCheck.checked == true) {
+        confirmPassword.type = "textbox";
+      } else if (confirmCheck.checked == false) {
+        confirmPassword.type = "password";
+      }
     },
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
 .card {
   border-radius: 10px;
   background-color: #422d53;
@@ -82,24 +118,13 @@ export default {
 .auth {
   width: 75%;
 }
-/** .img {
-  background-image: url("../image.jpg");
-}
-*/
-#link {
-  text-decoration: none;
-  color: white;
-  transition-duration: 0.4s;
-}
-#link:hover {
-  color: rgb(199, 199, 199);
-}
-#login:hover {
+
+#create:hover {
   background-color: white;
   color: black;
   border: 4px solid #201f41;
 }
-#login {
+#create {
   border-radius: 8px;
   transition-duration: 0.4s;
   background-color: #201f41;
@@ -116,5 +141,10 @@ export default {
 }
 .box-text {
   margin-top: 4px;
+}
+#repeat-checkbox {
+  margin-top: 7px;
+  background-color: #201f41;
+  border: 1px solid white;
 }
 </style>
