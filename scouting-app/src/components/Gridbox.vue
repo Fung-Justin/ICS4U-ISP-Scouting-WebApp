@@ -1,25 +1,43 @@
 <template>
   <div class="container">
+    <!-- Grid formation -->
     <div class="cols">
-      <div class="bor">1</div>
-      <div class="bor">2</div>
-      <div class="bor">3</div>
-      <div class="bor">4</div>
-      <div class="bor-mid">5</div>
-      <div class="bor-mid">6</div>
-      <div class="bor-mid">7</div>
-      <div class="bor-mid">8</div>
-      <div class="bor">9</div>
-      <div class="bor">10</div>
-      <div class="bor">11</div>
-      <div class="bor">12</div>
+      <div class="bor" :style="{'background': s1}">1</div>
+      <div class="bor" :style="{'background': s1}">2</div>
+      <div class="bor" :style="{'background': s2}">3</div>
+      <div class="bor" :style="{'background': s2}">4</div>
+      <div class="bor-mid" :style="{'background': s1}">5</div>
+      <div class="bor-mid" :style="{'background': s1}">6</div>
+      <div class="bor-mid" :style="{'background': s2}">7</div>
+      <div class="bor-mid" :style="{'background': s2}">8</div>
+      <div class="bor" :style="{'background': s1}">9</div>
+      <div class="bor" :style="{'background': s1}">10</div>
+      <div class="bor" :style="{'background': s2}">11</div>
+      <div class="bor" :style="{'background': s2}">12</div>
     </div>
+    <button v-on:click=switchSides>Switch</button>
   </div>
 </template>
 
 <script>
 export default {
   name: "Grid",
+  data(){
+    return{
+      s1 : "",
+      s2 : ""
+    }
+  },
+  methods: {
+    switchSides(){
+      this.s1 = this.s1 === "#c0d8ed" ? "#edc0c8" : "#c0d8ed"
+      this.s2 = this.s2 === "#c0d8ed" ? "#edc0c8" : "#c0d8ed"
+    }
+  },
+  created(){
+    this.s1 = "#c0d8ed"
+    this.s2 = "#edc0c8"
+  }
 };
 </script>
 
@@ -41,7 +59,7 @@ a {
 }
 .card {
   border-radius: 10px;
-  background-color: #422d53;
+ /* background-color: #422d53;*/
   width: 50%;
 }
 .auth {

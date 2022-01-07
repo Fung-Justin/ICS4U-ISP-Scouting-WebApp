@@ -54,6 +54,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Login",
   methods: {
@@ -66,8 +67,8 @@ export default {
       } else if (check.checked == false) {
         password.type = "password";
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
