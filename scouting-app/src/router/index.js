@@ -17,7 +17,7 @@ const routes = [{
         path: '/create-account',
         name: 'Create Account',
         component: () =>
-            import ('../views/Create-Password.vue')
+            import ('../views/CreatePassword.vue')
     },
     {
         path: '/scout',
