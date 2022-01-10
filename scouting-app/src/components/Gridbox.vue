@@ -2,41 +2,40 @@
   <div class="container">
     <!-- Grid formation -->
     <div class="cols">
-      <div class="bor" :style="{'background': s1}">1</div>
-      <div class="bor" :style="{'background': s1}">2</div>
-      <div class="bor" :style="{'background': s2}">3</div>
-      <div class="bor" :style="{'background': s2}">4</div>
-      <div class="bor-mid" :style="{'background': s1}">5</div>
-      <div class="bor-mid" :style="{'background': s1}">6</div>
-      <div class="bor-mid" :style="{'background': s2}">7</div>
-      <div class="bor-mid" :style="{'background': s2}">8</div>
-      <div class="bor" :style="{'background': s1}">9</div>
-      <div class="bor" :style="{'background': s1}">10</div>
-      <div class="bor" :style="{'background': s2}">11</div>
-      <div class="bor" :style="{'background': s2}">12</div>
+      <div class="bor" :style="{background: [currentPos === 1 ? [ s1 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s1]}" v-on:click="setPosition(1)">1</div>
+      <div class="bor" :style="{background: [currentPos === 2 ? [ s1 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s1]}" v-on:click="setPosition(2)">2</div>
+      <div class="bor" :style="{background: [currentPos === 3 ? [ s2 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s2]}" v-on:click="setPosition(3)">3</div>
+      <div class="bor" :style="{background: [currentPos === 4 ? [ s2 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s2]}" v-on:click="setPosition(4)">4</div>
+      <div class="bor-mid" :style="{background: [currentPos === 5 ? [ s1 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s1]}" v-on:click="setPosition(5)">5</div>
+      <div class="bor-mid" :style="{background: [currentPos === 6 ? [ s1 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s1]}" v-on:click="setPosition(6)">6</div>
+      <div class="bor-mid" :style="{background: [currentPos === 7 ? [ s2 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s2]}" v-on:click="setPosition(7)">7</div>
+      <div class="bor-mid" :style="{background: [currentPos === 8 ? [ s2 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s2]}" v-on:click="setPosition(8)">8</div>
+      <div class="bor" :style="{background: [currentPos === 9 ? [ s1 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s1]}" v-on:click="setPosition(9)">9</div>
+      <div class="bor" :style="{background: [currentPos === 10 ? [ s1 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s1]}" v-on:click="setPosition(10)">10</div>
+      <div class="bor" :style="{background: [currentPos === 11 ? [ s2 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s2]}" v-on:click="setPosition(11)">11</div>
+      <div class="bor" :style="{background: [currentPos === 12 ? [ s2 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s2]}" v-on:click="setPosition(12)">12</div>
     </div>
-    <button v-on:click=switchSides>Switch</button>
   </div>
 </template>
 
 <script>
 export default {
   name: "Grid",
-  data(){
-    return{
-      s1 : "",
-      s2 : ""
-    }
-  },
-  methods: {
-    switchSides(){
-      this.s1 = this.s1 === "#c0d8ed" ? "#edc0c8" : "#c0d8ed"
-      this.s2 = this.s2 === "#c0d8ed" ? "#edc0c8" : "#c0d8ed"
+    props: ['s1', 's2', 'mode', 'gameState'],
+    data(){
+      return{
+        currentPos: Number
+      }
+    },
+    methods: {
+    //Sets the current position of the bot
+    setPosition(position){
+      if(this.mode !== 'playback' && (this.gameState !== 'pregame' || position === 5 || position === 8))
+      this.currentPos = position
     }
   },
   created(){
-    this.s1 = "#c0d8ed"
-    this.s2 = "#edc0c8"
+    console.log(this.s1, this.s2, this.currentPos)
   }
 };
 </script>
