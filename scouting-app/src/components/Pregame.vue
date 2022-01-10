@@ -26,12 +26,6 @@
   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked >
   <label class="form-check-label" for="flexSwitchCheckChecked">Qualification or Playoff</label>
 </div>
-
-<!-- Hatches Placed -->
-<button v-on:click="hatchScored+=1">+</button>
-<button>{{hatchScored}} Hatches</button>
-<button v-on:click="hatchScored-=(hatchScored===0?0:1)">-</button>
-
     
   <div class="form-group">
     <button v-on:click="$emit('flip')">Flip</button>
@@ -44,7 +38,6 @@
 export default ({
 data(){
     return{
-    hatchScored: 0
   }
 },
     methods:{

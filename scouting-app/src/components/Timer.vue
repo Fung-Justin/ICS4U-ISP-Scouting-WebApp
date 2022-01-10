@@ -12,14 +12,17 @@ data(){
         time: 0,
         timeString: '2:30',
         active: false,
-        timer: Number
+        timer: Number,
     };
 },
 methods: {
+    getTime(){
+        this.$emit('getTime', this.time.toFixed(1));
+    },
     startTimer(){
         this.active = true
         this.time = 0
-        this.timer = setInterval(this.updateTimer, 1000)
+        this.timer = setInterval(this.updateTimer, 100)
     },
     resetTimer(){
         this.active = false
@@ -36,13 +39,19 @@ methods: {
     },
     updateTimer(){
         if(this.time<150){
-            this.time+=1
+            this.time+=0.1
             this.timeString=Math.floor((150-this.time)/60)+":"
             if((150-this.time)%60<10)
                 this.timeString+="0"
-            this.timeString+=(150-this.time)%60
+            this.timeString+=Math.round((150-this.time)%60)
         }
     }
+},
+mounted(){
+      window.setInterval(() => {
+    this.getTime()
+  }, 100)
+
 }
 }
 </script>

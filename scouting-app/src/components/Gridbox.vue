@@ -42,28 +42,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-.card {
-  border-radius: 10px;
- /* background-color: #422d53;*/
-  width: 50%;
-}
-.auth {
-  width: 75%;
-}
+
 .cols {
   display: grid;
   grid-template-columns: 12.5% 37% 37% 12.5%;
@@ -84,8 +63,5 @@ a {
   border: 1px solid white;
   padding-bottom: 8.5em;
   padding-top: 8.5em;
-}
-.btn {
-  background-color: #201f41;
 }
 </style>

@@ -19,9 +19,18 @@
             <button v-on:click="defense=4"  :style="[defense === 4 ? 'background: #d0ddf7' : 'background: #FFF']">Unbreakable (4)</button>
         </section>
 
+        <!-- Misc -->
         <section>
+            <label>Scout Name: </label>
+            <input textarea>
             <label>Comments: </label>
             <input textarea>
+        </section>
+
+    <!-- Submit -->
+        <section>
+            <!--Probably a v-if on an error message here or something -->
+            <button>Submit</button>
         </section>
     </div>
 </template>
