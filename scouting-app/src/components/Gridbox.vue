@@ -2,18 +2,18 @@
   <div class="container">
     <!-- Grid formation -->
     <div class="cols">
-      <div class="bor" :style="{background: [currentPos === 1 ? [ s1 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s1]}" v-on:click="setPosition(1)">1</div>
-      <div class="bor" :style="{background: [currentPos === 2 ? [ s1 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s1]}" v-on:click="setPosition(2)">2</div>
-      <div class="bor" :style="{background: [currentPos === 3 ? [ s2 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s2]}" v-on:click="setPosition(3)">3</div>
-      <div class="bor" :style="{background: [currentPos === 4 ? [ s2 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s2]}" v-on:click="setPosition(4)">4</div>
-      <div class="bor-mid" :style="{background: [currentPos === 5 ? [ s1 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s1]}" v-on:click="setPosition(5)">5</div>
-      <div class="bor-mid" :style="{background: [currentPos === 6 ? [ s1 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s1]}" v-on:click="setPosition(6)">6</div>
-      <div class="bor-mid" :style="{background: [currentPos === 7 ? [ s2 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s2]}" v-on:click="setPosition(7)">7</div>
-      <div class="bor-mid" :style="{background: [currentPos === 8 ? [ s2 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s2]}" v-on:click="setPosition(8)">8</div>
-      <div class="bor" :style="{background: [currentPos === 9 ? [ s1 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s1]}" v-on:click="setPosition(9)">9</div>
-      <div class="bor" :style="{background: [currentPos === 10 ? [ s1 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s1]}" v-on:click="setPosition(10)">10</div>
-      <div class="bor" :style="{background: [currentPos === 11 ? [ s2 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s2]}" v-on:click="setPosition(11)">11</div>
-      <div class="bor" :style="{background: [currentPos === 12 ? [ s2 === '#c0d8ed' ? '#0764f0' :  '#E80028']: s2]}" v-on:click="setPosition(12)">12</div>
+      <div class="bor" :style="{background: [flipped ? [currentPos === 1 ? 'linear-gradient(to right, #8B0001 0%, #9E1711 100%)' : '#edc0c8']: [currentPos === 1 ? 'linear-gradient(to right, #010280 0%, #061993 100%)' : '#c0d8ed']]}" v-on:click="setPosition(1)">1</div>
+      <div class="bor" :style="{background: [flipped ? [currentPos === 2 ? 'linear-gradient(to right, #9E1711 0%, #C34632 100%)' : '#edc0c8']: [currentPos === 2 ? 'linear-gradient(to right, #061993 0%, #1973D1 100%)' : '#c0d8ed']]}" v-on:click="setPosition(2)">2</div>
+      <div class="bor" :style="{background: [!flipped ? [currentPos === 3 ? 'linear-gradient(to left, #9E1711 0%, #C34632 100%)' : '#edc0c8']: [currentPos === 3 ? 'linear-gradient(to left, #061993 0%, #1973D1 100%)' : '#c0d8ed']]}" v-on:click="setPosition(3)">3</div>
+      <div class="bor" :style="{background: [!flipped ? [currentPos === 4 ? 'linear-gradient(to left, #8B0001 0%, #9E1711 100%)' : '#edc0c8']: [currentPos === 4 ? 'linear-gradient(to right, #010280 0%, #061993 100%)' : '#c0d8ed']]}" v-on:click="setPosition(4)">4</div>
+      <div class="bor-mid" :style="{background: [flipped ? [currentPos === 5 ? 'linear-gradient(to right, #8B0001 0%, #9E1711 100%)' : '#edc0c8']: [currentPos === 5 ? 'linear-gradient(to right, #010280 0%, #061993 100%)' : '#c0d8ed']]}" v-on:click="setPosition(5)">5</div>
+      <div class="bor-mid" :style="{background: [flipped ? [currentPos === 6 ? 'linear-gradient(to right, #9E1711 0%, #C34632 100%)' : '#edc0c8']: [currentPos === 6 ? 'linear-gradient(to right, #061993 0%, #1973D1 100%)' : '#c0d8ed']]}" v-on:click="setPosition(6)">6</div>
+      <div class="bor-mid" :style="{background: [!flipped ? [currentPos === 7 ? 'linear-gradient(to left, #9E1711 0%, #C34632 100%)' : '#edc0c8']: [currentPos === 7 ? 'linear-gradient(to left, #061993 0%, #1973D1 100%)' : '#c0d8ed']]}" v-on:click="setPosition(7)">7</div>
+      <div class="bor-mid" :style="{background: [!flipped ? [currentPos === 8 ? 'linear-gradient(to left, #8B0001 0%, #9E1711 100%)' : '#edc0c8']: [currentPos === 8 ? 'linear-gradient(to right, #010280 0%, #061993 100%)' : '#c0d8ed']]}" v-on:click="setPosition(8)">8</div>
+      <div class="bor" :style="{background: [flipped ? [currentPos === 9 ? 'linear-gradient(to left, #8B0001 0%, #9E1711 100%)' : '#edc0c8']: [currentPos === 9 ? 'linear-gradient(to right, #010280 0%, #061993 100%)' : '#c0d8ed']]}" v-on:click="setPosition(9)">9</div>
+      <div class="bor" :style="{background: [flipped ? [currentPos === 10 ? 'linear-gradient(to right, #9E1711 0%, #C34632 100%)' : '#edc0c8']: [currentPos === 10 ? 'linear-gradient(to right, #061993 0%, #1973D1 100%)' : '#c0d8ed']]}" v-on:click="setPosition(10)">10</div>
+      <div class="bor" :style="{background: [!flipped ? [currentPos === 11 ? 'linear-gradient(to left, #9E1711 0%, #C34632 100%)' : '#edc0c8']: [currentPos === 11 ? 'linear-gradient(to left, #061993 0%, #1973D1 100%)' : '#c0d8ed']]}" v-on:click="setPosition(11)">11</div>
+      <div class="bor" :style="{background: [!flipped ? [currentPos === 12 ? 'linear-gradient(to left, #8B0001 0%, #9E1711 100%)' : '#edc0c8']: [currentPos === 12 ? 'linear-gradient(to right, #010280 0%, #061993 100%)' : '#c0d8ed']]}" v-on:click="setPosition(12)">12</div>
     </div>
   </div>
 </template>
@@ -21,21 +21,25 @@
 <script>
 export default {
   name: "Grid",
-    props: ['s1', 's2', 'mode', 'gameState'],
+    props: ['flipped', 'mode', 'time'],
     data(){
       return{
+        s1: String,
         currentPos: Number
       }
     },
     methods: {
     //Sets the current position of the bot
     setPosition(position){
-      if(this.mode !== 'playback' && (this.gameState !== 'pregame' || position === 5 || position === 8))
+      if(this.mode !== 'playback' && (this.time != 0.0 || position === 5 || position === 8)){
       this.currentPos = position
+      this.$emit('getPosition', this.currentPos);
+        }
     }
   },
   created(){
-    console.log(this.s1, this.s2, this.currentPos)
+    this.s1 = this.flipped ? "#c0d8ed" : "#edc0c8"   
+    this.s2 = this.flipped ? "#edc0c8" : "#c0d8ed"
   }
 };
 </script>
