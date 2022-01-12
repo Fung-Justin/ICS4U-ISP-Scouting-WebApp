@@ -46,13 +46,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 .cols {
   display: grid;
   grid-template-columns: 12.5% 37% 37% 12.5%;
-  grid-column-gap: 5px;
-  grid-row-gap: 5px;
-  background-color: black;
+  grid-column-gap: 1px;
+  grid-row-gap: 1px;
 }
 /** .img {
   background-image: url("../image.jpg");
@@ -62,10 +60,15 @@ export default {
   border: 1px solid white;
   padding-bottom: 4em;
   padding-top: 4em;
+  color: white;
+  background-color: black;
 }
 .bor-mid {
   border: 1px solid white;
   padding-bottom: 8.5em;
   padding-top: 8.5em;
+  color: white;
+  background-color: black;
 }
 </style>
+
