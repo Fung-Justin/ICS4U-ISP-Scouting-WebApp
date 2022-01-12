@@ -16,6 +16,7 @@ data(){
     };
 },
 methods: {
+    //Emits the time to Scout component in seconds to one decimal place
     getTime(){
         this.$emit('getTime', this.time.toFixed(1));
     },
@@ -38,13 +39,13 @@ methods: {
         }
     },
     updateTimer(){
-        if(this.time<150){
+        if(this.time<149.9){
             this.time+=0.1
             this.timeString=Math.floor((150-this.time)/60)+":"
             if((150-this.time)%60<10)
                 this.timeString+="0"
             this.timeString+=Math.round((150-this.time)%60)
-        }
+        } else this.timeString = "Match Finished"
     }
 },
 mounted(){

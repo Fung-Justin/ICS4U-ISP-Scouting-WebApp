@@ -4,12 +4,13 @@
     <button v-on:click="gameState = 'pregame'" :style="[gameState === 'pregame' ? 'background: #d0ddf7' : '']">Pregame</button>
     <button v-on:click="gameState = 'midgame'" :style="[gameState === 'midgame' ? 'background: #d0ddf7' : '']">Midgame</button>
     <button v-on:click="gameState = 'endgame'" :style="[gameState === 'endgame' ? 'background: #d0ddf7' : '']">Endgame</button>
+    <button v-on:click="createEvent">test</button>
     <div>{{gameState}} 00ga</div>
   </section>
     <Timer v-show="gameState === 'midgame'" @getTime='getTime($event)'/>
-    <Grid :s1='s1' :s2='s2' :mode='"scout"' v-if="gameState !== 'endgame'" :gameState="gameState"/>
+    <Grid :flipped='flipped' :mode='"scout"' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
     <Pregame v-show="gameState === 'pregame'" @flip="flip()"/>
-    <Midgame v-show="gameState === 'midgame'"/>
+    <Midgame v-show="gameState === 'midgame'" :currTime='currTime' @createEvent='createEvent' @removeEvent='removeEvent'/>
     <Endgame v-show="gameState === 'endgame'"/>
 
   </div>
@@ -33,38 +34,47 @@ export default{
   }, data() {
     return {
       gameState: "pregame",
-      s1: "#c0d8ed",
-      s2: "#edc0c8",
+      flipped: false,
       currTime: 0.0,
-      Events: []
+      currPos: Number,
+      events: []
     }
 }, 
 methods:{
-      flip(){
-      console.log('gseiogs')
-      this.s1 = this.s1 === "#c0d8ed" ? "#edc0c8" : "#c0d8ed"
-      this.s2 = this.s2 === "#c0d8ed" ? "#edc0c8" : "#c0d8ed"
-    },
+flip(){
+  this.flipped = !this.flipped
+  //console.log("flip flop")
+  console.log(this.flipped)
+  console.log(typeof this.flipped)
+},
 getTime(e){
   this.currTime = e
 },
+getPosition(e){
+  if(this.currPos !== e)
+    this.createEvent('')
+  this.currPos = e
+
+},
 createEvent(event){
-  console.log(this.currTime)
+  this.events.push({
+    time: this.currTime, 
+    position: this.currPos, 
+    event: event})
+  console.log(this.events)
  // console.log(time)
   //get time 
   //add event to events array
 }, removeEvent(event){
+  let index = this.events.length-1
+  //MAYBE REMOVE this.events[index] cause never let this function run if the thing won't be found??
+  while(this.events[index] && this.events[index].event !== event){
+    console.log(this.events[index].event)
+    index --
+  }
+  this.events.splice(index, 1)
   //searches through event array, deletes the last recorded type of that event
 }
-},
-mounted() {
-    let i = 0;
-    while(i < 100){
-       setTimeout(() => {
-         console.log(this.gameState)
-       } , 1000)
-       i++
-    }
 }}
 </script>
 
