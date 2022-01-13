@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import RegisterUser from '../views/RegisterUser.vue'
 
 const routes = [{
         path: '/',
@@ -24,6 +25,12 @@ const routes = [{
         name: 'Scout Match',
         component: () =>
             import ('../views/Scout.vue')
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: () =>
+            import ('../views/RegisterUser.vue')
     }
 ]
 
