@@ -22,29 +22,36 @@
         <!-- Misc -->
         <section>
             <label>Scout Name: </label>
-            <input textarea>
+            <input v-model="scoutName" textarea>
             <label>Comments: </label>
-            <input textarea>
+            <input v-model="comments" textarea>
         </section>
 
     <!-- Submit -->
         <section>
             <!--Probably a v-if on an error message here or something -->
-            <button>Submit</button>
+            <button v-on:click="this.$emit('submit')">Submit</button>
         </section>
     </div>
 </template>
 
 <script>
+import { watchEffect, ref, defineComponent } from "vue";
 
 export default ({
 data(){
     return{
         climb: 0,
-        defense: 0
+        defense: 0,
+        scoutName: '',
+        comments: ''
 }
 },
-    methods:{
-    }
+  created(){
+watchEffect(() => {
+  this.$emit('sendData',  {climb: this.climb, defense: this.defense, scoutName: this.scoutName, comments: this.comments})
+  })
+}
+
 })
 </script>

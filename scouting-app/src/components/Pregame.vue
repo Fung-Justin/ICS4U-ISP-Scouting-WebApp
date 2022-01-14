@@ -1,18 +1,15 @@
 <template>
     <div>
-        We're in the Auto now
     <!-- Match Number input -->
   <div class="form-group">
     <label>Match Number</label>
     <input v-model="matchNumber" type="number" class="form-control" id="match-number">
   </div>
 
-  <div>{{matchNumber}}</div>
-
     <!-- Team Number input -->
   <div class="form-group">
     <label>Team Number</label>
-    <input type="number" class="form-control" id="team-number" />
+    <input v-model="teamNumber" type="number" class="form-control" id="team-number" />
   </div>
 
 
@@ -23,30 +20,29 @@
   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" v-model="playoff" checked >
   <label class="form-check-label" for="flexSwitchCheckChecked">Qualification or Playoff</label>
 </div>
-
-<div>{{playoff}}</div>
     
   <div class="form-group">
-    <button v-on:click="$emit('flip')">Flip</button>
+    <button v-on:click="flipped=!flipped">Flip</button>
     </div>
     </div>
 </template>
 
 <script>
+import { watchEffect, ref, defineComponent } from "vue";
 
 export default ({
 data(){
     return{
-      matchNumber: 0,
-      teamNumber: 0,
-      playoff: false
+      matchNumber: Number,
+      teamNumber: Number,
+      playoff: false,
+      flipped: false
   }
 },
-    methods:{
-      sendData(){
-        //TODO: get data in scout
-      }
-    }, mounted(){
-    }
+  created(){
+watchEffect(() => {
+  this.$emit('sendData',  {matchNumber: this.matchNumber, teamNumber: this.teamNumber, playoff: this.playoff, flipped: this.flipped})
+  })
+}
 })
 </script>
