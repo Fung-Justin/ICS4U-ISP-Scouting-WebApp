@@ -4,10 +4,11 @@
       <div class="row text-center">
         <div class="col-md">
           <div class="card text-light mx-auto">
-            <form>
+            <form @submit.prevent="login">
               <div class="mb-3">
                 <h2 class="form-label fw-bold my-4">Username</h2>
                 <input
+                v-model="name"
                   type="username"
                   class="form-control mx-auto auth"
                   id="username"
@@ -17,6 +18,7 @@
               <div class="mb-3">
                 <h2 class="form-label fw-bold my-4">Password</h2>
                 <input
+                v-model="password"
                   type="password"
                   class="form-control mx-auto auth"
                   id="password"
@@ -39,7 +41,7 @@
               <div>
                 <button
                   id="login"
-                  type="button"
+                  type="submit"
                   class="btn px-3 mt-3 mb-4 btn-lg"
                 >
                   Login
@@ -57,6 +59,13 @@
 
 export default {
   name: "Login",
+
+  data () {
+        return {
+          name: '',
+          password: ''
+        }
+      },
   methods: {
     checkValue() {
       let check = document.querySelector("#checkbox");
@@ -67,7 +76,18 @@ export default {
       } else if (check.checked == false) {
         password.type = "password";
       }
-    }
+    },
+    login () {
+      console.log('login method ran');
+          this.$store
+            .dispatch('login', {
+              name: this.name,
+              password: this.password
+            })
+            .then(() => { this.$router.push({ name: 'Grid' }) })
+        }
+
+
   }
 };
 </script>

@@ -4,24 +4,29 @@
       <div class="row text-center">
         <div class="col-md">
           <div class="card text-light mx-auto">
-            <form>
+            <form @submit.prevent="register">
+
               <div class="mb-3">
                 <h3 class="form-label fw-bold my-4">New Username</h3>
                 <input
+                  v-model="name"
                   type="username"
                   class="form-control mx-auto auth"
                   id="username"
                   placeholder="Enter New Username"
                 />
               </div>
+
               <div class="mb-3">
                 <h3 class="form-label fw-bold my-4">New Password</h3>
                 <input
+                  v-model="password"
                   type="password"
                   class="form-control mx-auto auth"
                   id="password"
                   placeholder="Enter New Password"
                 />
+
                 <input
                   class="ml-3 form-check-input"
                   type="checkbox"
@@ -41,6 +46,7 @@
                   id="repeat-password"
                   placeholder="Confirm Password"
                 />
+
                 <input
                   class="ml-3 form-check-input"
                   type="checkbox"
@@ -55,7 +61,7 @@
               <div>
                 <button
                   id="create"
-                  type="button"
+                  type="submit"
                   class="btn px-3 mt-3 mb-4 btn-lg"
                 >
                   Create
@@ -72,6 +78,14 @@
 <script>
 export default {
   name: "Create Account",
+
+   data () {
+        return {
+          name: '',
+          email: '',
+          password: ''
+        }
+      },
   methods: {
     checkValue() {
       let check = document.querySelector("#checkbox");
@@ -91,6 +105,14 @@ export default {
         confirmPassword.type = "password";
       }
     },
+
+    register () {
+      
+        this.$store.dispatch('register', {
+              name: this.name,
+              password: this.password
+            })
+        }
   },
 };
 </script>

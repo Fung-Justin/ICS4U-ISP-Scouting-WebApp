@@ -8,18 +8,17 @@ router.get('/', async (req, res) => {
     res.send(await posts.find({}).toArray());
 });
 
-router.get('/register', async (req, res) => {
+router.get('/', async (req, res) => {
     const posts = await loadPostsCollection();
     res.send(await posts.find({}).toArray());
 });
 
 
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
     const posts = await loadPostsCollection();
     await posts.insertOne({
         name: req.body.name,
-        email: req.body.email,
-        password:req.body.password,
+
         createdAt: new Date()
     })
     res.status(201).send();
