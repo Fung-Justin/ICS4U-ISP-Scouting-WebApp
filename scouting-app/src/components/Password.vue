@@ -26,7 +26,7 @@
                 <i id = "showIMG" v-on:click = "checkValue()" class = "bi bi-eye-slash-fill"></i>
               </div>
               <br>
-              <router-link id="link" class="h6 text-dark" to="/create-account"
+              <router-link id="link" class="h6" to="/create-account"
                 >Create your account</router-link
               >
               <div>
@@ -107,12 +107,12 @@ export default {
 */
 #link {
   text-decoration: none;
-  color: white;
   transition-duration: 0.1s;
+  color: black;
   padding-top:100px;
 }
 #link:hover {
-  color: rgb(199, 199, 199);
+  color: rgb(114, 113, 113);
 }
 #login:hover {
   background-color: white;
