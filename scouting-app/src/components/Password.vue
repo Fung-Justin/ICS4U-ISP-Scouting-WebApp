@@ -8,6 +8,7 @@
             <form>
               <div class="mb-3">
                 <input
+                v-model="name"
                   type="username"
                   class="form-control mx-auto auth mb-5"
                   id="username"
@@ -16,6 +17,7 @@
               </div>
               <div class="mb-3">
                 <input
+                v-model="password"
                   type="password"
                   class="form-control mx-auto auth"
                   id="password"
@@ -31,6 +33,7 @@
                   id="login"
                   type="button"
                   class="btn px-3 mt-3 mb-4 btn-md"
+                  type="submit"
                 >
                   Login
                 </button>
@@ -47,6 +50,13 @@
 
 export default {
   name: "Login",
+
+  data () {
+        return {
+          name: '',
+          password: ''
+        }
+      },
   methods: {
     checkValue() {
       let img = document.querySelector('#showIMG');
@@ -59,7 +69,18 @@ export default {
         password.type = 'text'
         img.className = 'bi bi-eye-fill'
       }
-    }
+    },
+    login () {
+      console.log('login method ran');
+          this.$store
+            .dispatch('login', {
+              name: this.name,
+              password: this.password
+            })
+            .then(() => { this.$router.push({ name: 'Grid' }) })
+        }
+
+
   }
 };
 </script>

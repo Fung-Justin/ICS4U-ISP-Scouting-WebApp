@@ -24,6 +24,12 @@ const routes = [{
         component: () =>
             import ('../views/Scout.vue')
     },
+    {
+        path: '/register',
+        name: 'Register',
+        component: () =>
+            import ('../views/RegisterUser.vue')
+    },
     /**{
         path: '/login',
         name: 'Password',
