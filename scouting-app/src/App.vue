@@ -1,29 +1,24 @@
 <template>
-  <div id="nav">
-    <router-link to="/grid">Grid</router-link>
-  </div>
+  
   <router-view />
 </template>
 
+Change colours of navbar based on design on the landing page. Modern, simplistic, efficient design 
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.text-light {
+  text-decoration: none;
+}
+.navbar {
+  background-image: linear-gradient(to right, #B12E21 0%, #135CC5 100%)
+}
+#nav-img {
+  width: 30px;
+  position: absolute
+}
+#home {
+  text-align: left;
+  margin-left: 2.3em;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>

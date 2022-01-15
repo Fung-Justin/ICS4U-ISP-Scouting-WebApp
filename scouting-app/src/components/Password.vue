@@ -1,46 +1,36 @@
 <template>
-  <div class="img p-5">
+  <div class="img">
     <div class="container">
       <div class="row text-center">
         <div class="col-md">
-          <div class="card text-light mx-auto">
+          <div class="card text-dark mx-auto py-5">
+            <h1 class = "mb-5">Welcome!</h1>
             <form>
               <div class="mb-3">
-                <h2 class="form-label fw-bold my-4">Username</h2>
                 <input
                   type="username"
-                  class="form-control mx-auto auth"
+                  class="form-control mx-auto auth mb-5"
                   id="username"
-                  placeholder="Enter Username"
+                  placeholder="Username"
                 />
               </div>
               <div class="mb-3">
-                <h2 class="form-label fw-bold my-4">Password</h2>
                 <input
                   type="password"
                   class="form-control mx-auto auth"
                   id="password"
-                  placeholder="Enter Password"
+                  placeholder="Password"
                 />
-                <input
-                  class="ml-3 form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="checkbox"
-                  v-on:click="checkValue()"
-                />
-                <label class="form-check-label box-text" for="flexCheckDefault">
-                  Show Password
-                </label>
+                <i id = "showIMG" v-on:click = "checkValue()" class = "bi bi-eye-slash-fill"></i>
               </div>
               <router-link id="link" class="h5" to="/create-account"
-                >Create a new account</router-link
+                >Create your account</router-link
               >
               <div>
                 <button
                   id="login"
                   type="button"
-                  class="btn px-3 mt-3 mb-4 btn-lg"
+                  class="btn px-3 mt-3 mb-4 btn-md"
                 >
                   Login
                 </button>
@@ -59,13 +49,15 @@ export default {
   name: "Login",
   methods: {
     checkValue() {
-      let check = document.querySelector("#checkbox");
-      let password = document.querySelector("#password");
+      let img = document.querySelector('#showIMG');
+      let password = document.querySelector('#password');
 
-      if (check.checked == true) {
-        password.type = "textbox";
-      } else if (check.checked == false) {
-        password.type = "password";
+      if (img.className == 'bi bi-eye-fill'){
+        password.type = 'password'
+        img.className = 'bi bi-eye-slash-fill'
+      } else if (img.className == 'bi bi-eye-slash-fill'){
+        password.type = 'text'
+        img.className = 'bi bi-eye-fill'
       }
     }
   }
@@ -77,10 +69,15 @@ export default {
 
 .card {
   border-radius: 10px;
-  background-color: #422d53;
-  width: 50%;
+  background-image: white;
+  width: 30%;
+  margin-right:0%;
+  margin-left:0%;
 }
 .auth {
+  width: 75%;
+}
+.btn {
   width: 75%;
 }
 /** .img {
@@ -90,7 +87,7 @@ export default {
 #link {
   text-decoration: none;
   color: white;
-  transition-duration: 0.4s;
+  transition-duration: 0.1s;
 }
 #link:hover {
   color: rgb(199, 199, 199);
@@ -102,20 +99,34 @@ export default {
 }
 #login {
   border-radius: 8px;
-  transition-duration: 0.4s;
-  background-color: #201f41;
-  border: 4px solid #201f41;
+  transition-duration: 0.2s;
+  background-color: black;
+  border: 4px solid black;
   color: white;
 }
-.form-check-label {
-  margin-left: 5px;
+.img {
+  background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
+  padding: 7.5em;
+  height: 100%;
 }
-#checkbox {
-  margin-top: 7px;
-  background-color: #201f41;
-  border: 1px solid white;
+#username {
+  border-bottom: 2px solid #adadad;
+  border-right: white;
+  border-left: white;
+  border-top: white;
 }
-.box-text {
-  margin-top: 4px;
+#password {
+  border-bottom: 2px solid #adadad;
+  border-right: white;
+  border-left: white;
+  border-top: white;
+}
+i {
+  cursor: pointer;
+  float: right;
+  margin-left: -1.5em;
+  margin-top: -1.5em;
+  margin-right: 3.3em;
+  position:relative;
 }
 </style>
