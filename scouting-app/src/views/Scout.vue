@@ -11,7 +11,6 @@
     <button v-on:click="gameState = 'midgame'" :style="[gameState === 'midgame' ? 'background: #d0ddf7' : '']">Midgame</button>
     <button v-on:click="gameState = 'endgame'" :style="[gameState === 'endgame' ? 'background: #d0ddf7' : '']">Endgame</button>
   </section>
-
     <Timer v-show="gameState === 'midgame'" @getTime='getTime($event)'/>
     <Grid :flipped='flipped' :mode='"scout"' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
     <Pregame v-show="gameState === 'pregame'" @sendData="setPreGame($event)"/>
@@ -109,6 +108,7 @@ createEvent(event){
 
   //TODO: error handling (only check for teamNumber, matchNumber and starting pos)
   let match = {
+    compID: this.$route.query.compID,
     matchNumber: this.matchNumber,
     teamNumber: this.teamNumber,
     playoff: this.playoff,

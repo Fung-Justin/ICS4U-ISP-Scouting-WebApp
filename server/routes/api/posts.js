@@ -8,17 +8,26 @@ router.get('/', async(req, res) => {
     res.send(await posts.find({}).toArray());
 });
 
-const posts = await loadMatches();
+//const posts = await loadMatches();
 router.get('/register', async(req, res) => {
     res.send(await posts.find({}).toArray());
 });
 
 
-router.post('/', async (req, res) => {
-    const posts = await loadPostsCollection();
+router.post('/register', async(req, res) => {
+    const posts = await loadMatches();
     await posts.insertOne({
         name: req.body.name,
+        password: req.body.password,
+        createdAt: new Date()
+    })
+    res.status(201).send();
+})
 
+router.post('/', async(req, res) => {
+    const posts = await loadMatches();
+    await posts.insertOne({
+        text: req.body.text,
         createdAt: new Date()
     })
     res.status(201).send();

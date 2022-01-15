@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 export default {
 data(){
     return{
@@ -41,10 +40,10 @@ methods: {
     updateTimer(){
         if(this.time<149.9){
             this.time+=0.1
-            this.timeString=Math.floor((150-this.time)/60)+":"
-            if((150-this.time)%60<10)
+            this.timeString=Math.floor((150-Math.round(this.time))/60)+":"
+            if((150-Math.round(this.time))%60<10)
                 this.timeString+="0"
-            this.timeString+=Math.round((150-this.time)%60)
+            this.timeString+=Math.round((150-Math.round(this.time))%60)
         } else this.timeString = "Match Finished"
     }
 },
@@ -52,7 +51,6 @@ mounted(){
       window.setInterval(() => {
     this.getTime()
   }, 100)
-
 }
 }
 </script>
