@@ -23,7 +23,7 @@
                   id="password"
                   placeholder="Password"
                 />
-                <i id = "showIMG" v-on:click = "checkValue()" class = "bi bi-eye-slash-fill"></i>
+                <i id = "showIMG" v-on:click = "showPassword()" class = "bi bi-eye-slash-fill"></i>
               </div>
               <br>
               <router-link id="link" class="h6" to="/create-account"
@@ -58,7 +58,7 @@ export default {
         }
       },
   methods: {
-    checkValue() {
+    showPassword() {
       let img = document.querySelector('#showIMG');
       let password = document.querySelector('#password');
 
@@ -112,7 +112,7 @@ export default {
   padding-top:100px;
 }
 #link:hover {
-  color: rgb(114, 113, 113);
+  color: rgb(77, 77, 77);
 }
 #login:hover {
   background-color: white;
@@ -121,7 +121,7 @@ export default {
 }
 #login {
   border-radius: 8px;
-  transition-duration: 0.2s;
+  transition-duration: 0.1s;
   background-color: black;
   border: 4px solid black;
   color: white;
