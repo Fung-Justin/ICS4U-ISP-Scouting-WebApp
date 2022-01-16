@@ -30,6 +30,13 @@ const routes = [{
         component: () =>
             import ('../views/RegisterUser.vue')
     },
+    {
+        path: '/playback',
+        name: 'Playback',
+        component: () =>
+            import ('../views/Playback.vue')
+    }
+
     /**{
         path: '/login',
         name: 'Password',

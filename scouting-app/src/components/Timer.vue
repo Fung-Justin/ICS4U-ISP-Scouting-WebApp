@@ -1,11 +1,13 @@
 <template>
     <div>
         <button v-on:click="onClick">{{timeString}}</button>
+        <div>{{sliderTime}}</div>
     </div>
 </template>
 
 <script>
 export default {
+    props:['paused', 'sliderTime'],
 data(){
     return{
         time: 0,
@@ -15,7 +17,7 @@ data(){
     };
 },
 methods: {
-    //Emits the time to Scout component in seconds to one decimal place
+    //Emits the time to parent component in seconds to one decimal place
     getTime(){
         this.$emit('getTime', this.time.toFixed(1));
     },
@@ -35,22 +37,35 @@ methods: {
             this.startTimer()
         }else if(this.time<=15){
             this.resetTimer()
+            this.$emit('resetSlider')
         }
     },
     updateTimer(){
-        if(this.time<149.9){
+        console.log("time = " + this.time)
+        console.log("slide = " + Number(this.sliderTime))
+        console.log((Number(this.sliderTime)-this.time))
+        if(Math.abs(Number(this.sliderTime)-this.time) > 0.1)
+            this.time=Number(this.sliderTime)
+        if(this.time>149.9)
+            this.timeString="Match Finished"
+        else if(!this.paused){
             this.time+=0.1
-            this.timeString=Math.floor((150-Math.round(this.time))/60)+":"
-            if((150-Math.round(this.time))%60<10)
-                this.timeString+="0"
-            this.timeString+=Math.round((150-Math.round(this.time))%60)
-        } else this.timeString = "Match Finished"
+            this.getTime()
+            this.createTS()
+        }
+    }, createTS(){
+        this.timeString=Math.floor((150-Math.round(this.time))/60)+":"
+        if((150-Math.round(this.time))%60<10)
+            this.timeString+="0"
+        this.timeString+=Math.round((150-Math.round(this.time))%60)
+        console.log(this.timeString)
     }
 },
 mounted(){
+    /* 
       window.setInterval(() => {
     this.getTime()
-  }, 100)
+  }, 100)*/
 }
 }
 </script>

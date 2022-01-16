@@ -11,7 +11,7 @@
     <button v-on:click="gameState = 'midgame'" :style="[gameState === 'midgame' ? 'background: #d0ddf7' : '']">Midgame</button>
     <button v-on:click="gameState = 'endgame'" :style="[gameState === 'endgame' ? 'background: #d0ddf7' : '']">Endgame</button>
   </section>
-    <Timer v-show="gameState === 'midgame'" @getTime='getTime($event)'/>
+    <Timer v-show="gameState === 'midgame'" @getTime='getTime($event)' :paused='false'/>
     <Grid :flipped='flipped' :mode='"scout"' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
     <Pregame v-show="gameState === 'pregame'" @sendData="setPreGame($event)"/>
     <Midgame v-show="gameState === 'midgame'" :currTime='currTime' @createEvent='createEvent' @removeEvent='removeEvent'/>
