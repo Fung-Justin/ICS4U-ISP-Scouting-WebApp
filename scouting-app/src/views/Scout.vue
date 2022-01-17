@@ -12,7 +12,7 @@
     <button v-on:click="gameState = 'endgame'" :style="[gameState === 'endgame' ? 'background: #d0ddf7' : '']">Endgame</button>
   </section>
     <Timer v-show="gameState === 'midgame'" @getTime='getTime($event)' :paused='false'/>
-    <Grid :flipped='flipped' :mode='"scout"' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
+    <Grid :flipped='flipped' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
     <Pregame v-show="gameState === 'pregame'" @sendData="setPreGame($event)"/>
     <Midgame v-show="gameState === 'midgame'" :currTime='currTime' @createEvent='createEvent' @removeEvent='removeEvent'/>
     <Endgame v-show="gameState === 'endgame'" @sendData="setEndGame($event)" @submit="submit"/>
@@ -69,6 +69,7 @@ setEndGame({climb, defense, scoutName, comments}){
 },
 getTime(e){
   this.currTime = e
+  console.log(typeof this.currTime)
 },
 //Creates a movement event if position of bot changes
 getPosition(e){
@@ -81,11 +82,13 @@ getPosition(e){
 },
 createEvent(event){
   if(this.currTime !== 150){
+    console.log(typeof this.currTime)
   this.events.push({
     time: this.currTime, 
     position: this.currPos, 
     event: event})
     }
+    console.log(this.events)
   //get time 
   //add event to events array
 }, removeEvent(event){
@@ -119,9 +122,9 @@ createEvent(event){
     comments: this.comments,
     scoutName: this.scoutName
   }
+    //SEND TO DB
   await PostService.insertPost(match)
   //console.log(match)
-  //SEND TO DB
 }
 }}
 </script>

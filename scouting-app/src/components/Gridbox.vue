@@ -19,32 +19,33 @@
 </template>
 
 <script>
+
 export default {
   name: "Grid",
-    props: ['flipped', 'mode', 'time'],
+    props: ['flipped', 'playbackPos', 'time'],
     data(){
       return{
-        s1: String,
         currentPos: Number
       }
-    },
+      },
     methods: {
     //Sets the current position of the bot
     setPosition(position){
-      if(this.mode !== 'playback' && (this.time != 0.0 || position === 5 || position === 8)){
+      if(this.playbackPos == undefined && (this.time != 0.0 || position === 5 || position === 8)){
       this.currentPos = position
       this.$emit('getPosition', this.currentPos);
         }
     }
   },
-  created(){
-    this.s1 = this.flipped ? "#c0d8ed" : "#edc0c8"   
-    this.s2 = this.flipped ? "#edc0c8" : "#c0d8ed"
+  watch:{
+    //Sets the current position to the playback position whenever there is a change in the playback position
+    playbackPos(newVal){
+      this.currentPos = newVal
+    }
   }
-};
+    }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .cols {

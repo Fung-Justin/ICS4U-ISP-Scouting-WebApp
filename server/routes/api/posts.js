@@ -8,10 +8,16 @@ router.get('/', async(req, res) => {
     res.send(await posts.find({}).toArray());
 });
 
-//const posts = await loadMatches();
 router.get('/register', async(req, res) => {
+    const posts = await loadMatches();
     res.send(await posts.find({}).toArray());
 });
+
+//Gets one piece of data based off of its id
+router.get('/:id', async(req, res) => {
+    const posts = await loadMatches()
+    res.send(await posts.findOne({ _id: new mongodb.ObjectID(req.params.id) }))
+})
 
 
 router.post('/register', async(req, res) => {
@@ -27,7 +33,15 @@ router.post('/register', async(req, res) => {
 router.post('/', async(req, res) => {
     const posts = await loadMatches();
     await posts.insertOne({
-        text: req.body.text,
+        matchNumber: req.body.matchNumber,
+        teamNumber: req.body.teamNumber,
+        playoff: req.body.playoff,
+        flipped: req.body.flipped,
+        events: req.body.events,
+        climb: req.body.climb,
+        defense: req.body.defense,
+        comments: req.body.comments,
+        scoutName: req.body.scoutName,
         createdAt: new Date()
     })
     res.status(201).send();
