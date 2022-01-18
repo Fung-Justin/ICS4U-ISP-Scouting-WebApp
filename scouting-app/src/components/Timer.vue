@@ -1,7 +1,6 @@
 <template>
     <div>
         <button v-on:click="onClick">{{timeString}}</button>
-        <div>{{sliderTime}}</div>
     </div>
 </template>
 
@@ -50,7 +49,6 @@ methods: {
         else{
             if(!this.paused){
             this.time+=0.1
-            this.getTime()
         }
             this.createTS()
         }
@@ -60,6 +58,10 @@ methods: {
             this.timeString+="0"
         this.timeString+=Math.round((150-Math.round(this.time))%60)
     }
+}, watch:{
+        time(newVal){
+            this.getTime()
+        }
 },
 mounted(){
     if(this.sliderTime != null)

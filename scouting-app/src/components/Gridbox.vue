@@ -31,7 +31,7 @@ export default {
     methods: {
     //Sets the current position of the bot
     setPosition(position){
-      if(this.playbackPos == undefined && (this.time != 0.0 || position === 5 || position === 8)){
+      if(this.playbackPos === undefined && (this.time !== 0.0 || position === 5 || position === 8)){
       this.currentPos = position
       this.$emit('getPosition', this.currentPos);
         }
@@ -42,6 +42,9 @@ export default {
     playbackPos(newVal){
       this.currentPos = newVal
     }
+  }, created(){
+    if(this.playbackPos !== undefined)
+      this.currentPos = this.playbackPos
   }
     }
 </script>

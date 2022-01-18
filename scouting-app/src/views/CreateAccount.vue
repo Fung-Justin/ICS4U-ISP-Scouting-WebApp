@@ -116,11 +116,6 @@ export default {
 .btn {
   width: 75%
 }
-.img {
-  background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
-  padding: 7.5em;
-  height: 100%;
-}
 #create:hover {
   background-color: white;
   color: black;
@@ -173,5 +168,12 @@ i {
   border-right: white;
   border-left: white;
   border-top: white;
+}
+</style>
+<style>
+.img {
+  background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
+  padding: 7.5em;
+  height: 100%;
 }
 </style>
