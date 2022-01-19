@@ -16,7 +16,7 @@ const routes = [{
         path: '/create-account',
         name: 'Create Account',
         component: () =>
-            import ('../views/CreatePassword.vue')
+            import ('../views/CreateAccount.vue')
     },
     {
         path: '/scout',
@@ -30,6 +30,19 @@ const routes = [{
         component: () =>
             import ('../views/RegisterUser.vue')
     },
+    {
+        path: '/playback',
+        name: 'Playback',
+        component: () =>
+            import ('../views/Playback.vue')
+    },
+    {
+        path: '/matches',
+        name: 'Matches',
+        component: () =>
+            import ('../views/Matches.vue')
+    }
+
     /**{
         path: '/login',
         name: 'Password',
