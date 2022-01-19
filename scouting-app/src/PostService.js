@@ -3,7 +3,7 @@ import axios from 'axios';
 const url = '/api/posts/';
 
 class PostService {
-    //Get Posts
+    //Get Posts (used by match)
     static async getPosts() {
         const res = await axios.get(url);
         const data = res.data;
@@ -13,13 +13,12 @@ class PostService {
         }))
     }
 
-    // Create Post
+    // Create Post (used by scout)
     static insertPost(match) {
         return axios.post(url, {
             compID: match.compID,
             matchNumber: match.matchNumber,
             teamNumber: match.teamNumber,
-            playoff: match.playoff,
             flipped: match.flipped,
             events: match.events,
             climb: match.climb,
@@ -34,7 +33,7 @@ class PostService {
         return axios.delete(`${url}${id}`);
     }
 
-    // Get single Post
+    // Get single Post (used by playback)
     static getPost(id) {
         return axios.get(`${url}${id}`);
     }

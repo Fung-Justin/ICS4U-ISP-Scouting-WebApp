@@ -6,10 +6,10 @@
     <section v-else>
         <h5>Team {{match.teamNumber}}</h5>
         <h5>Match {{match.matchNumber}}</h5>
-        <Timer @getTime='timeChange($event)' :paused='paused' :sliderTime='time' @resetSlider='time=0'/>
+        <Timer @getTime='timeChange($event)' :paused='paused' :sliderTime='time' :speed='speed' @resetSlider='time=0'/>
         <section v-if="time!==150">
             <Grid :flipped='match.flipped'  :playbackPos='currentPos'/>
-            <div v-if="currentAction !== undefined">{{currentAction.time}} - {{currentAction.event}}</div>
+            <div v-if="currentAction !== undefined">{{currentAction.TS}} - {{currentAction.event}}</div>
         </section>
         <!-- Endgame Data -->
         <section v-if="time===150">
@@ -23,6 +23,10 @@
         <section>
             <input type="range" v-model="time" min="0" max="150">
             <button v-on:click='paused=!paused'>{{paused ? 'play' : 'pause'}}</button>
+            <button v-on:click='speed=1' :style="[speed === 1 ? 'background: #d0ddf7' : '']">1x</button>
+            <button v-on:click='speed=2' :style="[speed === 2 ? 'background: #d0ddf7' : '']">2x</button>
+            <button v-on:click='speed=5' :style="[speed === 5 ? 'background: #d0ddf7' : '']">5x</button>
+
         </section>
     </section>
 </template>
@@ -48,11 +52,7 @@ export default ({
             currentAction: Object,
             completed: false,
             revEvents: Array,
-            e1: Object,
-            e2: Object,
-            e3: Object,
-            e4: Object,
-            e5: Object
+            speed: 1
         }
     }, 
     methods:{
@@ -61,29 +61,19 @@ export default ({
             this.setPos()
             this.setAction()
         },
+        //Sets the current Position of the bot at the current time
         setPos(){
-            //Checks what the time is and sets the position to the current position
-           //console.log(this.revEvents)
-            this.currentPos = (this.revEvents.find(action => action.time<=this.time && action.event==='')).position
-            console.log((this.revEvents.find(action => action.time<=this.time && action.event==='')))
-            console.log(this.time)
-        }, 
+            this.currentPos = (this.events.find(action => action.time<=this.time && action.event==='')).position
+        },
+        //sets the currentAction based on the time 
         setAction(){
-            console.log('im running')
-           // this.currentAction = this.revEvents[1]
-            this.currentAction = this.revEvents.find(action => action.time <= this.time && action.event!=='' && Math.abs(this.time-action.time) <= 5)
+            this.currentAction = this.events.find(action => action.time <= this.time && action.event!=='' && Math.abs(this.time-action.time) <= 5)
         }
     },
     async mounted(){
         const res = await PostService.getPost(this.$route.query.id)
         this.match = res.data
-        /*this.revEvents = this.match.events
-        console.log(this.match.events)
-        console.log(this.revEvents)
-        console.log(this.revEvents.reverse())*/
-        this.events = this.match.events
-        console.log(this.match)
-        this.revEvents = [...this.events].reverse()
+        this.events = this.match.events.reverse()
         this.setPos()
         this.setAction()
         this.completed = true

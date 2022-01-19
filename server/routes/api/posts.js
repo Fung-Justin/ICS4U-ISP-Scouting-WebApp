@@ -3,6 +3,7 @@ const mongodb = require('mongodb');
 
 const router = express.Router();
 
+//Gets all data (used for match display)
 router.get('/', async(req, res) => {
     const posts = await loadMatches();
     res.send(await posts.find({}).toArray());
@@ -13,7 +14,7 @@ router.get('/register', async(req, res) => {
     res.send(await posts.find({}).toArray());
 });
 
-//Gets one piece of data based off of its id
+//Gets one piece of data based off of its id (used for playback)
 router.get('/:id', async(req, res) => {
     const posts = await loadMatches()
     res.send(await posts.findOne({ _id: new mongodb.ObjectID(req.params.id) }))
@@ -30,12 +31,12 @@ router.post('/register', async(req, res) => {
     res.status(201).send();
 })
 
+//Inserts a new match (used for scout)
 router.post('/', async(req, res) => {
     const posts = await loadMatches();
     await posts.insertOne({
         matchNumber: req.body.matchNumber,
         teamNumber: req.body.teamNumber,
-        playoff: req.body.playoff,
         flipped: req.body.flipped,
         events: req.body.events,
         climb: req.body.climb,

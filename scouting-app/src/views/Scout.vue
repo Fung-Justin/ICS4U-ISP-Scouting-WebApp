@@ -1,7 +1,7 @@
 <template>
   <div>
         <p v-if="errors.length">
-    <b>Please correct the following error(s):</b>
+    <b>Missing:</b>
     <ul>
       <li v-for="error in errors">{{ error }}</li>
     </ul>
@@ -11,7 +11,7 @@
     <button v-on:click="gameState = 'midgame'" :style="[gameState === 'midgame' ? 'background: #d0ddf7' : '']">Midgame</button>
     <button v-on:click="gameState = 'endgame'" :style="[gameState === 'endgame' ? 'background: #d0ddf7' : '']">Endgame</button>
   </section>
-    <Timer v-show="gameState === 'midgame'" @getTime='getTime($event)' :paused='false'/>
+    <Timer v-show="gameState === 'midgame'" @getTime='this.currTime=$event' @getTS='this.timeString=$event' :paused='false' :run='events.length!==0' :speed='1'/>
     <Grid :flipped='flipped' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
     <Pregame v-show="gameState === 'pregame'" @sendData="setPreGame($event)"/>
     <Midgame v-show="gameState === 'midgame'" :currTime='currTime' @createEvent='createEvent' @removeEvent='removeEvent'/>
@@ -39,26 +39,26 @@ export default{
     Timer
   }, data() {
     return {
+    //  reset: 0,
       errors: [],
       gameState: "pregame",
       currTime: 0.0,
+      timeString: '2:30',
       currPos: Number,
       events: [], 
       matchNumber: Number,
       teamNumber: Number,
-      playoff: Boolean,
       flipped: Boolean,
       climb: Number,
       defense: Number,
-      scoutName: String,
-      comments: String
+      scoutName: '',
+      comments: ''
     }
 }, 
 methods:{
-setPreGame({matchNumber, teamNumber, playoff, flipped}){
+setPreGame({matchNumber, teamNumber, flipped}){
  this.matchNumber = matchNumber
  this.teamNumber = teamNumber
- this.playoff = playoff
  this.flipped= flipped
 },
 setEndGame({climb, defense, scoutName, comments}){
@@ -66,10 +66,6 @@ setEndGame({climb, defense, scoutName, comments}){
   this.defense = defense
   this.scoutName = scoutName
   this.comments = comments
-},
-getTime(e){
-  this.currTime = e
-  console.log(typeof this.currTime)
 },
 //Creates a movement event if position of bot changes
 getPosition(e){
@@ -86,7 +82,9 @@ createEvent(event){
   this.events.push({
     time: this.currTime, 
     position: this.currPos, 
-    event: event})
+    event: event,
+    TS: this.timeString
+    })
     }
     console.log(this.events)
   //get time 
@@ -100,21 +98,31 @@ createEvent(event){
   //searches through event array, deletes the last recorded type of that event
 }, async submit(){
   //Should we just do one error for incomplete input and match ongoing? (also for styling possibly do red boxes around the inputs that are incomplete)
-  /*this.errors=[];
-  if(!this.matchNumber)
+  this.errors=[];
+  if(this.currTime !== 150)
+    this.errors.push('Completed Match Data')
+  if(typeof this.matchNumber !== 'number')
     this.errors.push('Match Number Required')
-  if(!this.teamNumber)
+  if(typeof this.teamNumber !== 'number')
     this.errors.push('Team Number Required')
-  if(this.currTime != 0.0)
-    this.errors.push('Match Still Ongoing')
-  if(!this.scoutName)*/
+  if(this.scoutName === '')
+    this.errors.push('Scout Name')
+  if(this.comments === '')
+    this.errors.push('Comments')
+
 
   //TODO: error handling (only check for teamNumber, matchNumber and starting pos)
+    //console.log(this.reset)
+    //Object.assign(this.$data, this.$options.data.apply(this))
+       // this.reset +=1
+  //console.log(this.reset)
+    //Changes the variable reset so that child components re-render
+   // console.log(this.reset)
+   if(this.errors.length === 0){
   let match = {
     compID: this.$route.query.compID,
     matchNumber: this.matchNumber,
     teamNumber: this.teamNumber,
-    playoff: this.playoff,
     flipped: this.flipped,
     events: this.events,
     climb: this.climb,
@@ -122,9 +130,12 @@ createEvent(event){
     comments: this.comments,
     scoutName: this.scoutName
   }
+  console.log(match)
+
     //SEND TO DB
   await PostService.insertPost(match)
   //console.log(match)
+  }
 }
 }}
 </script>

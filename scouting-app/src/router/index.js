@@ -35,6 +35,12 @@ const routes = [{
         name: 'Playback',
         component: () =>
             import ('../views/Playback.vue')
+    },
+    {
+        path: '/matches',
+        name: 'Matches',
+        component: () =>
+            import ('../views/Matches.vue')
     }
 
     /**{
