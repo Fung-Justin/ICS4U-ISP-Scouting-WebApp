@@ -42,7 +42,7 @@
                 <button
                   id="create"
                   type="submit"
-                  class="btn my-4 btn-lg"
+                  class="btn my-4 btn-md"
                 >
                   Create
                 </button>

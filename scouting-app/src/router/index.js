@@ -30,13 +30,13 @@ const routes = [{
         component: () =>
             import ('../views/RegisterUser.vue')
     },
-    /**{
+    {
         path: '/login',
         name: 'Password',
         component: () =>
             import ('../views/Login.vue')
     }
-    */
+    
 
 ]
 

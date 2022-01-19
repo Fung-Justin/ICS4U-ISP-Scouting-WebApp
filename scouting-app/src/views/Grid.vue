@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="grid">
     <grid/>
       <router-link id="link" class="h5" to="/scout?compID=humber"
                 >TEST</router-link>
@@ -15,4 +15,10 @@ export default{
   }
 }
 </script>
+
+<style scoped>
+.grid{
+  margin-top: 5em;
+}
+</style>
 
