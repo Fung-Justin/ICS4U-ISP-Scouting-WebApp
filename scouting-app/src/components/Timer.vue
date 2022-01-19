@@ -1,4 +1,5 @@
 <template>
+    <!-- Timer String -->
     <div>
         <button v-on:click="onClick">{{timeString}}</button>
     </div>
@@ -14,13 +15,14 @@ data(){
         timer: Number,
     };
 },
-methods: {
-    //Emits the time to parent component
-    getTime(){
-        this.$emit('getTime', Math.round(this.time*10)/10);
-        this.$emit('getTS', this.timeString)
+    methods: {
+        //Emits the time to parent component
+        getTime(){
+            this.$emit('getTime', Math.round(this.time*10)/10);
+            this.$emit('getTS', this.timeString)
     },
-    startTimer(){
+    //Sets timer _____
+    setTimer(){
         this.timer = setInterval(this.updateTimer, 100/this.speed)
     },
     resetTimer(){
@@ -31,10 +33,12 @@ methods: {
         clearInterval(this.timer)
         }
     },
+    //Starts timer if run conditions are met
     onClick(){
         if(this.run)
-            this.startTimer()
+            this.setTimer()
     },
+    //Updates the timer
     updateTimer(){
         if(this.sliderTime)
             this.time=Number(this.sliderTime)
@@ -46,6 +50,7 @@ methods: {
         }
             this.createTS()
         }
+        //Creates a String in M:SS format for the current time
     }, createTS(){
         this.timeString=Math.floor((150-Math.round(this.time))/60)+":"
         if((150-Math.round(this.time))%60<10)
@@ -53,17 +58,20 @@ methods: {
         this.timeString+=Math.round((150-Math.round(this.time))%60)
     }
 }, watch:{
+        //Sends new time to parent component on change
         time(newTime){
             this.getTime()
         },
+        //sets timer with new speed when speed changes
         speed(newSpeed){
             clearInterval(this.timer)
-            this.startTimer()
+            this.setTimer()
         }
 },
 mounted(){
+    //Has timer automatically started but paused if in playback mode
     if(this.sliderTime != null)
-        this.startTimer()
+        this.setTimer()
 }
 }
 </script>

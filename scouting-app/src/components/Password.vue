@@ -26,7 +26,7 @@
                 <i id = "showIMG" v-on:click = "showPassword()" class = "bi bi-eye-slash-fill"></i>
               </div>
               <br>
-              <router-link id="link" class="h6" to="/create-account"
+              <router-link id="link" class="h6 p-0" to="/create-account"
                 >Create your account</router-link
               >
               <div>
