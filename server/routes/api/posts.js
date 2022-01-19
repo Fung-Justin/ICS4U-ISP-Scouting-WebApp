@@ -8,7 +8,7 @@ router.get('/', async(req, res) => {
     res.send(await posts.find({}).toArray());
 });
 
-const posts = await loadMatches();
+//const posts = await loadMatches();
 router.get('/register', async(req, res) => {
     res.send(await posts.find({}).toArray());
 });

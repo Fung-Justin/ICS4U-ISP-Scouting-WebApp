@@ -19,15 +19,20 @@ router.post('/login', async (req, res) => {
     
     
     userArray.forEach(element => { 
+        console.log(element.name);
+        console.log(element.password);
         if(element.name === name && element.password === password){
             
             const jwt = require('njwt')
             const claims = { iss: 'AMMJ', sub: 'AzureDiamond' }
             const token = jwt.create(claims, 'bottle-neck')
+            console.log(token.compact());
             token.setExpiration(new Date().getTime() + 60*1000)
-              res.status(201).send(token.compact() + ' login sucessful');
+            res.status(201).send(token.compact() + ' login sucessful');
+
+
         }
-        res.status(404).send('login failed');
+        res.status(500).send('login failed');
     });
     
 
