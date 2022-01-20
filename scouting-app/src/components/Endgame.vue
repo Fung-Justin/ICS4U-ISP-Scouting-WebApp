@@ -25,6 +25,12 @@
             <input v-model="scoutName" textarea>
             <label>Comments: </label>
             <input v-model="comments" textarea>
+
+            <!-- Win -->
+             <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" v-model="win" checked >
+            <label class="form-check-label" for="flexSwitchCheckChecked">{{win ? 'Win' : 'Loss'}}</label>
+             </div>
         </section>
 
     <!-- Submit -->
@@ -44,12 +50,13 @@ data(){
         climb: 0,
         defense: 0,
         scoutName: '',
-        comments: ''
+        comments: '',
+        win: false
 }
 },
   created(){
 watchEffect(() => {
-  this.$emit('sendData',  {climb: this.climb, defense: this.defense, scoutName: this.scoutName, comments: this.comments})
+  this.$emit('sendData',  {climb: this.climb, defense: this.defense, scoutName: this.scoutName, comments: this.comments, win: this.win})
   })
 }
 
