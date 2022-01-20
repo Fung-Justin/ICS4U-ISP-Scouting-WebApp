@@ -12,11 +12,16 @@
     <button class = "btn bg-dark text-light mx-2" v-on:click="gameState = 'endgame'" :style="[gameState === 'endgame' ? 'background-color: white !important; border: 2px solid black; color: black !important;' : '']">Endgame</button>
   </section>
     <Timer id = 'timer' v-show="gameState === 'midgame'" @getTime='this.currTime=$event' @getTS='this.timeString=$event' :paused='false' :run='events.length!==0' :speed='1'/>
+    <p v-if="errors.length">
+      <b>Missing:</b>
+      <ul>
+        <li v-for="error in errors">{{ error }}</li>
+    </ul>
+    </p>
     <Grid id = 'grid' :flipped='flipped' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
     <Pregame id = 'pregame' v-show="gameState === 'pregame'" @sendData="setPreGame($event)"/>
-    <Midgame id = 'midgame' v-show="gameState === 'midgame'" :currTime='currTime' @createEvent='createEvent' @removeEvent='removeEvent'/>
-    <Endgame id = 'endgame' v-show="gameState === 'endgame'" @sendData="setEndGame($event)" @submit="submit"/>
-
+    <Midgame v-show="gameState === 'midgame'" :currTime='currTime' @createEvent='createEvent' @removeEvent='removeEvent'/>
+    <Endgame v-show="gameState === 'endgame'" @sendData="setEndGame($event)" @submit="submit"/>
   </div>
 </template>
 
@@ -99,9 +104,9 @@ createEvent(event){
   this.events.splice(index, 1)
   //searches through event array, deletes the last recorded type of that event
 }, async submit(){
-  //Should we just do one error for incomplete input and match ongoing? (also for styling possibly do red boxes around the inputs that are incomplete)
+  //(also for styling possibly do red boxes around the inputs that are incomplete)
   this.errors=[];
-  /*if(this.currTime !== 150)
+  if(this.currTime !== 150)
     this.errors.push('Completed Match Data')
   if(typeof this.matchNumber !== 'number')
     this.errors.push('Match Number Required')
@@ -110,16 +115,8 @@ createEvent(event){
   if(this.scoutName === '')
     this.errors.push('Scout Name')
   if(this.comments === '')
-    this.errors.push('Comments')*/
+    this.errors.push('Comments')
 
-
-  //TODO: error handling (only check for teamNumber, matchNumber and starting pos)
-    //console.log(this.reset)
-    //Object.assign(this.$data, this.$options.data.apply(this))
-       // this.reset +=1
-  //console.log(this.reset)
-    //Changes the variable reset so that child components re-render
-   // console.log(this.reset)
    if(this.errors.length === 0){
   let match = {
     compID: this.$route.query.compID,
