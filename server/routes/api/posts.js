@@ -44,7 +44,7 @@ router.post('/', async(req, res) => {
         defense: req.body.defense,
         comments: req.body.comments,
         scoutName: req.body.scoutName,
-        win: req.body.win
+        win: req.body.win,
         createdAt: new Date()
     })
     res.status(201).send();
