@@ -1,4 +1,5 @@
 <template>
+<div>
 <!-- When making router links to this component, YOU MUST USE ?id={{matchID}} as part of the routerlink to get to that specific match-->
     <!-- Displays Loading Wheel -->
     <Loading v-if="!completed"/>
@@ -46,6 +47,7 @@
 
         </section>
     </section>
+</div>
 </template>
 
 <script>
