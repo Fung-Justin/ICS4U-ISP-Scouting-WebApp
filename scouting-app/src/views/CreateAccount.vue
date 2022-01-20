@@ -46,6 +46,7 @@
                 >
                   Create
                 </button>
+                  <p class="text-danger font-weight-bold " :key="key">{{this.$store.state.errorMsg}}</p>
               </div>
             </form>
           </div>
@@ -63,7 +64,8 @@ export default {
         return {
           name: '',
           email: '',
-          password: ''
+          password: '',
+          key: 0,
         }
       },
   methods: {
@@ -92,12 +94,17 @@ export default {
       }
     },
     register () {
+      this.$store.commit('errorMsg', null)
         this.$store.dispatch('register', {
               name: this.name,
               password: this.password
             }
-            ).then(() => { this.$router.push({ name: 'Grid' }) })
+            ).then(() => {this.forceRerender(),this.$router.push({ name: 'Grid' })  })
+        },
+           forceRerender(){
+          this.key +=1;
         }
+
   },
 };
 </script>

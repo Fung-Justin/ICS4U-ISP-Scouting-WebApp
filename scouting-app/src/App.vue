@@ -77,6 +77,7 @@ export default {
   methods: {
     logout (){
       localStorage.removeItem('user');
+       location.reload()
     }
   }
 }
