@@ -117,7 +117,7 @@ export default {
 #login:hover {
   background-color: white;
   color: black;
-  border: 4px solid #201f41;
+  border: 4px solid black;
 }
 #login {
   border-radius: 8px;

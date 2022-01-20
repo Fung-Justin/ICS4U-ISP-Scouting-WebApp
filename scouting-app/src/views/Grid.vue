@@ -1,8 +1,6 @@
 <template>
   <div class="grid">
     <grid/>
-      <router-link id="link" class="h5" to="/scout?compID=humber"
-                >TEST</router-link>
   </div>
 </template>
 
@@ -18,8 +16,7 @@ export default{
 
 <style scoped>
 .grid{
-  margin-top: 5em;
+  padding-top: 5em;
 }
-
 </style>
 

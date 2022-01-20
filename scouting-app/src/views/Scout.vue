@@ -6,14 +6,14 @@
       <li v-for="error in errors">{{ error }}</li>
     </ul>
   </p>
-  <section>
-    <button v-on:click="gameState = 'pregame'" :style="[gameState === 'pregame' ? 'background: #d0ddf7' : '']">Pregame</button>
-    <button v-on:click="gameState = 'midgame'" :style="[gameState === 'midgame' ? 'background: #d0ddf7' : '']">Midgame</button>
-    <button v-on:click="gameState = 'endgame'" :style="[gameState === 'endgame' ? 'background: #d0ddf7' : '']">Endgame</button>
+  <section class = "text-center mt-2">
+    <button class = "btn mx-2" v-on:click="gameState = 'pregame'" :style="[gameState === 'pregame' ? 'color: black; border: 2px solid black;' : '']">Pregame</button>
+    <button class = "btn mx-2" v-on:click="gameState = 'midgame'" :style="[gameState === 'midgame' ? 'color: black; border: 2px solid black;' : '']">Midgame</button>
+    <button class = "btn mx-2" v-on:click="gameState = 'endgame'" :style="[gameState === 'endgame' ? 'color: black; border: 2px solid black;' : '']">Endgame</button>
   </section>
-    <Timer v-show="gameState === 'midgame'" @getTime='this.currTime=$event' @getTS='this.timeString=$event' :paused='false' :run='events.length!==0' :speed='1'/>
-    <Grid :flipped='flipped' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
-    <Pregame v-show="gameState === 'pregame'" @sendData="setPreGame($event)"/>
+    <Timer id = 'timer' v-show="gameState === 'midgame'" @getTime='this.currTime=$event' @getTS='this.timeString=$event' :paused='false' :run='events.length!==0' :speed='1'/>
+    <Grid id = 'grid' :flipped='flipped' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
+    <Pregame id = 'pregame' v-show="gameState === 'pregame'" @sendData="setPreGame($event)"/>
     <Midgame v-show="gameState === 'midgame'" :currTime='currTime' @createEvent='createEvent' @removeEvent='removeEvent'/>
     <Endgame v-show="gameState === 'endgame'" @sendData="setEndGame($event)" @submit="submit"/>
 
@@ -142,3 +142,23 @@ createEvent(event){
 }
 }}
 </script>
+
+<style scoped>
+div{
+  padding-top: 5em
+}
+.btn{
+  background-image: linear-gradient(315deg, #7d77ff 0%, #ff9482 100%);
+  color: white;
+}
+#grid{
+  margin-top: -2.5em;
+}
+#pregame{
+  margin-top: -3.5em;
+}
+#timer{
+  margin-top: -2.5em !important;
+  margin-bottom: -4.3em !important;
+}
+</style>
