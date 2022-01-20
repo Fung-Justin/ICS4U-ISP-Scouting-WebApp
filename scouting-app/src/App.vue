@@ -9,7 +9,9 @@
           <router-link class = "h5 text-white" to="/">Home</router-link>
         </div>
         <div class = "links">
-          <router-link class = "h6 text-white" to="/grid">Grid</router-link>
+          <router-link class = "h6 text-white dir" to="/grid">Grid</router-link>
+          <router-link class = "h6 text-white dir" to="/matches">Matches</router-link>
+          <router-link class = "h6 text-white" to="/scout">Scout</router-link>
         </div>
       </div>
     </div>
@@ -38,11 +40,15 @@ Check if home button actually takes you home.
   padding: 7px 0;
   display: inline-block;
   float:right;
-  margin-right: 18px;
+  margin-left: 25px;
+  margin-right: 30px;
 }
 .bi-house{
-  margin-right: 4px;
+  margin-right: 5px;
   cursor: pointer;
+}
+.dir {
+  margin-right: 25px;
 }
 </style>
 

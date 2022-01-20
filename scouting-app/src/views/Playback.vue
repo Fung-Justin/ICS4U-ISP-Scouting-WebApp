@@ -4,8 +4,8 @@
     <Loading v-if="!completed"/>
     <!-- Displays page once loaded -->
     <section id = "top" v-else>
-        <h2 class = "text-center">Team {{match.teamNumber}}</h2>
-        <h2 class = "text-center mb-3">Match {{match.matchNumber}}</h2>
+        <h2 class = "fw-bold text-center">Team {{match.teamNumber}}</h2>
+        <h2 class = "fw-bold text-center mb-3">Match {{match.matchNumber}}</h2>
         <Timer class = "mb-2" @getTime='timeChange($event)' :paused='paused' :sliderTime='time' :speed='speed' @resetSlider='time=0'/>
         <section v-if="time!==150">
             <Grid :flipped='match.flipped'  :playbackPos='currentPos'/>
@@ -21,7 +21,8 @@
         </section>
         <!-- Playback Controls -->
         <section>
-            <div id = "playback">
+            <div id = "playback" style = "display: flex; justify-content: center;">
+                <i id = "img" class = "bi bi-play-fill h4 mt-2"></i>
                 <input type="range" class = "playback-bar" v-model="time" min="0" max="150">
             </div>
             <div id = "btns">
@@ -105,8 +106,7 @@ export default ({
     text-align: center;
     padding-bottom: 1em;
 }
-#playback {
-    text-align: center;
+#img {
 }
 .playback-bar {
     width: 20em;
