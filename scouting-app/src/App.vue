@@ -2,7 +2,7 @@
   <nav class="bg-dark pt-2 fixed-top">
     <div class="container">
       <div>
-        <router-link to="/"><button id="logout-btn" class="btn mb-2 py-2 text-white" type="submit">Logout
+        <router-link to="/"><button id="logout-btn" class="btn mb-2 py-2 text-white" type="submit" @click="logout()">Logout
               </button></router-link>
         <div class = "home">
           <router-link to="/"><i class = "bi bi-house text-white"></i></router-link>
@@ -45,3 +45,13 @@ Check if home button actually takes you home.
   cursor: pointer;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    logout (){
+      localStorage.removeItem('user');
+    }
+  }
+}
+</script>

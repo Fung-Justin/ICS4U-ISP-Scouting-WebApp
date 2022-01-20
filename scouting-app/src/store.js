@@ -9,7 +9,7 @@ import router from './router'
 
 const store = createStore({
     state: {
-        count: 0
+        
     },
     mutations: {
         SET_USER_DATA(state,userData){
