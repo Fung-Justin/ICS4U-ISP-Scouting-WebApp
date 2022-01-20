@@ -1,14 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-
-
-  
-
 const routes = [{
         path: '/',
-        name: 'Login',
+        name: 'Landing',
         component: () =>
-            import ('../views/Login.vue')
+            import ('../views/Landing.vue')
     },
     {
         path: '/grid',

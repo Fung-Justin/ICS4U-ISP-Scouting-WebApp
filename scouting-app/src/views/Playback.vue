@@ -22,11 +22,10 @@
         <!-- Playback Controls -->
         <section>
             <div id = "playback" style = "display: flex; justify-content: center;">
-                <i id = "img" class = "bi bi-play-fill h4 mt-2"></i>
+                <i id = "img" class = "bi bi-play-fill h4 mt-2" v-on:click='paused=!paused; playButton()'></i>
                 <input type="range" class = "playback-bar" v-model="time" min="0" max="150">
             </div>
             <div id = "btns">
-                <button class = "btn" v-on:click='paused=!paused'>{{paused ? 'play' : 'pause'}}</button>
                 <button class = "btn" v-on:click='speed=1' :style="[speed === 1 ? 'background: #d0ddf7' : '']">1x</button>
                 <button class = "btn" v-on:click='speed=2' :style="[speed === 2 ? 'background: #d0ddf7' : '']">2x</button>
                 <button class = "btn" v-on:click='speed=5' :style="[speed === 5 ? 'background: #d0ddf7' : '']">5x</button>
@@ -72,6 +71,15 @@ export default ({
         //sets the currentAction based on the time 
         setAction(){
             this.currentAction = this.events.find(action => action.time <= this.time && action.event!=='' && Math.abs(this.time-action.time) <= 5)
+        },
+        playButton(){
+            let button = document.querySelector('#img');
+
+            if (button.className == 'bi bi-play-fill h4 mt-2'){
+                button.className = 'bi bi-pause-fill h4 mt-2'
+            }else if (button.className == 'bi bi-pause-fill h4 mt-2'){
+                button.className = 'bi bi-play-fill h4 mt-2'
+            }
         }
     },
     async mounted(){
@@ -107,9 +115,10 @@ export default ({
     padding-bottom: 1em;
 }
 #img {
+    cursor: pointer;
 }
 .playback-bar {
-    width: 20em;
+    width: 26em;
 }
 input[type=range]{
     -webkit-appearance: none;
