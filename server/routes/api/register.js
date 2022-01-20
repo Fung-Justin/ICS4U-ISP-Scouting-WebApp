@@ -27,9 +27,9 @@ router.post('/login', async (req, res) => {
     });
     
     if(login)
-    res.status(201).send(token.compact() + ' login');
+    res.status(201).send(token.compact());
     else
-    res.status(401).send("login failed");
+    res.status(401).send("Invalid Login, Please Try Again");
    
 });
 
@@ -40,6 +40,17 @@ router.get('/register', async (req, res) => {
 
 router.post('/new-user', async (req, res) => {
     const posts = await loadPostsCollection();
+    let userArray = await posts.find({}).toArray();
+    let existingUser = false
+    userArray.forEach(element => { 
+        if(element.name === req.body.name ){
+           existingUser = true;
+        }
+    });
+
+    if(existingUser){
+        res.status(401).send("Invalid account details, Username already exists");
+    }else{
     await posts.insertOne({
         name: req.body.name,
         password:req.body.password,
@@ -50,6 +61,7 @@ router.post('/new-user', async (req, res) => {
   const token = jwt.create(claims, 'top-secret-phrase')
   token.setExpiration(new Date().getTime() + 60*1000)
     res.status(201).send(`Username: ${req.body.name} Password: ${req.body.password} Token: ${token.compact()} `);
+}
 })
 
 

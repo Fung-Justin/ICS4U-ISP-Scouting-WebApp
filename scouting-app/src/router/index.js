@@ -53,6 +53,12 @@ const routes = [{
         name: 'Team',
         component: () =>
             import ('../views/Team.vue')
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'Page Not Found',
+        component: () =>
+            import ('../views/PageNotFound.vue')
     }
 
     /**{
@@ -69,16 +75,18 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes
 })
+
+//route guard
 router.beforeEach((to, from, next) => {
     const publicPages = ['/', '/create-account'];
     const authRequired = !publicPages.includes(to.path);
-    console.log(authRequired);
+    
     const loggedIn = localStorage.getItem('user');
-    console.log(loggedIn);
+
     // trying to access a restricted page + not logged in
     // redirect to login page
     if (authRequired && !loggedIn) {
-        router.push("/")
+     router.push(from.path);
     } else {
         next();
     }

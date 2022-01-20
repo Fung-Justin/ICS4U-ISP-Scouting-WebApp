@@ -38,6 +38,10 @@
                   Login
                 </button>
               </div>
+            
+                  <p class="text-danger font-weight-bold " :key="key">{{this.$store.state.errorMsg}}</p>
+                
+            
             </form>
           </div>
         </div>
@@ -54,7 +58,9 @@ export default {
   data () {
         return {
           name: '',
-          password: ''
+          password: '',
+        key: 0,
+       
         }
       },
   methods: {
@@ -72,13 +78,18 @@ export default {
     },
     
     login() {
-      console.log('login method ran');
+      this.$store.commit('errorMsg', null)
           this.$store
             .dispatch('login', {
               name: this.name,
               password: this.password
             })
-            .then(() => { this.$router.push({ name: 'Grid' }) })
+            .then(() => { this.forceRerender(),this.$router.push({ name: 'Grid' }) })
+
+        },
+        
+        forceRerender(){
+          this.key +=1;
         }
 
 
@@ -110,6 +121,7 @@ export default {
   text-decoration: none;
   transition-duration: 0.1s;
   color: black;
+  padding-top:100px;
 }
 #link:hover {
   color: rgb(77, 77, 77);

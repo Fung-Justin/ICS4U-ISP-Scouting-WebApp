@@ -1,5 +1,6 @@
 <template>
-  <nav class="bg-dark pt-2 fixed-top">
+    <transition name="fade" mode="out-in">
+  <nav class="bg-dark pt-2 fixed-top" v-if="this.$route.path !== '/'">
     <div class="container">
       <div>
         <router-link to="/"><button id="logout-btn" class="btn mb-2 py-2 text-white" type="submit" @click="logout()">Logout
@@ -16,7 +17,14 @@
       </div>
     </div>
   </nav>
-  <router-view />
+    </transition>
+
+  <router-view v-slot="{ Component }" :style="[this.$route.path !== '/' ? 'margin: 56px 0 0 0' : '']">
+    <transition name="fade" mode="out-in">
+      <component :is="Component"/>
+          </transition>
+  </router-view>
+
 </template>
 
 Check if home button actually takes you home. 
@@ -50,6 +58,18 @@ Check if home button actually takes you home.
 .dir {
   margin-right: 25px;
 }
+
+/* Transitions */
+.fade-enter-from,
+.fade-leave-to {
+opacity:0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease-out;
+}
+
 </style>
 
 <script>
@@ -57,6 +77,7 @@ export default {
   methods: {
     logout (){
       localStorage.removeItem('user');
+       location.reload()
     }
   }
 }
