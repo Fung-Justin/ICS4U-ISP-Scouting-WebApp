@@ -5,7 +5,7 @@
         <div class="col-md">
           <div class="card text-dark mx-auto py-5">
             <h1 class = "mb-5">Welcome!</h1>
-            <form>
+            <form @submit.prevent="login">
               <div class="mb-3">
                 <input
                 v-model="name"
@@ -26,7 +26,7 @@
                 <i id = "showIMG" v-on:click = "showPassword()" class = "bi bi-eye-slash-fill"></i>
               </div>
               <br>
-              <router-link id="link" class="h6" to="/create-account"
+              <router-link id="link" class="h6 p-0" to="/create-account"
                 >Create your account</router-link
               >
               <div>
@@ -70,7 +70,8 @@ export default {
         img.className = 'bi bi-eye-fill'
       }
     },
-    login () {
+    
+    login() {
       console.log('login method ran');
           this.$store
             .dispatch('login', {

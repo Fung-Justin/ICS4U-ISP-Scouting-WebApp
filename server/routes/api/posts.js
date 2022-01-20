@@ -9,6 +9,7 @@ router.get('/', async(req, res) => {
     res.send(await posts.find({}).toArray());
 });
 
+//const posts = await loadMatches();
 router.get('/register', async(req, res) => {
     const posts = await loadMatches();
     res.send(await posts.find({}).toArray());
@@ -31,6 +32,7 @@ router.post('/register', async(req, res) => {
     res.status(201).send();
 })
 
+
 //Inserts a new match (used for scout)
 router.post('/', async(req, res) => {
     const posts = await loadMatches();
@@ -43,6 +45,7 @@ router.post('/', async(req, res) => {
         defense: req.body.defense,
         comments: req.body.comments,
         scoutName: req.body.scoutName,
+        win: req.body.win,
         createdAt: new Date()
     })
     res.status(201).send();

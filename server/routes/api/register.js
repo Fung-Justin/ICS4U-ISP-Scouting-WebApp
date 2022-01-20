@@ -3,7 +3,7 @@ const mongodb = require('mongodb');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/users', async (req, res) => {
     const posts = await loadPostsCollection();
     res.send(await posts.find({}).toArray());
 });
@@ -13,24 +13,23 @@ router.post('/login', async (req, res) => {
     const posts = await loadPostsCollection();
     let name = req.body.name;
     let password = req.body.password;
-
     let userArray = await posts.find({}).toArray();
-    console.log(userArray);
-    
+    let login = false;
+
+    const jwt = require('njwt')
+    const claims = { iss: 'AMMJ', sub: 'AzureDiamond' }
+    const token = jwt.create(claims, 'bottle-neck')
+    token.setExpiration(new Date().getTime() + 60*1000)
     
     userArray.forEach(element => { 
-        if(element.name === name && element.password === password){
-            
-            const jwt = require('njwt')
-            const claims = { iss: 'AMMJ', sub: 'AzureDiamond' }
-            const token = jwt.create(claims, 'bottle-neck')
-            token.setExpiration(new Date().getTime() + 60*1000)
-              res.status(201).send(token.compact() + ' login sucessful');
-        }
-        res.status(404).send('login failed');
+        if(element.name === name && element.password === password)
+        login = true;
     });
     
-
+    if(login)
+    res.status(201).send(token.compact() + ' login');
+    else
+    res.status(401).send("login failed");
    
 });
 
@@ -39,7 +38,7 @@ router.get('/register', async (req, res) => {
     res.send(await posts.find({}).toArray());
 });
 
-router.post('/', async (req, res) => {
+router.post('/new-user', async (req, res) => {
     const posts = await loadPostsCollection();
     await posts.insertOne({
         name: req.body.name,

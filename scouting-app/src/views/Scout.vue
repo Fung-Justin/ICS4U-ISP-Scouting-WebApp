@@ -52,7 +52,8 @@ export default{
       climb: Number,
       defense: Number,
       scoutName: '',
-      comments: ''
+      comments: '',
+      win: false
     }
 }, 
 methods:{
@@ -61,11 +62,12 @@ setPreGame({matchNumber, teamNumber, flipped}){
  this.teamNumber = teamNumber
  this.flipped= flipped
 },
-setEndGame({climb, defense, scoutName, comments}){
+setEndGame({climb, defense, scoutName, comments, win}){
   this.climb = climb
   this.defense = defense
   this.scoutName = scoutName
   this.comments = comments
+  this.win = win
 },
 //Creates a movement event if position of bot changes
 getPosition(e){
@@ -99,7 +101,7 @@ createEvent(event){
 }, async submit(){
   //Should we just do one error for incomplete input and match ongoing? (also for styling possibly do red boxes around the inputs that are incomplete)
   this.errors=[];
-  if(this.currTime !== 150)
+  /*if(this.currTime !== 150)
     this.errors.push('Completed Match Data')
   if(typeof this.matchNumber !== 'number')
     this.errors.push('Match Number Required')
@@ -108,7 +110,7 @@ createEvent(event){
   if(this.scoutName === '')
     this.errors.push('Scout Name')
   if(this.comments === '')
-    this.errors.push('Comments')
+    this.errors.push('Comments')*/
 
 
   //TODO: error handling (only check for teamNumber, matchNumber and starting pos)
@@ -128,11 +130,12 @@ createEvent(event){
     climb: this.climb,
     defense: this.defense,
     comments: this.comments,
-    scoutName: this.scoutName
+    scoutName: this.scoutName,
+    win: this.win
   }
   console.log(match)
 
-    //SEND TO DB
+  //SEND TO DB
   await PostService.insertPost(match)
   //console.log(match)
   }
