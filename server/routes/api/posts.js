@@ -21,7 +21,7 @@ router.get('/:id', async(req, res) => {
     res.send(await posts.findOne({ _id: new mongodb.ObjectID(req.params.id) }))
 })
 
-/*
+
 router.post('/register', async(req, res) => {
     const posts = await loadMatches();
     await posts.insertOne({
@@ -31,7 +31,7 @@ router.post('/register', async(req, res) => {
     })
     res.status(201).send();
 })
-*/
+
 
 //Inserts a new match (used for scout)
 router.post('/', async(req, res) => {

@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
     });
     
     if(login)
-    res.status(201).send(token.compact() + ' login sucessful');
+    res.status(201).send(token.compact() + ' login');
     else
     res.status(401).send("login failed");
    
