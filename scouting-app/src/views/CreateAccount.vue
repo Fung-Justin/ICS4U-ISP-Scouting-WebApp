@@ -92,11 +92,11 @@ export default {
       }
     },
     register () {
-      
         this.$store.dispatch('register', {
               name: this.name,
               password: this.password
-            })
+            }.then(() => { this.$router.push({ name: 'Grid' }) })
+            )
         }
   },
 };
