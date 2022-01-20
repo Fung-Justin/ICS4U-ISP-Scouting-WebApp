@@ -47,8 +47,21 @@ const routes = [{
         name: 'Landing',
         component: () =>
             import ('../views/Landing.vue')
+    },
+    {
+        path: '/team',
+        name: 'Team',
+        component: () =>
+            import ('../views/Team.vue')
     }
-    
+
+    /**{
+        path: '/login',
+        name: 'Password',
+        component: () =>
+            import ('../views/Landing.vue')
+    }*/
+
 
 ]
 
@@ -61,15 +74,15 @@ router.beforeEach((to, from, next) => {
     const authRequired = !publicPages.includes(to.path);
     console.log(authRequired);
     const loggedIn = localStorage.getItem('user');
-   console.log(loggedIn);
+    console.log(loggedIn);
     // trying to access a restricted page + not logged in
     // redirect to login page
     if (authRequired && !loggedIn) {
-     router.push("/")
+        router.push("/")
     } else {
-      next();
+        next();
     }
-  });
-  
+});
+
 
 export default router
