@@ -56,7 +56,7 @@ export default {
   grid-template-columns: 12.5% 37% 37% 12.5%;
   grid-column-gap: 1px;
   grid-row-gap: 1px;
-  
+  margin-top: 3em;
 }
 /** .img {
   background-image: url("../image.jpg");

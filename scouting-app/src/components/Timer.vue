@@ -77,7 +77,7 @@ mounted(){
 
 <style scoped>
 .btn {
-    background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
+    background-image: linear-gradient(to left, #7d77FF 0%, #FF9482 100%);
     border: white;
     color: white;
 }

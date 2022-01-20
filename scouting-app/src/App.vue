@@ -6,7 +6,7 @@
               </button></router-link>
         <div class = "home">
           <router-link to="/"><i class = "bi bi-house text-white"></i></router-link>
-          <router-link class = "h5 text-white" to="/">Home</router-link>
+          <router-link class = "h5 text-white" to="/home">Home</router-link>
         </div>
         <div class = "links">
           <router-link class = "h6 text-white dir" to="/grid">Grid</router-link>
