@@ -7,14 +7,14 @@
     </ul>
   </p>
   <section class = "text-center mt-2">
-    <button class = "btn mx-2" v-on:click="gameState = 'pregame'" :style="[gameState === 'pregame' ? 'color: black; border: 2px solid black;' : '']">Pregame</button>
-    <button class = "btn mx-2" v-on:click="gameState = 'midgame'" :style="[gameState === 'midgame' ? 'color: black; border: 2px solid black;' : '']">Midgame</button>
-    <button class = "btn mx-2" v-on:click="gameState = 'endgame'" :style="[gameState === 'endgame' ? 'color: black; border: 2px solid black;' : '']">Endgame</button>
+    <button class = "btn bg-dark text-light mx-2" v-on:click="gameState = 'pregame'" :style="[gameState === 'pregame' ? 'background-color: white !important; border: 2px solid black; color: black !important;' : '']">Pregame</button>
+    <button class = "btn bg-dark text-light mx-2" v-on:click="gameState = 'midgame'" :style="[gameState === 'midgame' ? 'background-color: white !important; border: 2px solid black; color: black !important;' : '']">Midgame</button>
+    <button class = "btn bg-dark text-light mx-2" v-on:click="gameState = 'endgame'" :style="[gameState === 'endgame' ? 'background-color: white !important; border: 2px solid black; color: black !important;' : '']">Endgame</button>
   </section>
     <Timer id = 'timer' v-show="gameState === 'midgame'" @getTime='this.currTime=$event' @getTS='this.timeString=$event' :paused='false' :run='events.length!==0' :speed='1'/>
     <Grid id = 'grid' :flipped='flipped' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
     <Pregame id = 'pregame' v-show="gameState === 'pregame'" @sendData="setPreGame($event)"/>
-    <Midgame v-show="gameState === 'midgame'" :currTime='currTime' @createEvent='createEvent' @removeEvent='removeEvent'/>
+    <Midgame id = 'midgame' v-show="gameState === 'midgame'" :currTime='currTime' @createEvent='createEvent' @removeEvent='removeEvent'/>
     <Endgame v-show="gameState === 'endgame'" @sendData="setEndGame($event)" @submit="submit"/>
 
   </div>
@@ -147,10 +147,6 @@ createEvent(event){
 div{
   padding-top: 5em
 }
-.btn{
-  background-image: linear-gradient(315deg, #7d77ff 0%, #ff9482 100%);
-  color: white;
-}
 #grid{
   margin-top: -2.5em;
 }
@@ -158,7 +154,10 @@ div{
   margin-top: -3.5em;
 }
 #timer{
-  margin-top: -2.5em !important;
+  margin-top: -3em !important;
   margin-bottom: -4.3em !important;
+}
+#midgame{
+  margin-top: -2em;
 }
 </style>
