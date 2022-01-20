@@ -9,16 +9,25 @@
         <Timer class = "mb-2" @getTime='timeChange($event)' :paused='paused' :sliderTime='time' :speed='speed' @resetSlider='time=0'/>
         <section v-if="time!==150">
             <Grid :flipped='match.flipped'  :playbackPos='currentPos'/>
-            <div v-if="currentAction !== undefined">{{currentAction.TS}} - {{currentAction.event}}</div>
+            
         </section>
         <!-- Endgame Data -->
-        <section v-if="time===150">
-            <p>Hang Level {{match.climb}}</p>
-            <p>Defence level {{match.defense}}</p>
-            <h4>Comments: </h4>
-            <p>{{match.comments}}</p>
-            <p>Scouted by {{match.scoutName}}</p>
-        </section>
+        <div class="container">
+            <section class = "text-center card bg-dark text-light mx-auto my-4" v-if="time===150">
+                <div class="card-body">
+                    <div class="container">
+                        <h2 class = "card-title mb-3">Replay Report:</h2>
+                        <h5>Hang Level {{match.climb}}</h5>
+                        <h5>Defence Level {{match.defense}}</h5>
+                        <br>
+                        <h3>Comments: </h3>
+                        <h5>{{match.comments}}</h5>
+                        <br> 
+                        <h5 class = "fw-bold">Scouted by {{match.scoutName}}</h5>
+                    </div>
+                </div>
+            </section>
+        </div>
         <!-- Playback Controls -->
         <section>
             <div id = "playback" style = "display: flex; justify-content: center;">
@@ -29,7 +38,12 @@
                 <button class = "btn" v-on:click='speed=1' :style="[speed === 1 ? 'background: #d0ddf7' : '']">1x</button>
                 <button class = "btn" v-on:click='speed=2' :style="[speed === 2 ? 'background: #d0ddf7' : '']">2x</button>
                 <button class = "btn" v-on:click='speed=5' :style="[speed === 5 ? 'background: #d0ddf7' : '']">5x</button>
+                <div>
+                <h5 style = "display:inline-block">Non-movement actions: &nbsp</h5>
+                <h5 style = "display:inline-block" v-if="currentAction !== undefined">{{currentAction.TS}} - {{currentAction.event}}</h5>
+                </div>
             </div>
+
         </section>
     </section>
 </template>
@@ -120,10 +134,13 @@ export default ({
 .playback-bar {
     width: 26em;
 }
+.card{
+    width: 50%;
+    border-radius: 8px;
+}
 input[type=range]{
     -webkit-appearance: none;
 }
-
 input[type=range]::-webkit-slider-runnable-track {
     width: 300px;
     height: 5px;
@@ -131,7 +148,6 @@ input[type=range]::-webkit-slider-runnable-track {
     border: none;
     border-radius: 3px;
 }
-
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: none;
@@ -141,11 +157,9 @@ input[type=range]::-webkit-slider-thumb {
     background: #343a40;
     margin-top: -4px;
 }
-
 input[type=range]:focus {
     outline: none;
 }
-
 input[type=range]:focus::-webkit-slider-runnable-track {
     background-image: linear-gradient(to right, #7d77FF 0%, #FF9482 100%);
 }
