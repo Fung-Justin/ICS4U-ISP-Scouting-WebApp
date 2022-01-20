@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id = 'page'>
         <p v-if="errors.length">
     <b>Missing:</b>
     <ul>
@@ -15,7 +15,7 @@
     <Grid id = 'grid' :flipped='flipped' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
     <Pregame id = 'pregame' v-show="gameState === 'pregame'" @sendData="setPreGame($event)"/>
     <Midgame id = 'midgame' v-show="gameState === 'midgame'" :currTime='currTime' @createEvent='createEvent' @removeEvent='removeEvent'/>
-    <Endgame v-show="gameState === 'endgame'" @sendData="setEndGame($event)" @submit="submit"/>
+    <Endgame id = 'endgame' v-show="gameState === 'endgame'" @sendData="setEndGame($event)" @submit="submit"/>
 
   </div>
 </template>
@@ -148,16 +148,25 @@ div{
   padding-top: 5em
 }
 #grid{
-  margin-top: -2.5em;
+  margin-top: -3.5em;
 }
 #pregame{
   margin-top: -3.5em;
 }
 #timer{
-  margin-top: -3em !important;
+  margin-top: -4em !important;
   margin-bottom: -4.3em !important;
 }
 #midgame{
   margin-top: -2em;
+}
+.btn{
+  margin-top: -4em;
+}
+#endgame{
+  margin-top: -2em;
+}
+#page{
+  height:100%;
 }
 </style>

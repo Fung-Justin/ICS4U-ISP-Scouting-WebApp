@@ -23,7 +23,7 @@
               >
                 -
               </button>
-              <button class="btn btn-lg bigbtn mx-2">
+              <button class="btn bigbtn mx-2">
                 {{ hatchCB }} hatches on Cargo Bay
               </button>
               <button
@@ -42,7 +42,7 @@
               >
                 -
               </button>
-              <button class="btn btn-lg bigbtn mx-2">
+              <button class="btn bigbtn mx-2">
                 {{ hatchRocketL }} hatches on bottom rocket
               </button>
               <button
@@ -61,7 +61,7 @@
               >
                 -
               </button>
-              <button class="btn btn-lg bigbtn mx-2">
+              <button class="btn bigbtn mx-2">
                 {{ hatchRocketM }} hatches on middle rocket
               </button>
               <button
@@ -80,7 +80,7 @@
               >
                 -
               </button>
-              <button class="btn btn-lg bigbtn mx-2">
+              <button class="btn bigbtn mx-2">
                 {{ hatchRocketH }} hatches on high rocket
               </button>
               <button
@@ -104,7 +104,7 @@
                 class="btn btn-lg bigbtn"
                 v-on:click="changeStat('intakeCargo', 0)"
               >
-                Intake cargo
+                Intake Cargo
               </button>
             </div>
 
@@ -116,7 +116,7 @@
               >
                 -
               </button>
-              <button class="btn btn-lg bigbtn">
+              <button class="btn bigbtn">
                 {{ cargoCB }} cargo on Cargo Bay
               </button>
               <button
@@ -135,7 +135,7 @@
               >
                 -
               </button>
-              <button class="btn btn-lg bigbtn">
+              <button class="btn bigbtn">
                 {{ cargoRocketL }} cargo on bottom rocket
               </button>
               <button
@@ -153,7 +153,7 @@
               >
                 -
               </button>
-              <button class="btn btn-lg bigbtn">
+              <button class="btn bigbtn">
                 {{ cargoRocketM }} cargo on middle rocket
               </button>
               <button
@@ -171,7 +171,7 @@
               >
                 -
               </button>
-              <button class="btn btn-lg bigbtn">
+              <button class="btn bigbtn">
                 {{ cargoRocketH }} cargo on high rocket
               </button>
               <button
@@ -229,14 +229,13 @@ export default {
 .btnsm {
   color: white;
 }
-.card {
-  border-radius: 8px;
-  width: 70%;
-  height: 100%;
-}
 .row.display-flex {
   display: flex;
   flex-wrap: wrap;
+}
+.card {
+  height: 100%;
+  width: 80%; 
 }
 .col {
   align-items: center;
