@@ -3,7 +3,7 @@ import axios from 'axios';
 const url = '/api/posts/';
 
 class PostService {
-    //Get Posts
+    //Get Posts (used by match)
     static async getPosts() {
         const res = await axios.get(url);
         const data = res.data;
@@ -13,16 +13,29 @@ class PostService {
         }))
     }
 
-    // Create Post
-    static insertPost(text) {
+    // Create Post (used by scout)
+    static insertPost(match) {
         return axios.post(url, {
-            text
+            compID: match.compID,
+            matchNumber: match.matchNumber,
+            teamNumber: match.teamNumber,
+            flipped: match.flipped,
+            events: match.events,
+            climb: match.climb,
+            defense: match.defense,
+            comments: match.comments,
+            scoutName: match.scoutName
         });
     }
 
     // Delete Post
     static deletePost(id) {
         return axios.delete(`${url}${id}`);
+    }
+
+    // Get single Post (used by playback)
+    static getPost(id) {
+        return axios.get(`${url}${id}`);
     }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-dark fixed-top pt-2">
+  <nav class="bg-dark pt-2 fixed-top">
     <div class="container">
       <div>
         <router-link to="/"><button id="logout-btn" class="btn mb-2 py-2 text-white" type="submit">Logout

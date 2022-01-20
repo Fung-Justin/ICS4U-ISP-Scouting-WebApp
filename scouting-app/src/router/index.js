@@ -31,6 +31,18 @@ const routes = [{
             import ('../views/RegisterUser.vue')
     },
     {
+        path: '/playback',
+        name: 'Playback',
+        component: () =>
+            import ('../views/Playback.vue')
+    },
+    {
+        path: '/matches',
+        name: 'Matches',
+        component: () =>
+            import ('../views/Matches.vue')
+    },
+    {
         path: '/login',
         name: 'Password',
         component: () =>

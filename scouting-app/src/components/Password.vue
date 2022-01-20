@@ -109,7 +109,6 @@ export default {
   text-decoration: none;
   transition-duration: 0.1s;
   color: black;
-  padding-top:100px;
 }
 #link:hover {
   color: rgb(77, 77, 77);
