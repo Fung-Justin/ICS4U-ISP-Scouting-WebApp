@@ -2,7 +2,7 @@
   <nav class="bg-dark pt-2 fixed-top">
     <div class="container">
       <div>
-        <router-link to="/"><button id="logout-btn" class="btn mb-2 py-2 text-white" type="submit">Logout
+        <router-link to="/"><button id="logout-btn" class="btn mb-2 py-2 text-white" type="submit" @click="logout()">Logout
               </button></router-link>
       </div>
     </div>
@@ -21,3 +21,13 @@ Change colours of navbar based on design on the landing page. Modern, simplistic
   padding-left: 20px;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    logout (){
+      localStorage.removeItem('user');
+    }
+  }
+}
+</script>
