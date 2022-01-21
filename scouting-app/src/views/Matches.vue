@@ -1,5 +1,7 @@
 <template>
-  <div id = 'page'>
+<div>
+<Loading v-if="!completed"/>
+  <div v-else id = 'page'>
   <div class = "container text-center mx-auto pt-4">
     <div class="card bg-dark text-white mx-auto mt-3 pt-2 pb-3 px-4" style = "width: 95%;">
     <h1 class="title m-3 mb-4">Matches</h1>
@@ -62,17 +64,20 @@
     </div>
   </div>
   </div>
+</div>
 </template>
 
 <script>
 import PostService from "../PostService";
+import Loading from "@/components/Loading"
 
 export default {
-  components: {},
+  components: {Loading},
   data() {
     return {
       matches: Array,
       matchData: Array,
+      completed: false
     };
   },
 
@@ -166,7 +171,7 @@ export default {
     this.matchData = [];
     console.log(this.matches);
    await PostService.getPosts().then(this.getMatches());
-    
+    this.completed = true
   },
 };
 </script>
