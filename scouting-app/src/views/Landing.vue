@@ -15,8 +15,8 @@
 
     <section class="px-5 pt-5">
         <div class="row text-center">
-          <div class="col-md">
-            <div class="card bg-dark text-light mx-auto">
+          <div  class="col-md ">
+            <div @click="this.$router.push('/grid')" class="card bg-dark text-light mx-auto" >
               <div class="card-body text-center">
                 <h2 class="card-title">Grid</h2>
                 <h5 class="card-text px-2 mb-3">
@@ -26,7 +26,7 @@
             </div>
           </div>
           <div class="col-md">
-            <div class="card bg-dark text-light mx-auto">
+            <div @click="this.$router.push('/matches')" class="card bg-dark text-light mx-auto" >
               <div class="card-body text-center">
                 <h2 class="card-title">
                   Matches
@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="col-md">
-            <div class="card bg-dark text-light mx-auto">
+            <div @click="this.$router.push('/matches')" class="card bg-dark text-light mx-auto">
               <div class="card-body text-center">
                 <h2 class="card-title">
                   Scout
@@ -58,6 +58,11 @@
 <script>
 export default {
   name: "Landing",
+  methods: {
+    test(){
+      console.log('hello');
+    }
+  }
 };
 </script>
 
@@ -87,6 +92,13 @@ export default {
 .card-text {
   line-height: 1.3;
 }
+
+.col-md :hover{
+  opacity: 0.9;
+  background-color: white;
+  color: black;
+}
+
 </style>
 
 
