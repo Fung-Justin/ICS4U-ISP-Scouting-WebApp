@@ -76,44 +76,16 @@
                     {{ stats.teamNumber }}
                   </h4>
                 </td>
-                <td>
-                  <h6>{{ stats.score / stats.matchesPlayed }}</h6>
-                </td>
-                <td>
-                  <h6>{{ stats.wins }}</h6>
-                </td>
-                <td>
-                  <h6>{{ stats.matchesPlayed - stats.wins }}</h6>
-                </td>
-                <td>
-                  <h6>{{ stats.rp }}</h6>
-                </td>
-                <td>
-                  <h6>
-                    {{ stats.CargoRocketH / stats.matchesPlayed }}<br />{{
-                      stats.CargoRocketM / stats.matchesPlayed
-                    }}<br />{{ stats.CargoRocketL / stats.matchesPlayed }}
-                  </h6>
-                </td>
-                <td>
-                  <h6>{{ stats.CargoCB / stats.matchesPlayed }}</h6>
-                </td>
-                <td>
-                  <h6>
-                    {{ stats.HatchRocketH / stats.matchesPlayed }}<br />{{
-                      stats.HatchRocketM / stats.matchesPlayed
-                    }}<br />{{ stats.HatchRocketL / stats.matchesPlayed }}
-                  </h6>
-                </td>
-                <td>
-                  <h6>{{ stats.HatchCB / stats.matchesPlayed }}</h6>
-                </td>
-                <td>
-                  <h6>{{ stats.climb / stats.matchesPlayed }}</h6>
-                </td>
-                <td>
-                  <h6>{{ stats.defense / stats.matchesPlayed }}</h6>
-                </td>
+                <td><h6>{{stats.avgScore}}</h6></td>
+            <td><h6>{{stats.wins}}</h6></td>
+            <td><h6>{{stats.losses}}</h6></td>
+            <td><h6>{{stats.rp}}</h6></td>
+            <td><h6>{{stats.avgCargoRocketH}}<br>{{stats.avgCargoRocketM}}<br>{{stats.avgCargoRocketL}}</h6></td>
+            <td><h6>{{stats.avgCargoCB}}</h6></td>
+            <td><h6>{{stats.avgHatchRocketH}}<br>{{stats.avgHatchRocketM}}<br>{{stats.avgCargoRocketL}}</h6></td>
+            <td><h6>{{stats.avgHatchCB}}</h6></td>
+            <td><h6>{{stats.avgClimb}}</h6></td>
+            <td><h6>{{stats.avgDefense}}</h6></td>
               </tr>
             </tbody>
           </table>
@@ -124,15 +96,13 @@
 </template>
 
 <script>
-import TeamRow from "@/components/TeamRow.vue";
 import PostService from "../PostService";
 import Loading from "@/components/Loading.vue";
 
 export default {
   name: "Teams",
   components: {
-    TeamRow,
-    Loading,
+    Loading
   },
   data() {
     return {
@@ -159,18 +129,28 @@ export default {
             wins: 0,
             losses: 0,
             rp: 0,
-            line: 0,
             CargoRocketL: 0,
+            avgCargoRocketL: 0,
             CargoRocketM: 0,
+            avgCargoRocketM: 0,
             CargoRocketH: 0,
+            avgCargoRocketH: 0,
             CargoCB: 0,
+            avgCargoCB: 0,
             HatchRocketL: 0,
+            avgHatchRocketL: 0,
             HatchRocketM: 0,
+            avgHatchRocketM: 0,
             HatchRocketH: 0,
+            avgHatchRocketH: 0,
             HatchCB: 0,
+            avgHatchCB: 0,
             climb: 0,
+            avgClimb: 0,
             defense: 0,
+            avgDefense: 0,
             score: 0,
+            avgScore: 0,
           });
         }
         // Update team stats with match stats
@@ -224,6 +204,38 @@ export default {
             team.HatchRocketH +
             team.HatchCB) *
             2;
+
+        // Determining averages
+        team.avgCargoRocketL = team.CargoRocketL/team.matchesPlayed
+        if(this.countDecimals(team.avgCargoRocketL)>2)
+            team.avgCargoRocketL = team.avgCargoRocketL.toFixed(2)
+        team.avgCargoRocketM = team.CargoRocketM/team.matchesPlayed
+        if(this.countDecimals(team.avgCargoRocketM)>2)
+            team.avgCargoRocketM = team.avgCargoRocketM.toFixed(2)
+        team.avgCargoRocketH = team.CargoRocketH/team.matchesPlayed
+        if(this.countDecimals(team.avgCargoRocketH)>2)
+            team.avgCargoRocketH = team.avgCargoRocketH.toFixed(2)
+        team.avgCargoCB = team.CargoCB/team.matchesPlayed
+        if(this.countDecimals(team.avgCargoCB)>2)
+            team.avgCargoCB = team.avgCargoCB.toFixed(2)
+        team.avgHatchRocketL = team.HatchRocketL/team.matchesPlayed
+        if(this.countDecimals(team.avgHatchRocketL)>2)
+            team.avgHatchRocketL = team.avgHatchRocketL.toFixed(2)
+        team.avgHatchRocketM = team.HatchRocketM/team.matchesPlayed
+        if(this.countDecimals(team.avgHatchRocketM)>2)
+            team.avgHatchRocketM = team.avgHatchRocketM.toFixed(2)
+        team.avgHatchRocketH = team.HatchRocketH/team.matchesPlayed
+        if(this.countDecimals(team.avgHatchRocketH)>2)
+            team.avgHatchRocketH = team.avgHatchRocketH.toFixed(2)
+        team.avgClimb = team.climb/team.matchesPlayed
+        if(this.countDecimals(team.avgClimb)>2)
+            team.avgClimb = team.avgClimb.toFixed(2)
+        team.avgDefense = team.defense/team.matchesPlayed
+        if(this.countDecimals(team.avgDefense)>2)
+            team.avgDefense = team.avgDefense.toFixed(2)
+        team.avgScore = team.score/team.matchesPlayed
+        if(this.countDecimals(team.avgScore)>2)
+            team.avgScore = team.avgScore.toFixed(2)
       }
     },
     // Controls the table sorting
@@ -252,6 +264,11 @@ export default {
       if (!this.sortAsc) this.teams.reverse();
       this.currentSortField = field;
     },
+    countDecimals(value) {
+        if (Math.floor(value) !== value)
+            return value.toString().split(".")[1].length || 0;
+        return 0;
+    }
   },
   async created() {
     const matches = await PostService.getPosts();
