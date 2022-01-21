@@ -39,9 +39,9 @@
                 <div class="dropdown mt-1" style = "margin-left: 0.5em;">
                 <button class="dropbtn btn-sm"><i class = "bi bi-speedometer2 text-dark"></i></button>
                 <div class="dropdown-content">
-                    <button class = "btn text-white" v-on:click='speed=1' :style="[speed === 1 ? 'background: black' : '']">1x</button>
-                    <button class = "btn text-white" v-on:click='speed=2' :style="[speed === 2 ? 'background: black' : '']">2x</button>
-                    <button class = "btn text-white" v-on:click='speed=5' :style="[speed === 5 ? 'background: black' : '']">5x</button>
+                    <button class = "btn text-white bg-dark" v-on:click='speed=1' :style="[speed === 1 ? 'background: black' : '']">1x</button>
+                    <button class = "btn text-white bg-dark" v-on:click='speed=2' :style="[speed === 2 ? 'background: black' : '']">2x</button>
+                    <button class = "btn text-white bg-dark" v-on:click='speed=5' :style="[speed === 5 ? 'background: black' : '']">5x</button>
                 </div>
                 </div>
             </div>
@@ -182,7 +182,6 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   display: none;
   position: absolute;
   bottom: -34px;    
-  background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
   color: white;
   z-index: 1;
 }
@@ -192,7 +191,6 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   display: block;
 }
 .dropdown-content a:hover {
-    background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
     color: white;
     left:auto;
     right:0;
