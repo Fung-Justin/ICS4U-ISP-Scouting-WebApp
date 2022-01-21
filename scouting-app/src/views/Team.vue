@@ -1,17 +1,21 @@
 <template>
 <div>
     <Loading v-if="!completed"/>
-    <section v-else>
-    <h1>{{team}}</h1>
+    <div class = "py-5" style = "background-image: linear-gradient(315deg, #7d77ff 0%, #ff9482 100%);" v-else>
+        <div class="container text-center">
+        <div class="card bg-dark text-light mx-auto pb-4" style = "border-radius: 4px; width: 80%;">
+    <h1 class = "fw-bold mt-3">{{team}}</h1>
     <!-- Auto vs Teleop switch -->
-    <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" v-model="auto" checked :style="[auto ? 'background: #7d77FF' : 'background: #FF9482']">
-        <label class="form-check-label" for="flexSwitchCheckChecked">{{auto ? 'Auto' : 'Teleop'}}</label>
+    <div>
+        <div class = "mt-3" style = "display: inline-block; float: right; margin-right: 5em">
+            <input class="form-check-input" style = "margin-right: 0.2em; display: inline-block" type="checkbox" role="switch" id="flexSwitchCheckChecked" v-model="auto" checked :style="[auto ? 'background: #7d77FF' : 'background: #FF9482']">
+            <h5 class="form-check-label" style = "display: inline-block" for="flexSwitchCheckChecked">{{auto ? 'Auto' : 'Teleop'}}</h5>
+        </div>
+        <input class = "mt-3" id = 'filter' type=textarea v-model="filterValue" placeholder = "Filter" v-on:keyup="filterComments">
     </div>
-    <input type=textarea v-model="filterValue" v-on:keyup="filterComments">
     <!-- Table of Stats NEEDS TO FILL WHOLE SCREEN-->
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered table-hover table-dark" style = "border-radius: 4px;">
             <thread>
             <tr>
                 <th v-on:click="sort('matchNumber')">Match Number</th>
@@ -27,7 +31,8 @@
             <tr v-for:each='stat in data'>
             <td>{{stat.matchNumber}}</td>
             <!-- THE PLAY BUTTON NEEDS TO BE CENTERED-->
-                <router-link class="bi bi-play-fill h4 mt-2" :to="`/playback?id=${stat.id}`"></router-link>
+                <br style="line-height: 10px"/>
+                <router-link id = 'play-button' class="bi bi-play-fill h4 text-white" :to="`/playback?id=${stat.id}`"></router-link>
                     <td>
                         {{auto ? stat.ACargoRocketH : stat.TCargoRocketH}}
                         <br>
@@ -61,8 +66,10 @@
 
             </thread>
         </table>
+        </div>
     </div>
-    </section>
+    </div>
+    </div>
 </div>
 </template>
 
@@ -176,3 +183,17 @@ export default({
 }
 })
 </script>
+
+<style scoped>
+#filter{
+    width: 20%;
+    border-radius: 6px;
+    margin-left: 5em;
+    float: left;
+    border: none;
+    border-bottom: 2px solid black;
+}
+#play-button{
+    margin-bottom: 10px;
+}
+</style>
