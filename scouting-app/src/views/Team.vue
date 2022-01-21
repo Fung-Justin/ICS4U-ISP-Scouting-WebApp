@@ -3,11 +3,11 @@
     <Loading v-if="!completed"/>
     <div class = "py-5" style = "background-image: linear-gradient(315deg, #7d77ff 0%, #ff9482 100%); height: 100%;" v-else>
         <div class="container text-center">
-        <div class="card bg-dark text-light mx-auto pb-4" style = "border-radius: 4px; width: 80%;">
+        <div class="card bg-dark text-light mx-auto pb-4 px-4" style = "border-radius: 8px; width: 95%;">
     <h1 class = "fw-bold mt-3">{{team}}</h1>
     <!-- Auto vs Teleop switch -->
     <div>
-        <div class = "mt-3" style = "display: inline-block; float: right; margin-right: 5em">
+        <div class = "mt-3" style = "display: inline-block; float: right;">
             <input class="form-check-input" style = "margin-right: 0.2em; display: inline-block" type="checkbox" role="switch" id="flexSwitchCheckChecked" v-model="auto" checked :style="[auto ? 'background: #7d77FF' : 'background: #FF9482']">
             <h5 class="form-check-label" style = "display: inline-block" for="flexSwitchCheckChecked">{{auto ? 'Auto' : 'Teleop'}}</h5>
         </div>
@@ -193,7 +193,6 @@ export default({
 #filter{
     width: 20%;
     border-radius: 6px;
-    margin-left: 5em;
     float: left;
     border: none;
     border-bottom: 2px solid white;
