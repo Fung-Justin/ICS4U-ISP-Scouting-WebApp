@@ -17,7 +17,6 @@
                         <th v-on:click="sort('climb')">Avg Climb</th>
                         <th v-on:click="sort('defense')">Avg Defense</th>
                     </tr>
-                    <!-- Feel free to change the headings to make them consistent with Maya's -->
                 <tr v-for="stats in teams">
                     <td><h6 v-on:click="this.$router.push(`team?team=${stats.teamNumber}`)">{{stats.teamNumber}}</h6></td>
                     <td><h6>{{stats.score/stats.matchesPlayed}}</h6></td>
@@ -147,10 +146,12 @@ export default{
             else this.sortAsc = true
             if(field.search('CargoRocket') > -1) 
                 this.teams = this.teams.sort((a, b) => (a[field+'L'] + a[field+'M'] + a[field+'H']) - (b[field+'L'] + b[field+'M'] + b[field+'H']))
-            if(field.search('HatchRocket') > -1) 
+            else if(field.search('HatchRocket') > -1) 
                 this.teams = this.teams.sort((a, b) => (a[field+'L'] + a[field+'M'] + a[field+'H']) - (b[field+'L'] + b[field+'M'] + b[field+'H']))
             else
-                this.teams = this.teams.sort((a, b) => a[field] -  b[field]);
+                this.teams = this.teams.sort((a, b) => b[field] -  a[field]);
+            if(!field.search('losses')>-1)
+                this.teams.reverse()
                 
             if(!this.sortAsc) this.teams.reverse()
             this.currentSortField = field

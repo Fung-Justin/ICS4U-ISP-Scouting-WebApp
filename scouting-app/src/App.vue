@@ -10,9 +10,9 @@
         </div>
         <div class = "links">
           <router-link class = "h6 text-white dir" to="/grid">Grid</router-link>
+          <router-link class = "h6 text-white dir" to="/teams">Teams</router-link>
           <router-link class = "h6 text-white dir" to="/matches">Matches</router-link>
           <router-link class = "h6 text-white" to="/scout">Scout</router-link>
-          <router-link class = "h6 text-white" to="/matches">Scout</router-link>
         </div>
       </div>
     </div>
