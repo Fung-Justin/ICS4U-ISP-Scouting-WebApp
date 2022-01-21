@@ -1,7 +1,7 @@
 <template>
-    <div class = "container pb-4">
-      <div class="card bg-dark text-light mx-auto">
-    <!-- Match Number input -->
+  <div class = "container pb-4">
+    <div class="card bg-dark text-light mx-auto">
+      <!-- Match Number input -->
       <div class="form-group text-center mt-3">
         <h5>Match Number</h5>
         <input v-model="matchNumber" type="number" class="form-control mx-auto" id="match-number">
@@ -13,6 +13,7 @@
         <input v-model="teamNumber" type="number" class="form-control mx-auto" id="team-number"/>
       </div>
 
+    <!-- Flip Button -->
       <div class="form-group text-center mt-4 pb-4">
         <button type="button" class="btn btn-lg btn-block" v-on:click="flipped=!flipped">Flip</button>
       </div>
@@ -25,18 +26,23 @@
 import { watchEffect, ref, defineComponent } from "vue";
 
 export default ({
-data(){
-    return{
+  data() {
+    return {
       matchNumber: Number,
       teamNumber: Number,
       flipped: false
+    }
+  },
+  created() {
+    //Emits data to parent component whenever there is a change in data
+    watchEffect(() => {
+      this.$emit('sendData', {
+        matchNumber: this.matchNumber,
+        teamNumber: this.teamNumber,
+        flipped: this.flipped
+      })
+    })
   }
-},
-  created(){
-watchEffect(() => {
-  this.$emit('sendData',  {matchNumber: this.matchNumber, teamNumber: this.teamNumber, flipped: this.flipped})
-  })
-}
 })
 </script>
 
