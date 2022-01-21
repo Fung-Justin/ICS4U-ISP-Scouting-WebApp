@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-md">
-          <div class="card text-dark mx-auto py-5">
+          <div class="card text-dark mx-auto pt-5 pb-4">
             <h1 class = "mb-5">Welcome!</h1>
             <form @submit.prevent="login">
               <div class="mb-3">

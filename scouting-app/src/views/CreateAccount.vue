@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-md">
-          <div class="card text-light mx-auto py-5">
+          <div class="card text-light mx-auto pt-5 pb-4">
             <h1 class = "mb-5 text-dark">Create Your Account!</h1>
             <form @submit.prevent="register">
               <div class="mb-5">
@@ -116,6 +116,7 @@ export default {
   width: 35%;
   margin-right:0%;
   margin-left:0%;
+  margin-top: -2em;
 }
 .auth {
   width: 75%;
