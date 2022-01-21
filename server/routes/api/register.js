@@ -59,7 +59,7 @@ router.post('/new-user', async (req, res) => {
     const jwt = require('njwt')
   const claims = { iss: 'fun-with-jwts', sub: 'AzureDiamond' }
   const token = jwt.create(claims, 'top-secret-phrase')
-  token.setExpiration(new Date().getTime() + 60*1000)
+  token.setExpiration(new Date().getTime() + ((3.6*Math.pow(10,6)) * 24))
     res.status(201).send(`Username: ${req.body.name} Password: ${req.body.password} Token: ${token.compact()} `);
 }
 })

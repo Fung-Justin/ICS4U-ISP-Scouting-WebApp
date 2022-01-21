@@ -8,18 +8,18 @@
     <table class="table table-bordered text-white table-hover">
       <thead>
         <tr>
-          <th scope="col">Match</th>
-          <th scope="col">R1</th>
-          <th scope="col">R2</th>
-          <th scope="col">R3</th>
-          <th scope="col">B1</th>
-          <th scope="col">B2</th>
-          <th scope="col">B3</th>
-          <th scope="col">Red Climb Points</th>
-          <th scope="col">Blue Climb Points</th>
-          <th scope="col">Red RP</th>
-          <th scope="col">Blue RP</th>
-          <th scope="col">Winner</th>
+          <th title="Match ID" scope="col" id="match">Match</th>
+          <th title = "Red Alliance Robot #1" scope="col">R1</th>
+          <th title = "Red Alliance Robot #2" scope="col">R2</th>
+          <th title = "Red Alliance Robot #3" scope="col">R3</th>
+          <th title = "Blue Alliance Robot #1" scope="col">B1</th>
+          <th title = "Blue Alliance Robot #2"  scope="col">B2</th>
+          <th title = "Blue Alliance Robot #3"  scope="col">B3</th>
+          <th title = "Red Alliance Total Hab Climb Points"  scope="col">Red Climb Points</th>
+          <th title = "Blue Alliance Total Hab Climb Points" scope="col">Blue Climb Points</th>
+          <th title = "Red Alliance Total Ranking Points Earned" scope="col">Red RP</th>
+          <th title="Blue Alliance Total Ranking Points Earned" scope="col">Blue RP</th>
+          <th title="Which Alliance Won the Match" scope="col">Winner</th>
         </tr>
       </thead>
       <tbody class = "bg-dark text-white" v-for="data in matchData" :key="data">
@@ -57,7 +57,7 @@
           <h6>{{ data.bRp }}</h6>
         </td>
         <td>
-          <h6>{{ data.win }}</h6>
+          <h6>{{ data.win }}</h6>s
         </td>
       </tbody>
     </table>
@@ -82,9 +82,12 @@ export default {
   },
 
   methods: {
-      test(){
-          this.getMatches();
-      },
+    /**
+     iterates through the array of scout reports and finds matches to be made into a match object
+     the match number is passed through getMatchData() and the new match objects are pushed into the MatchData array
+    */
+   
+
       getMatches(){
           let num = [];
           this.matches.forEach(match => {
@@ -94,6 +97,11 @@ export default {
               }
           });
       },
+  /**
+   gets individual match reports on each team in a match and compiles the data into a match object
+   the method accounts for missing scout data by filling missing scout reports with an object called "incomplete"
+  */
+     
     getMatchData(matchNum) {
       let teamBlue = [];
       let teamRed = [];

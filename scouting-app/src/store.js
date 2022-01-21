@@ -1,11 +1,11 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
-import router from './router'
 
 
 
 
 
+//const url = "http://localhost:5000";
 
 const store = createStore({
     state: {
@@ -26,7 +26,7 @@ const store = createStore({
 
         register({ commit }, credentials) {
             console.log(credentials);
-            return axios.post('http://localhost:5000/register/new-user', credentials).then(({data}) => {commit('SET_USER_DATA', data),commit('errorMsg', null)})
+            return axios.post('/url/register/new-user', credentials).then(({data}) => {commit('SET_USER_DATA', data),commit('errorMsg', null)})
             .catch(err => 
                 commit('errorMsg',err.response.data));
 
@@ -34,7 +34,7 @@ const store = createStore({
         login ({ commit }, credentials) {
            
             return axios
-              .post('http://localhost:5000/register/login', credentials)
+              .post("/url/register/login", credentials)
               .then(({ data }) => { commit('SET_USER_DATA', data),commit('errorMsg', null)
            
               }).catch(err => 
