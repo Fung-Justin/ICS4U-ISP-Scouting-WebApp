@@ -111,6 +111,7 @@ export default {
       let bCl = 0;
       let rCl = 0;
       let incomplete ={matchNumber:"Incomplete Data", teamNumber:"Incomplete Data", climb:0}
+      let completed = true
   
          this.matches.forEach((team) => {
         if (team.matchNumber == matchNum && team.team === "blue" ) {
@@ -122,13 +123,13 @@ export default {
     
         while(teamBlue.length < 3){
             teamBlue.push(incomplete);
+            completed = false
         }
          while(teamRed.length < 3){
             teamRed.push(incomplete);
+            completed = false
         }
-  
-        
-   
+
       let r1 = teamRed[0].teamNumber;
       let r2 = teamRed[1].teamNumber;
       let r3 = teamRed[2].teamNumber;
@@ -136,17 +137,6 @@ export default {
       let b1 = teamBlue[0].teamNumber;
       let b2 = teamBlue[1].teamNumber;
       let b3 = teamBlue[2].teamNumber;
-  if(teamRed[0].win){
-        winner = "Red";
-        rRP += 2;
-     }else if(teamBlue[0].win){
-         winner = "Blue";
-         bRP +=2;
-     }else{
-         winner = "Tie";
-         bRP += 1;
-         rRP += 1;
-     }
 
      teamBlue.forEach(team =>{
         
@@ -165,11 +155,24 @@ export default {
              rCl+= (3*team.climb);
          }
      });
+    if(completed){ 
+       if(teamRed[0].win){
+        winner = "Red";
+        rRP += 2;
+     }else if(teamBlue[0].win){
+         winner = "Blue";
+         bRP +=2;
+     }else{
+         winner = "Tie";
+         bRP += 1;
+         rRP += 1;
+     }
+
       if(bCl>=15)bRP++;
      if(rCl >=15)rRP++;
-     
+     }
 
-        let Match ={matchNumber:teamBlue[0].matchNumber, r1:r1, r2:r2, r3:r3, b1:b1, b2:b2, b3:b3, bRp:bRP, rRp:rRP, win:winner, blueClimb:bCl,redClimb:rCl}
+        let Match ={matchNumber: teamBlue[0].matchNumber === Number ? teamBlue[0].matchNumber : teamRed[0].matchNumber, r1:r1, r2:r2, r3:r3, b1:b1, b2:b2, b3:b3, bRp:bRP, rRp:rRP, win: completed ? winner : "N/A", blueClimb:bCl,redClimb:rCl}
         return Match;
     }
     },

@@ -1,8 +1,8 @@
 <template>
 <div>
-<!-- When making router links to this component, YOU MUST USE ?id={{matchID}} as part of the routerlink to get to that specific match-->
     <!-- Displays Loading Wheel -->
     <Loading v-if="!completed"/>
+    
     <!-- Displays page once loaded -->
     <section id = "page" v-else>
         <h2 class = "fw-bold text-center">Team {{match.teamNumber}}</h2>
@@ -11,6 +11,7 @@
         <section v-if="time!==150">
             <Grid :flipped='match.flipped'  :playbackPos='currentPos'/>
         </section>
+
         <!-- Endgame Data -->
         <div class="container">
             <section class = "text-center card bg-dark text-light mx-auto my-4" v-if="time===150">
@@ -28,6 +29,7 @@
                 </div>
             </section>
         </div>
+
         <!-- Playback Controls -->
         <section>
             <div id = "playback" class = "mt-2" style = "display: flex; justify-content: center;">
@@ -89,10 +91,11 @@ export default ({
         setPos(){
             this.currentPos = (this.events.find(action => action.time<=this.time && action.event==='')).position
         },
-        //sets the currentAction based on the time 
+        //Sets the current Action of the bot at the current time
         setAction(){
             this.currentAction = this.events.find(action => action.time <= this.time && action.event!=='' && Math.abs(this.time-action.time) <= 5)
         },
+        //Toggles the play and pause button
         playButton(){
             let button = document.querySelector('#img');
 
@@ -112,12 +115,6 @@ export default ({
         this.completed = true
     }
 })
-//THINGS TO DO IN THIS VIEW
-// 1 - see if you can get the timer component to follow the scroll (done)
-// 2 - get match from id from url (done)
-// 3 - display movements 
-// 4 - display movements based off time
-// repeat 3-4 with actions
 </script>
 <style scoped>
 .img {
