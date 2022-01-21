@@ -105,9 +105,15 @@ export default {
       
         
     },
+
+    /**
+    Register() handles all the processes related to registering a new account
+    also checks for error if the fields are left blank, or the user is trying
+    to register with an existing username
+    the method will return a 
+     */
     register () {
-     
-      console.log(this.checkPassword());
+
        if(this.checkPassword()){
         this.$store.dispatch('register', {
               name: this.name,

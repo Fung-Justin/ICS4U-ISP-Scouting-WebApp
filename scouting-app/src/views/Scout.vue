@@ -130,7 +130,7 @@ export default {
           comments: this.comments,
           scoutName: this.scoutName,
           win: this.win,
-          colour: this.flipped && this.events[0].position === 3 || !this.flipped && this.events[0].position === 8 ? 'red' : 'blue',
+          team: this.flipped && this.events[0].position === 3 || !this.flipped && this.events[0].position === 8 ? 'red' : 'blue',
           rocket: this.rocket
         }
 
