@@ -46,7 +46,7 @@
                 >
                   Create
                 </button>
-                  <p class="text-danger font-weight-bold " :key="key">{{this.$store.state.errorMsg}}</p>
+                  <p class="text-danger font-weight-bold h6" :key="key">{{this.$store.state.errorMsg}}</p>
               </div>
             </form>
           </div>
@@ -100,11 +100,11 @@ export default {
               password: this.password
             }
             ).then(() => {this.forceRerender(),this.$router.push({ name: 'Landing' })  })
-        },
-           forceRerender(){
-          this.key +=1;
-        }
-
+    },
+      forceRerender(){
+        this.key +=1;
+      }
+  
   },
 };
 </script>
