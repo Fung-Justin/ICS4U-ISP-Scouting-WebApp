@@ -24,7 +24,7 @@
                                 <!-- Headers -->
                                 <tr>
                                     <th v-on:click="sort('matchNumber')" title="Number in given comp">Match Number</th>
-                                    <th class='playback' title="A playback of the match in real time!">Playback<div class="playback-hide bg-light text-dark">Playback of all actions during a match</div></th>
+                                    <th class='playback' title="A playback of the match in real time!">Playback</th>
                                     <th v-on:click="sort(letter + 'CargoRocket')" title="Total Cargo scored in rocket from top to bottom">Cargo Rocket</th>
                                     <th v-on:click="sort(letter + 'CargoCB')" title="Total Cargo scored in Cargo Bay">Cargo CB</th>
                                     <th v-on:click="sort(letter + 'HatchRocket')" title="Total Hatch Panels scored in rocket from top to bottom">HP Rocket</th>
@@ -203,11 +203,5 @@ export default({
 }
 tbody:nth-child(even) {
  background-color: #2d3034 !important;
-}
-.playback-hide{
-    display: none;
-}
-.playback:hover .playback-hide{
-  display: block;
 }
 </style>
