@@ -19,8 +19,20 @@
             <div @click="this.$router.push('/grid')" class="card bg-dark text-light mx-auto" >
               <div class="card-body text-center">
                 <h2 class="card-title">Grid</h2>
-                <h5 class="card-text px-2 mb-3">
+                <h5 class="card-text px-2 my-3">
                   The grid is a map of the playing field, where you can test, replay and analyze your strategies. 
+                </h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md">
+            <div @click="this.$router.push('/teams')" class="card bg-dark text-light mx-auto" >
+              <div class="card-body text-center">
+                <h2 class="card-title">
+                  Teams
+                </h2>
+                <h5 class="card-text px-2 my-3">
+                  Survey the standings of the league, learn what they're doing to win, and crush them. 
                 </h5>
               </div>
             </div>
@@ -31,8 +43,8 @@
                 <h2 class="card-title">
                   Matches
                 </h2>
-                <h5 class="card-text px-2">
-                  Get live feeds of the matches of your competitors. Learn who'll pose a challenge to your team. 
+                <h5 class="card-text px-2 my-3">
+                  Get feeds of your competitor's matches. Learn who'll pose a challenge to your team. 
                 </h5>
               </div>
             </div>
@@ -43,7 +55,7 @@
                 <h2 class="card-title">
                   Scout
                 </h2>
-                <h5 class="card-text">
+                <h5 class="card-text px-2 my-3">
                   Learn your opponent's strategies and techniques. Nullify their game plan and secure the win. 
                 </h5>
               </div>
@@ -68,7 +80,7 @@ export default {
 
 <style scoped>
 #showcase {
-  height: 55%;
+  height: 50%;
 }
 #text-div {
   padding: 150px 0;
@@ -80,7 +92,7 @@ export default {
 }
 .card {
   height: 100%;
-  width: 80%; 
+  width: 87.5%; 
 }
 .col {
   align-items: center;
@@ -90,7 +102,7 @@ export default {
   height: 100%;
 }
 .card-text {
-  line-height: 1.3;
+  line-height: 1.5;
 }
 
 .col-md :hover{
