@@ -1,27 +1,22 @@
 <template>
   <div id = 'page'>
-        <p v-if="errors.length">
-    <b>Missing:</b>
-    <ul>
-      <li v-for="error in errors">{{ error }}</li>
-    </ul>
-  </p>
   <section class = "text-center mt-2">
     <button class = "btn bg-dark text-light mx-2" v-on:click="gameState = 'pregame'" :style="[gameState === 'pregame' ? 'background-color: white !important; border: 2px solid black; color: black !important;' : '']">Pregame</button>
     <button class = "btn bg-dark text-light mx-2" v-on:click="gameState = 'midgame'" :style="[gameState === 'midgame' ? 'background-color: white !important; border: 2px solid black; color: black !important;' : '']">Midgame</button>
     <button class = "btn bg-dark text-light mx-2" v-on:click="gameState = 'endgame'" :style="[gameState === 'endgame' ? 'background-color: white !important; border: 2px solid black; color: black !important;' : '']">Endgame</button>
   </section>
     <Timer id = 'timer' v-show="gameState === 'midgame'" @getTime='this.currTime=$event' @getTS='this.timeString=$event' :paused='false' :run='events.length!==0' :speed='1'/>
-    <p v-if="errors.length">
-      <b>Missing:</b>
-      <ul>
-        <li v-for="error in errors">{{ error }}</li>
-    </ul>
-    </p>
     <Grid id = 'grid' :flipped='flipped' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
     <Pregame id = 'pregame' v-show="gameState === 'pregame'" @sendData="setPreGame($event)"/>
     <Midgame v-show="gameState === 'midgame'" :currTime='currTime' @createEvent='createEvent' @removeEvent='removeEvent'/>
     <Endgame v-show="gameState === 'endgame'" @sendData="setEndGame($event)" @submit="submit"/>
+
+    <div class="container pb-3">
+    <p class = "text-danger fw-bold" style = " width: 100%; text-align: center" v-if="errors.length">
+    <h2>Information Missing!</h2>
+    <h5 id = 'error-list' v-for="error in errors">{{ error }}</h5>
+  </p>
+  </div>
   </div>
 </template>
 
@@ -165,5 +160,11 @@ div{
 }
 #page{
   height:100%;
+}
+#error-list{
+  line-height: 0.9;
+}
+.container{
+  margin-top: -3em;
 }
 </style>
