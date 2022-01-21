@@ -130,6 +130,7 @@ export default({
                 })
                 this.data.push(stats)
             })
+            this.allData = this.data
         },
         sort(field){
             console.log(this.high)
@@ -154,11 +155,12 @@ export default({
         },
         //Filters the comments based on input in text box
         filterComments() {
-            this.data = []
-            this.setData()
+            this.data = this.allData
+            if(this.filterValue != ''){
             this.currentSortField = 'team'
             this.data = this.data.filter(match => (match.comments.toLowerCase().indexOf(this.filterValue) >= 0));
-        }
+            }
+            }
         },
     watch:{
         //Sets the current position to the playback position whenever there is a change in the playback position
