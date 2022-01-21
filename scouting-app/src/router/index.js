@@ -55,6 +55,12 @@ const routes = [{
             import ('../views/Team.vue')
     },
     {
+        path: '/teams',
+        name: 'Teams',
+        component: () =>
+            import ('../views/Teams.vue')
+    },
+    {
         path: '/:pathMatch(.*)*',
         name: 'Page Not Found',
         component: () =>
