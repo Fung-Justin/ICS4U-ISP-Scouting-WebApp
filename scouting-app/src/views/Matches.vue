@@ -164,7 +164,7 @@ export default {
      if(rCl >=15)rRP++;
      }
 
-        let Match ={matchNumber: teamBlue[0].matchNumber === Number ? teamBlue[0].matchNumber : teamRed[0].matchNumber, r1:r1, r2:r2, r3:r3, b1:b1, b2:b2, b3:b3, bRp:bRP, rRp:rRP, win: completed ? winner : 'N/A', blueClimb:bCl,redClimb:rCl}
+        let Match ={matchNumber: teamBlue[0].matchNumber === Number ? teamBlue[0].matchNumber : teamRed[0].matchNumber, r1:r1, r2:r2, r3:r3, b1:b1, b2:b2, b3:b3, bRp:bRP, rRp:rRP, win: completed ? winner : "N/A", blueClimb:bCl,redClimb:rCl}
         return Match;
     }
     },
