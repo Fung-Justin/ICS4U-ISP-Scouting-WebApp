@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <h2 class="title m-3">Matches</h2>
-    <table class="table table-bordered">
+  <div id = 'page'>
+  <div class = "container text-center mx-auto pt-4">
+    <div class="card bg-dark text-white mx-auto mt-3 pt-2 pb-3 px-4" style = "width: 95%;">
+    <h1 class="title m-3 mb-4">Matches</h1>
+    <table class="table table-bordered text-white">
       <thead>
         <tr>
           <th scope="col">Match</th>
@@ -18,7 +20,7 @@
           <th scope="col">Winner</th>
         </tr>
       </thead>
-      <tbody v-for="data in matchData" :key="data">
+      <tbody class = "bg-dark text-white" v-for="data in matchData" :key="data">
         <td>
           <h6>{{ data.matchNumber }}</h6>
         </td>
@@ -57,7 +59,8 @@
         </td>
       </tbody>
     </table>
-    <button @click=" test()">TEST</button>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -167,3 +170,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#page{
+  background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
+}
+tbody:nth-child(even) {
+ background-color: #2d3034 !important;
+}
+</style>
