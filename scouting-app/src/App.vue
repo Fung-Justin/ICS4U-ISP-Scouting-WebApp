@@ -1,6 +1,6 @@
 <template>
     <transition name="fade" mode="out-in">
-  <nav id = 'nav' class="bg-dark pt-2 fixed-top" v-if="this.$route.path !== '/'">
+  <nav id = 'nav' class="bg-dark pt-2 fixed-top" v-if="this.$route.path !== '/' && this.$route.path !== '/create-account'">
     <div class="container">
       <div>
         <router-link to="/"><button id="logout-btn" class="btn mb-2 py-2 text-white" type="submit" @click="logout()">Logout
@@ -12,13 +12,14 @@
           <router-link class = "h6 text-white dir" to="/grid">Grid</router-link>
           <router-link class = "h6 text-white dir" to="/matches">Matches</router-link>
           <router-link class = "h6 text-white" to="/scout">Scout</router-link>
+          <router-link class = "h6 text-white" to="/matches">Scout</router-link>
         </div>
       </div>
     </div>
   </nav>
     </transition>
 
-  <router-view v-slot="{ Component }" class="h-100" :style="[this.$route.path !== '/' ? 'margin: 56px 0 0 0' : '']">
+  <router-view v-slot="{ Component }" class="h-100" :style="[this.$route.path !== '/' && this.$route.path !== '/create-account' ? 'margin: 56px 0 0 0' : '']">
     <transition name="fade" mode="out-in">
       <component :is="Component"/>
           </transition>

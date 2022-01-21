@@ -16,7 +16,6 @@ class PostService {
     // Create Post (used by scout)
     static insertPost(match) {
         return axios.post(url, {
-            compID: match.compID,
             matchNumber: match.matchNumber,
             teamNumber: match.teamNumber,
             flipped: match.flipped,
