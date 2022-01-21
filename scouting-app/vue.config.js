@@ -3,15 +3,17 @@ const path = require('path');
 module.exports = { 
     outputDir: path.resolve( __dirname, '../server/public'),
     devServer: { proxy:  { 
-        "^/url": {
+        "/url": {
              target: "http://localhost:5000", 
-             changeOrigin: true,
-              pathRewrite: { "^/url": "/" } },
+             //changeOrigin: true,
+              //pathRewrite: { "^/url": "/" } 
+            },
               
-              "^/api": {
+              "/api": {
                 target: "http://localhost:5000", 
-                changeOrigin: true,
-                 pathRewrite: { "^/api": "/api" } } 
+                //changeOrigin: true,
+                 //pathRewrite: { "^/api": "/api" }
+                 } 
 
          }
     
