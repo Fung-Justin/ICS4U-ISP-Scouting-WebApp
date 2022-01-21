@@ -25,22 +25,22 @@
           <h6>{{ data.matchNumber }}</h6>
         </td>
         <td class="bg-danger">
-          <h6>{{ data.r1 }}</h6>
+          <h6 v-on:click="this.$router.push(`team?team=${data.r1}`)">{{ data.r1 }}</h6>
         </td>
          <td class="bg-danger">
-          <h6>{{ data.r2 }}</h6>
+          <h6 v-on:click="this.$router.push(`team?team=${data.r2}`)">{{ data.r2 }}</h6>
         </td>
          <td class="bg-danger">
-          <h6>{{ data.r3 }}</h6>
+          <h6 v-on:click="this.$router.push(`team?team=${data.r3}`)">{{ data.r3 }}</h6>
         </td>
          <td class="bg-primary">
-          <h6>{{ data.b1 }}</h6>
+          <h6 v-on:click="this.$router.push(`team?team=${data.b1}`)">{{ data.b1 }}</h6>
         </td>
          <td class="bg-primary">
-          <h6>{{ data.b2 }}</h6>
+          <h6 v-on:click="this.$router.push(`team?team=${data.b2}`)">{{ data.b2 }}</h6>
         </td>
          <td class="bg-primary">
-          <h6>{{ data.b3 }}</h6>
+          <h6 v-on:click="this.$router.push(`team?team=${data.r1}`)">{{ data.b3 }}</h6>
         </td>
          <td class="bg-danger">
           <h6>{{ data.redClimb }}</h6>
