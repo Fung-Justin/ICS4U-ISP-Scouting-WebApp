@@ -1,6 +1,6 @@
 <template>
 
-<!-- Navbar -->
+<!-- Nav -->
   <transition name="fade" mode="out-in">
     <nav id = 'nav' class="bg-dark pt-2 fixed-top" v-if="this.$route.path !== '/' && this.$route.path !== '/create-account'">
       <div class="container">
