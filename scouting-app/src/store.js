@@ -34,7 +34,7 @@ const store = createStore({
         login ({ commit }, credentials) {
            
             return axios
-              .post("/url/register/test", credentials)
+              .post("/url/register/login", credentials)
               .then(({ data }) => { commit('SET_USER_DATA', data),commit('errorMsg', null)
            
               }).catch(err => 

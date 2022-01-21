@@ -6,14 +6,12 @@ module.exports = {
         "^/url": {
              target: "http://localhost:5000", 
              changeOrigin: true,
-              pathRewrite: { "^/url": "/" } 
-            },
+              pathRewrite: { "^/url": "/" } },
               
               "^/api": {
                 target: "http://localhost:5000", 
                 changeOrigin: true,
-                 pathRewrite: { "^/api": "/api" } 
-                } 
+                 pathRewrite: { "^/api": "/api" } } 
 
          }
     
