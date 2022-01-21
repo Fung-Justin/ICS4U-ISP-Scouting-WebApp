@@ -111,6 +111,7 @@ export default {
   opacity: 0.9;
   background-color: white;
   color: black;
+  cursor: pointer;
 }
 @media(max-width: 1024px){
   .card {
