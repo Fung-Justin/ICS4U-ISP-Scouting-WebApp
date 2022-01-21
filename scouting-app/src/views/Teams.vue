@@ -8,17 +8,17 @@
             <table id="main-table" class="table table-bordered table-hover table-dark table-striped" style = "border-radius: 4px;">
                 <thead id="col-heading">
                     <tr>
-                        <th>Team Number</th>
-                        <th>Avg Score</th>
-                        <th>Wins</th>
-                        <th>Losses</th>
-                        <th>RP</th>
-                        <th>Avg Rocket Cargo</th>
-                        <th>Avg CB Cargo</th>
-                        <th>Avg Rocket HP</th>
-                        <th>Avg CB HP</th>
-                        <th>Avg Climb</th>
-                        <th>Avg Defense</th>
+                        <th v-on:click="sort('teamNumber')">Team Number</th>
+                        <th v-on:click="sort('score')">Avg Score</th>
+                        <th v-on:click="sort('wins')">Wins</th>
+                        <th v-on:click="sort('losses')">Losses</th>
+                        <th v-on:click="sort('rp')">RP</th>
+                        <th v-on:click="sort('CargoRocket')">Avg Rocket Cargo</th>
+                        <th v-on:click="sort('CargoCB')">Avg CB Cargo</th>
+                        <th v-on:click="sort('HatchRocket')">Avg Rocket HP</th>
+                        <th v-on:click="sort('HatchCB')">Avg CB HP</th>
+                        <th v-on:click="sort('climb')">Avg Climb</th>
+                        <th v-on:click="sort('defense')">Avg Defense</th>
                     </tr>
                 </thead>
                     <!-- Feel free to change the headings to make them consistent with Maya's -->
@@ -58,7 +58,9 @@ export default{
     data(){
         return{
             completed: false,
-            teams: []
+            teams: [],
+            currentSortField: "teamNumber",
+            sortAsc: true
         }
     },
     methods:{
@@ -75,6 +77,7 @@ export default{
                         teamNumber: match.teamNumber,
                         matchesPlayed: 0,
                         wins: 0,
+                        losses: 0,
                         rp: 0,
                         line: 0,
                         CargoRocketL : 0,
@@ -122,6 +125,8 @@ export default{
                             team.score+=12
                         if(match.win)
                             team.wins++
+                        else    
+                            team.losses++
                         for(let k = 0; k<match.events.length; k++){
                             let action = match.events[k]
                             if(action.time<15&&action.event=="")
@@ -143,7 +148,20 @@ export default{
                 let team = this.teams[i]
                 team.score+=(team.CargoRocketL+team.CargoRocketM+team.CargoRocketH+team.CargoCB)*3+(team.HatchRocketL+team.HatchRocketM+team.HatchRocketH+team.HatchCB)*2
             }
-        }
+        },
+        sort(field){
+            if (field === this.currentSortField) this.sortAsc = !this.sortAsc
+            else this.sortAsc = true
+            if(field.search('CargoRocket') > -1) 
+                this.teams = this.teams.sort((a, b) => (a[field+'L'] + a[field+'M'] + a[field+'H']) - (b[field+'L'] + b[field+'M'] + b[field+'H']))
+            if(field.search('HatchRocket') > -1) 
+                this.teams = this.teams.sort((a, b) => (a[field+'L'] + a[field+'M'] + a[field+'H']) - (b[field+'L'] + b[field+'M'] + b[field+'H']))
+            else
+                this.teams = this.teams.sort((a, b) => a[field] -  b[field]);
+                
+            if(!this.sortAsc) this.teams.reverse()
+            this.currentSortField = field
+        },
     },
     async created(){
         const matches = await PostService.getPosts()
