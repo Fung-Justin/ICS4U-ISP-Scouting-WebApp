@@ -115,7 +115,7 @@ export default {
             }
             ).then(() => {this.forceRerender(),this.$router.push({ name: 'Landing' })  })
        }else{
-         this.$store.commit('errorMsg',"Invalid Username or Password, Check Passwords are Identical");
+         this.$store.commit('errorMsg',"Invalid username or password! Check passwords are identical!");
          this.forceRerender();
        }
     },
