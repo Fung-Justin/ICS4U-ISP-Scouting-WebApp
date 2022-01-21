@@ -28,7 +28,7 @@
 
 Check if home button actually takes you home. 
 
-<style scoped>
+<style>
 #logout-btn {
   float:right;
   background-image: linear-gradient(315deg, #7d77ff 0%, #ff9482 100%);
@@ -81,6 +81,13 @@ opacity:0;
   -webkit-background-clip: text !important; 
   -webkit-text-fill-color: transparent !important;
 }
+.img {
+  background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
+  padding: 7.5em;
+  height: 100%;
+}
+
+
 </style>
 
 <script>
