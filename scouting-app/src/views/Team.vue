@@ -8,26 +8,27 @@
         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" v-model="auto" checked :style="[auto ? 'background: #7d77FF' : 'background: #FF9482']">
         <label class="form-check-label" for="flexSwitchCheckChecked">{{auto ? 'Auto' : 'Teleop'}}</label>
     </div>
+    <input type=textarea v-model="filterValue" v-on:keyup="filterComments">
     <!-- Table of Stats NEEDS TO FILL WHOLE SCREEN-->
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thread>
             <tr>
-                <th>Match Number</th>
+                <th v-on:click="sort('matchNumber')">Match Number</th>
                 <th>Playback</th>
-                <th >{{letter}}-Cargo Rocket</th>
-                <th>{{letter}}-Cargo CB</th>
-                <th>{{letter}}-HP Rocket</th>
-                <th>{{letter}}-HP CB</th>
-                <th>Hang</th>
-                <th>Defense</th>
+                <th v-on:click="sort(letter + 'CargoRocket')">{{letter}}-Cargo Rocket</th>
+                <th v-on:click="sort(letter + 'CargoCB')">{{letter}}-Cargo CB</th>
+                <th v-on:click="sort(letter + 'HatchRocket')">{{letter}}-HP Rocket</th>
+                <th v-on:click="sort(letter + 'HatchCB')">{{letter}}-HP CB</th>
+                <th v-on:click="sort('climb')">Climb</th>
+                <th v-on:click="sort('defense')">Defense</th>
                 <th>Comments</th>
             </tr>
             <tr v-for:each='stat in data'>
             <td>{{stat.matchNumber}}</td>
             <!-- THE PLAY BUTTON NEEDS TO BE CENTERED-->
                 <router-link class="bi bi-play-fill h4 mt-2" :to="`/playback?id=${stat.id}`"></router-link>
-                    <td v-on:click="sort(letter + 'CargoRocket')">
+                    <td>
                         {{auto ? stat.ACargoRocketH : stat.TCargoRocketH}}
                         <br>
                         {{auto ? stat.ACargoRocketM : stat.TCargoRocketM}}
@@ -78,12 +79,14 @@ export default({
         return{
             completed: false,
             matches: Array,
+            allData: [],
             data: [],
             auto: true,
             team: this.$route.query.team,
-            ASC: true,
+            high: true,
             currentSortField: 'MatchNumber',
-            letter: 'A'
+            letter: 'A',
+            filterValue: ''    //Filters the teams based on input in text box
             }
     },
     methods:{
@@ -129,18 +132,32 @@ export default({
             })
         },
         sort(field){
-            console.log(this.ASC)
-            if (field === this.currentSortField) this.ASC = !this.ASC
-            else if(field.search('Rocket') > -1) 
-                this.data = this.data.sort((a, b) => (a[field+'L'] + a[field+'M'] + a[field+'H']) - b[field+'L'] + b[field+'M'] + b[field+'H'] )
+            console.log(this.high)
+            console.log(field)
+            if (field === this.currentSortField) this.high = !this.high
+            else this.high = false
+            //Filter by:
+            //Total rocket score
+            if(field.search('Rocket') > -1) {
+                this.data = this.data.sort((a, b) => (a[field+'L'] + a[field+'M'] + a[field+'H']) - (b[field+'L'] + b[field+'M'] + b[field+'H']))
+                console.log("ROCKET")
+            }
+            //Comments
             else if(field === 'Comments')
                 console.log('ill deal with you later')
-            //Rocket
-            //Comments
-            else 
-                this.data = this.data.sort((a, b) => a[field] - b[field]);
-            console.log(this.ASC)
-
+            //Other
+            else{ 
+                this.data = this.data.sort((a, b) => a[field] -  b[field]);
+                }
+            if(!this.high) this.data.reverse()
+            this.currentSortField = field
+        },
+        //Filters the comments based on input in text box
+        filterComments() {
+            this.data = []
+            this.setData()
+            this.currentSortField = 'team'
+            this.data = this.data.filter(match => (match.comments.toLowerCase().indexOf(this.filterValue) >= 0));
         }
         },
     watch:{
