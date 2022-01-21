@@ -5,7 +5,7 @@
   <div class = "container text-center mx-auto pt-4">
     <div class="card bg-dark text-white mx-auto mt-3 pt-2 pb-3 px-4" style = "width: 95%;">
     <h1 class="title m-3 mb-4">Matches</h1>
-    <table class="table table-bordered text-white">
+    <table class="table table-bordered text-white table-hover">
       <thead>
         <tr>
           <th scope="col">Match</th>
