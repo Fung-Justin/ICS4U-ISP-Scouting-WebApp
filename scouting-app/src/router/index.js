@@ -87,6 +87,13 @@ router.beforeEach((to, from, next) => {
     // redirect to login page
     if (authRequired && !loggedIn) {
      router.push(from.path);
+    } else if(to.path === '/'|| to.path ==='/create-account'){
+        
+        localStorage.removeItem('user');
+        
+        next();
+        
+       
     } else {
         next();
     }

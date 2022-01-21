@@ -2,8 +2,8 @@
     <div>
         <Loading v-if="!completed"/>
         <section v-else>
-            <table id="main-table">
-                <thead id="col-heading">
+            <table id="main-table" class="table table-bordered table-hover table-dark" style = "border-radius: 4px;">
+                <tbody id="col-heading">
                     <tr>
                         <th v-on:click="sort('teamNumber')">Team Number</th>
                         <th v-on:click="sort('score')">Avg Score</th>
@@ -18,9 +18,19 @@
                         <th v-on:click="sort('defense')">Avg Defense</th>
                     </tr>
                     <!-- Feel free to change the headings to make them consistent with Maya's -->
-                </thead>
-                <tbody>
-                    <TeamRow v-for="team in teams" :key="team.teamNumber" :stats="team"/>
+                <tr v-for="stats in teams">
+                    <td><h6 v-on:click="this.$router.push(`team?team=${stats.teamNumber}`)">{{stats.teamNumber}}</h6></td>
+                    <td><h6>{{stats.score/stats.matchesPlayed}}</h6></td>
+                    <td><h6>{{stats.wins}}</h6></td>
+                    <td><h6>{{stats.matchesPlayed-stats.wins}}</h6></td>
+                    <td><h6>{{stats.rp}}</h6></td>
+                    <td><h6>{{stats.CargoRocketH/stats.matchesPlayed}}<br>{{stats.CargoRocketM/stats.matchesPlayed}}<br>{{stats.CargoRocketL/stats.matchesPlayed}}</h6></td>
+                    <td><h6>{{stats.CargoCB/stats.matchesPlayed}}</h6></td>
+                    <td><h6>{{stats.HatchRocketH/stats.matchesPlayed}}<br>{{stats.HatchRocketM/stats.matchesPlayed}}<br>{{stats.HatchRocketL/stats.matchesPlayed}}</h6></td>
+                    <td><h6>{{stats.HatchCB/stats.matchesPlayed}}</h6></td>
+                    <td><h6>{{stats.climb/stats.matchesPlayed}}</h6></td>
+                    <td><h6>{{stats.defense/stats.matchesPlayed}}</h6></td>
+                </tr>
                 </tbody>
             </table>
         </section>

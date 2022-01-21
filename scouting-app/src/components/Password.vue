@@ -73,6 +73,7 @@ export default {
         img.className = 'bi bi-eye-fill'
       }
     },
+   
     
     login() {
       this.$store.commit('errorMsg', null)
@@ -90,6 +91,10 @@ export default {
         }
 
 
+  },
+  async created(){
+     this.$store.commit('errorMsg', null)
+     this.forceRerender();
   }
 };
 </script>

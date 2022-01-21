@@ -26,7 +26,7 @@
                 <i id = "showIMG" v-on:click = "showPassword()" class = "bi bi-eye-slash-fill"></i>
               </div>
               <div class="mb-3">
-                <input
+                <input v-model="password2"
                   type="password"
                   class="form-control mx-auto auth"
                   id="repeat-password"
@@ -65,6 +65,7 @@ export default {
           name: '',
           email: '',
           password: '',
+          password2: '',
           key: 0,
         }
       },
@@ -93,19 +94,40 @@ export default {
         img.className = 'bi bi-eye-fill'
       }
     },
+    checkPassword(){
+      if((this.password === "" || this.name === ""||this.password2 === "")||(this.password === "" && this.name === "" &&this.password2 ==="")){
+        return false
+      }else if (this.password2 === this.password){
+        return true
+      }else{
+        return false
+      }
+      
+        
+    },
     register () {
-      this.$store.commit('errorMsg', null)
+     
+      console.log(this.checkPassword());
+       if(this.checkPassword()){
         this.$store.dispatch('register', {
               name: this.name,
               password: this.password
             }
             ).then(() => {this.forceRerender(),this.$router.push({ name: 'Landing' })  })
+       }else{
+         this.$store.commit('errorMsg',"Invalid username or password! Check passwords are identical!");
+         this.forceRerender();
+       }
     },
       forceRerender(){
         this.key +=1;
       }
   
   },
+   async created(){
+     this.$store.commit('errorMsg', null)
+     this.forceRerender();
+  }
 };
 </script>
 
