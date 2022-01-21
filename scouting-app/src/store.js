@@ -26,7 +26,7 @@ const store = createStore({
 
         register({ commit }, credentials) {
             console.log(credentials);
-            return axios.post('/url/register/new-user', credentials).then(({data}) => {commit('SET_USER_DATA', data),commit('errorMsg', null)})
+            return axios.post('/api/register/new-user', credentials).then(({data}) => {commit('SET_USER_DATA', data),commit('errorMsg', null)})
             .catch(err => 
                 commit('errorMsg',err.response.data));
 
@@ -34,7 +34,7 @@ const store = createStore({
         login ({ commit }, credentials) {
            
             return axios
-              .post("/url/register/login", credentials)
+              .post("/api/register/test", credentials)
               .then(({ data }) => { commit('SET_USER_DATA', data),commit('errorMsg', null)
            
               }).catch(err => 
