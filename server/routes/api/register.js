@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
     if(login)
     res.status(201).send(token.compact());
     else
-    res.status(401).send("Invalid Login, Please Try Again");
+    res.status(401).send("Invalid login! Please try again!");
    
 });
 

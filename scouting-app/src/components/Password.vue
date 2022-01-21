@@ -38,10 +38,7 @@
                   Login
                 </button>
               </div>
-            
-                  <p class="text-danger font-weight-bold " :key="key">{{this.$store.state.errorMsg}}</p>
-                
-            
+                <p class="text-danger font-weight-bold h6" :key="key">{{this.$store.state.errorMsg}}</p>
             </form>
           </div>
         </div>
