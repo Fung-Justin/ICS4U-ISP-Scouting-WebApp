@@ -24,34 +24,34 @@
         <td>
           <h6>{{ data.matchNumber }}</h6>
         </td>
-        <td class="bg-danger">
+        <td class = "R-red-start">
           <h6>{{ data.r1 }}</h6>
         </td>
-         <td class="bg-danger">
+         <td class = "R-red-mid">
           <h6>{{ data.r2 }}</h6>
         </td>
-         <td class="bg-danger">
+         <td class = "R-red-end">
           <h6>{{ data.r3 }}</h6>
         </td>
-         <td class="bg-primary">
+         <td class="B-blue-start">
           <h6>{{ data.b1 }}</h6>
         </td>
-         <td class="bg-primary">
+         <td class="B-blue-mid">
           <h6>{{ data.b2 }}</h6>
         </td>
-         <td class="bg-primary">
+         <td class="B-blue-end">
           <h6>{{ data.b3 }}</h6>
         </td>
-         <td class="bg-danger">
+         <td class="R-red">
           <h6>{{ data.redClimb }}</h6>
         </td>
-         <td class="bg-primary">
+         <td class="B-blue">
           <h6>{{ data.blueClimb }}</h6>
         </td>
-        <td class="bg-danger">
+        <td class="R-red">
           <h6>{{ data.rRp }}</h6>
         </td>
-        <td class="bg-primary">
+        <td class="B-blue">
           <h6>{{ data.bRp }}</h6>
         </td>
         <td>
@@ -177,5 +177,29 @@ export default {
 }
 tbody:nth-child(even) {
  background-color: #2d3034 !important;
+}
+.R-red{
+  background-image: linear-gradient(to right, #9E1711 0%, #C34632 100%);
+}
+.R-red-start{
+  background-image: linear-gradient(to right, #8B0001 0%, #9E1711 100%);
+}
+.R-red-mid{
+  background-image: linear-gradient(to right, #9E1711 0%, #B12E21 100%);
+}
+.R-red-end{
+  background-image: linear-gradient(to right, #B12E21 0%, #C34632 100%);
+}
+.B-blue{
+  background-image: linear-gradient(to right, #061993 0%, #0C3BAA 100%);
+}
+.B-blue-start{
+  background-image: linear-gradient(to right, #010280 0%, #061993 100%);
+}
+.B-blue-mid{
+  background-image: linear-gradient(to right, #061993 0%, #0C3BAA 100%);
+}
+.B-blue-end{
+  background-image: linear-gradient(to right, #0C3BAA 0%, #135CC5 100%); 
 }
 </style>

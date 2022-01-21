@@ -1,7 +1,7 @@
 <template>
 <div>
     <Loading v-if="!completed"/>
-    <div class = "py-5" style = "background-image: linear-gradient(315deg, #7d77ff 0%, #ff9482 100%);" v-else>
+    <div class = "py-5" style = "background-image: linear-gradient(315deg, #7d77ff 0%, #ff9482 100%); height: 100%;" v-else>
         <div class="container text-center">
         <div class="card bg-dark text-light mx-auto pb-4" style = "border-radius: 4px; width: 80%;">
     <h1 class = "fw-bold mt-3">{{team}}</h1>
@@ -11,7 +11,7 @@
             <input class="form-check-input" style = "margin-right: 0.2em; display: inline-block" type="checkbox" role="switch" id="flexSwitchCheckChecked" v-model="auto" checked :style="[auto ? 'background: #7d77FF' : 'background: #FF9482']">
             <h5 class="form-check-label" style = "display: inline-block" for="flexSwitchCheckChecked">{{auto ? 'Auto' : 'Teleop'}}</h5>
         </div>
-        <input class = "mt-3" id = 'filter' type=textarea v-model="filterValue" placeholder = "Filter" v-on:keyup="filterComments">
+        <input class = "mt-3 bg-dark text-white" id = 'filter' type=textarea v-model="filterValue" placeholder = "Filter" v-on:keyup="filterComments">
     </div>
     <!-- Table of Stats NEEDS TO FILL WHOLE SCREEN-->
     <div class="table-responsive mt-4">
@@ -191,9 +191,12 @@ export default({
     margin-left: 5em;
     float: left;
     border: none;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid white;
 }
 #play-button{
     margin-bottom: 10px;
+}
+tbody:nth-child(even) {
+ background-color: #2d3034 !important;
 }
 </style>
