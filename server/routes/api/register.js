@@ -49,7 +49,7 @@ router.post('/new-user', async (req, res) => {
     });
 
     if(existingUser){
-        res.status(401).send("Invalid account details, Username already exists");
+        res.status(401).send("Invalid account details, username already exists!");
     }else{
     await posts.insertOne({
         name: req.body.name,

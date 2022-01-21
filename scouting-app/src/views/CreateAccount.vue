@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-md">
-          <div class="card text-light mx-auto py-5">
+          <div class="card text-light mx-auto pt-5 pb-4">
             <h1 class = "mb-5 text-dark">Create Your Account!</h1>
             <form @submit.prevent="register">
               <div class="mb-5">
@@ -46,7 +46,7 @@
                 >
                   Create
                 </button>
-                  <p class="text-danger font-weight-bold " :key="key">{{this.$store.state.errorMsg}}</p>
+                  <p class="text-danger font-weight-bold h6" :key="key">{{this.$store.state.errorMsg}}</p>
               </div>
             </form>
           </div>
@@ -100,11 +100,11 @@ export default {
               password: this.password
             }
             ).then(() => {this.forceRerender(),this.$router.push({ name: 'Landing' })  })
-        },
-           forceRerender(){
-          this.key +=1;
-        }
-
+    },
+      forceRerender(){
+        this.key +=1;
+      }
+  
   },
 };
 </script>
@@ -116,6 +116,7 @@ export default {
   width: 35%;
   margin-right:0%;
   margin-left:0%;
+  margin-top: -2em;
 }
 .auth {
   width: 75%;

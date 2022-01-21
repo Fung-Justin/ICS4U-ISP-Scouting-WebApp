@@ -19,13 +19,14 @@
             <thread>
             <tr>
                 <th v-on:click="sort('matchNumber')">Match Number</th>
-                <th >Playback</th>
+                <th class='playback'>Playback<div class="playback-hide bg-light text-dark">Playback of all actions during a match</div></th>
                 <th v-on:click="sort(letter + 'CargoRocket')">{{letter}}-Cargo Rocket</th>
                 <th v-on:click="sort(letter + 'CargoCB')">{{letter}}-Cargo CB</th>
                 <th v-on:click="sort(letter + 'HatchRocket')">{{letter}}-HP Rocket</th>
                 <th v-on:click="sort(letter + 'HatchCB')">{{letter}}-HP CB</th>
                 <th v-on:click="sort('climb')">Climb</th>
                 <th v-on:click="sort('defense')">Defense</th>
+                <th v-on:click="sort('score')">Score</th>
                 <th>Comments</th>
             </tr>
             <tr v-for:each='stat in data'>
@@ -58,10 +59,13 @@
                     </td> 
                     <td>
                         {{stat.defense}}
-                    </td>           
+                    </td> 
+                    <td>
+                        {{stat.score}}
+                    </td>                    
                     <td>
                         {{stat.comments}}
-                    </td>           
+                    </td> 
                 </tr>
 
             </thread>
@@ -119,7 +123,8 @@ export default({
                 THatchCB : 0,
                 climb: match.climb,
                 defense: match.defense,
-                comments: match.comments
+                comments: match.comments,
+                score: 0
             }
         },
         setData(){
@@ -131,10 +136,13 @@ export default({
                     let piece = action.event.search(/cargo/i) > -1 ? 'Cargo' : 'Hatch'
                     let index = action.event.search('Rocket')
                     let location = index > -1 ? action.event.slice(index) : 'CB'
+                    if(piece === 'Cargo') stats.score+=3
+                    else stats.score +=2
                     stats[state+piece+location] +=1 
                     console.log(state+piece+location)
                     }
                 })
+                stats.score += stats.climb < 3 ? stats.climb*3 : 12
                 this.data.push(stats)
             })
             this.allData = this.data
@@ -150,9 +158,6 @@ export default({
                 this.data = this.data.sort((a, b) => (a[field+'L'] + a[field+'M'] + a[field+'H']) - (b[field+'L'] + b[field+'M'] + b[field+'H']))
                 console.log("ROCKET")
             }
-            //Comments
-            else if(field === 'Comments')
-                console.log('ill deal with you later')
             //Other
             else{ 
                 this.data = this.data.sort((a, b) => a[field] -  b[field]);
@@ -198,5 +203,13 @@ export default({
 }
 tbody:nth-child(even) {
  background-color: #2d3034 !important;
+}
+
+.playback-hide{
+    display: none;
+}
+
+.playback:hover + .playback-hide {
+  display: block;
 }
 </style>

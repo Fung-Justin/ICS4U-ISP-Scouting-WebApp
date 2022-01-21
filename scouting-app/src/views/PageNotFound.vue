@@ -3,7 +3,7 @@
         <div class="card text-dark mx-auto py-5 text-center align-items-center">
             <h1>Oops! Page not found</h1>     
             <p>Sorry, the page you're looking for is no longer online or has been moved.</p>
-            <button class="btn mt-2" v-on:click="$router.push('home')">Go to Home</button>
+            <button class="btn mt-2" v-on:click="$router.push('/home')">Go to Home</button>
         </div>
     </div>
 </template>
