@@ -1,5 +1,7 @@
 <template>
-  <div id = 'page'>
+<div>
+<Loading v-if="!completed"/>
+  <div v-else id = 'page'>
   <div class = "container text-center mx-auto pt-4">
     <div class="card bg-dark text-white mx-auto mt-3 pt-2 pb-3 px-4" style = "width: 95%;">
     <h1 class="title m-3 mb-4">Matches</h1>
@@ -24,23 +26,23 @@
         <td>
           <h6>{{ data.matchNumber }}</h6>
         </td>
-        <td class = "R-red-start">
-          <h6>{{ data.r1 }}</h6>
+        <td class="R-red-start">
+          <h6 v-on:click="this.$router.push(`team?team=${data.r1}`)">{{ data.r1 }}</h6>
         </td>
-         <td class = "R-red-mid">
-          <h6>{{ data.r2 }}</h6>
+         <td class="R-red-mid">
+          <h6 v-on:click="this.$router.push(`team?team=${data.r2}`)">{{ data.r2 }}</h6>
         </td>
-         <td class = "R-red-end">
-          <h6>{{ data.r3 }}</h6>
+         <td class="R-red-end">
+          <h6 v-on:click="this.$router.push(`team?team=${data.r3}`)">{{ data.r3 }}</h6>
         </td>
          <td class="B-blue-start">
-          <h6>{{ data.b1 }}</h6>
+          <h6 v-on:click="this.$router.push(`team?team=${data.b1}`)">{{ data.b1 }}</h6>
         </td>
          <td class="B-blue-mid">
-          <h6>{{ data.b2 }}</h6>
+          <h6 v-on:click="this.$router.push(`team?team=${data.b2}`)">{{ data.b2 }}</h6>
         </td>
          <td class="B-blue-end">
-          <h6>{{ data.b3 }}</h6>
+          <h6 v-on:click="this.$router.push(`team?team=${data.r1}`)">{{ data.b3 }}</h6>
         </td>
          <td class="R-red">
           <h6>{{ data.redClimb }}</h6>
@@ -62,17 +64,20 @@
     </div>
   </div>
   </div>
+</div>
 </template>
 
 <script>
 import PostService from "../PostService";
+import Loading from "@/components/Loading"
 
 export default {
-  components: {},
+  components: {Loading},
   data() {
     return {
       matches: Array,
       matchData: Array,
+      completed: false
     };
   },
 
@@ -166,7 +171,7 @@ export default {
     this.matchData = [];
     console.log(this.matches);
    await PostService.getPosts().then(this.getMatches());
-    
+    this.completed = true
   },
 };
 </script>
@@ -174,6 +179,7 @@ export default {
 <style scoped>
 #page{
   background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
+  height: 100%;
 }
 tbody:nth-child(even) {
  background-color: #2d3034 !important;
