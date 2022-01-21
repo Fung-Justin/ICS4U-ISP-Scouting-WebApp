@@ -19,7 +19,7 @@
             <thread>
             <tr>
                 <th v-on:click="sort('matchNumber')">Match Number</th>
-                <th>Playback</th>
+                <th >Playback</th>
                 <th v-on:click="sort(letter + 'CargoRocket')">{{letter}}-Cargo Rocket</th>
                 <th v-on:click="sort(letter + 'CargoCB')">{{letter}}-Cargo CB</th>
                 <th v-on:click="sort(letter + 'HatchRocket')">{{letter}}-HP Rocket</th>

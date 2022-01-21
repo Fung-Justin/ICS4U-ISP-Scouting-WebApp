@@ -114,7 +114,6 @@ createEvent(event){
 
    if(this.errors.length === 0){
   let match = {
-    compID: this.$route.query.compID,
     matchNumber: this.matchNumber,
     teamNumber: this.teamNumber,
     flipped: this.flipped,
@@ -127,7 +126,7 @@ createEvent(event){
     colour: this.flipped && this.events[0].position === 3 || !this.flipped && this.events[0].position === 8 ? 'red' : 'blue',
     rocket: this.rocket
   }
-  
+
   //SEND TO DB
   const res = await PostService.insertPost(match)
 
