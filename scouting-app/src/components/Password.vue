@@ -84,7 +84,7 @@ export default {
               name: this.name,
               password: this.password
             })
-            .then(() => { this.forceRerender(),this.$router.push({ name: 'Grid' }) })
+            .then(() => { this.forceRerender(),this.$router.push({ name: 'Landing' }) })
 
         },
         
