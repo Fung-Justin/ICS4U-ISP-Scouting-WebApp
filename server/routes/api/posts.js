@@ -36,7 +36,8 @@ router.post('/register', async(req, res) => {
 //Inserts a new match (used for scout)
 router.post('/', async(req, res) => {
     const posts = await loadMatches();
-    await posts.insertOne({
+    const id = new mongodb.ObjectID()
+    const result = await posts.insertOne({
         matchNumber: req.body.matchNumber,
         teamNumber: req.body.teamNumber,
         flipped: req.body.flipped,
@@ -47,9 +48,12 @@ router.post('/', async(req, res) => {
         scoutName: req.body.scoutName,
         win: req.body.win,
         team: req.body.team,
-        createdAt: new Date()
+        rocket: req.body.rocket,
+        colour: req.body.colour,
+        createdAt: new Date(),
+        _id: id
     })
-    res.status(201).send();
+    res.status(201).send('' + id);
 })
 
 router.delete('/:id', async(req, res) => {

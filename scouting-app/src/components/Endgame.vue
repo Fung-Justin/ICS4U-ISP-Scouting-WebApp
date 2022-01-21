@@ -32,11 +32,17 @@
                 <input v-model="scoutName" class = "bg-light mt-5 mb-4" type = textarea id = 'scoutName' placeholder="Scout Name">
             </div>
             <textarea v-model="comments" class = "bg-light mt-4 mb-1" id = 'comments' placeholder="Comments"/>
-
-            <!-- Win -->
-            <div class = "mb-4">
-                <input class="form-check-input mx-auto" type="checkbox" role="switch" id="flexSwitchCheckChecked" v-model="win" checked>
-                <label class="form-check-label mx-auto" for="flexSwitchCheckChecked">{{win ? 'Win' : 'Loss'}}</label>
+        </section>
+        
+        <!-- Outcome -->
+        <section class="mb-2">
+            <div class="pt-1">
+                <input class="form-check-input mx-auto" type="checkbox" id="flexSwitchCheckChecked" v-model="win" checked>
+                <label class="form-check-label mx-auto">win</label>
+            </div>
+            <div class="pt-2">
+                <input class="form-check-input mx-auto" type="checkbox" id="flexSwitchCheckChecked" v-model="rocket" checked>
+                <label class="form-check-label mx-auto">Rocket</label>
             </div>
         </section>
 
@@ -86,12 +92,13 @@ data(){
         defense: 0,
         scoutName: '',
         comments: '',
-        win: false
+        win: false,
+        rocket: false
 }
 },
   created(){
 watchEffect(() => {
-  this.$emit('sendData',  {climb: this.climb, defense: this.defense, scoutName: this.scoutName, comments: this.comments, win: this.win})
+  this.$emit('sendData',  {climb: this.climb, defense: this.defense, scoutName: this.scoutName, comments: this.comments, win: this.win, rocket: this.rocket})
   })
 }
 

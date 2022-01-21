@@ -6,7 +6,7 @@
     <button class = "btn bg-dark text-light mx-2" v-on:click="gameState = 'endgame'" :style="[gameState === 'endgame' ? 'background-color: white !important; border: 2px solid black; color: black !important;' : '']">Endgame</button>
   </section>
     <Timer id = 'timer' v-show="gameState === 'midgame'" @getTime='this.currTime=$event' @getTS='this.timeString=$event' :paused='false' :run='events.length!==0' :speed='1'/>
-    <Grid id = 'grid' :flipped='flipped' v-if="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
+    <Grid id = 'grid' :flipped='flipped' v-show="gameState !== 'endgame'" :time="currTime" @getPosition='getPosition($event)'/>
     <Pregame id = 'pregame' v-show="gameState === 'pregame'" @sendData="setPreGame($event)"/>
     <Midgame v-show="gameState === 'midgame'" :currTime='currTime' @createEvent='createEvent' @removeEvent='removeEvent'/>
     <Endgame v-show="gameState === 'endgame'" @sendData="setEndGame($event)" @submit="submit"/>
@@ -62,12 +62,13 @@ setPreGame({matchNumber, teamNumber, flipped}){
  this.teamNumber = teamNumber
  this.flipped= flipped
 },
-setEndGame({climb, defense, scoutName, comments, win}){
+setEndGame({climb, defense, scoutName, comments, win, rocket}){
   this.climb = climb
   this.defense = defense
   this.scoutName = scoutName
   this.comments = comments
-  this.win = win
+  this.win = win,
+  this.rocket = rocket
 },
 //Creates a movement event if position of bot changes
 getPosition(e){
@@ -99,7 +100,6 @@ createEvent(event){
   this.events.splice(index, 1)
   //searches through event array, deletes the last recorded type of that event
 }, async submit(){
-  //(also for styling possibly do red boxes around the inputs that are incomplete)
   this.errors=[];
   if(this.currTime !== 150)
     this.errors.push('Completed Match Data')
@@ -123,13 +123,16 @@ createEvent(event){
     defense: this.defense,
     comments: this.comments,
     scoutName: this.scoutName,
-    win: this.win
+    win: this.win,
+    colour: this.flipped && this.events[0].position === 3 || !this.flipped && this.events[0].position === 8 ? 'red' : 'blue',
+    rocket: this.rocket
   }
-  console.log(match)
-
+  
   //SEND TO DB
-  await PostService.insertPost(match)
-  //console.log(match)
+  const res = await PostService.insertPost(match)
+
+  //Go to match playback
+  this.$router.push(`playback?id=${res.data}`)
   }
 }
 }}

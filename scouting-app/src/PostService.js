@@ -25,7 +25,8 @@ class PostService {
             defense: match.defense,
             comments: match.comments,
             scoutName: match.scoutName,
-            win: match.win
+            win: match.win,
+            rocket: match.rocket
         });
     }
 
