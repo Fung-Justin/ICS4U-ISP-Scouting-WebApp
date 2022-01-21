@@ -7,10 +7,9 @@
     <section id = "top" v-else>
         <h2 class = "fw-bold text-center">Team {{match.teamNumber}}</h2>
         <h2 class = "fw-bold text-center mb-3">Match {{match.matchNumber}}</h2>
-        <Timer class = "mb-2" @getTime='timeChange($event)' :paused='paused' :sliderTime='time' :speed='speed' @resetSlider='time=0'/>
+        <Timer class = "mb-3" @getTime='timeChange($event)' :paused='paused' :sliderTime='time' :speed='speed' @resetSlider='time=0'/>
         <section v-if="time!==150">
             <Grid :flipped='match.flipped'  :playbackPos='currentPos'/>
-            
         </section>
         <!-- Endgame Data -->
         <div class="container">
@@ -31,14 +30,20 @@
         </div>
         <!-- Playback Controls -->
         <section>
-            <div id = "playback" style = "display: flex; justify-content: center;">
+            <div id = "playback" class = "mt-2" style = "display: flex; justify-content: center;">
                 <i id = "img" class = "bi bi-play-fill h4 mt-2" v-on:click='paused=!paused; playButton()'></i>
                 <input type="range" class = "playback-bar" v-model="time" min="0" max="150">
+
+                <div class="dropdown mt-1" style = "margin-left: 0.5em;">
+                <button class="dropbtn btn-sm"><i class = "bi bi-speedometer2 text-dark"></i></button>
+                <div class="dropdown-content">
+                    <button class = "btn text-white" v-on:click='speed=1' :style="[speed === 1 ? 'background: black' : '']">1x</button>
+                    <button class = "btn text-white" v-on:click='speed=2' :style="[speed === 2 ? 'background: black' : '']">2x</button>
+                    <button class = "btn text-white" v-on:click='speed=5' :style="[speed === 5 ? 'background: black' : '']">5x</button>
+                </div>
+                </div>
             </div>
-            <div id = "btns">
-                <button class = "btn" v-on:click='speed=1' :style="[speed === 1 ? 'background: #d0ddf7' : '']">1x</button>
-                <button class = "btn" v-on:click='speed=2' :style="[speed === 2 ? 'background: #d0ddf7' : '']">2x</button>
-                <button class = "btn" v-on:click='speed=5' :style="[speed === 5 ? 'background: #d0ddf7' : '']">5x</button>
+            <div id = "actions">
                 <div>
                 <h5 style = "display:inline-block">Non-movement actions: &nbsp</h5>
                 <h5 style = "display:inline-block" v-if="currentAction !== undefined">{{currentAction.TS}} - {{currentAction.event}}</h5>
@@ -126,7 +131,7 @@ export default ({
 .btn {
     border-radius: 4px;
 }
-#btns {
+#actions {
     text-align: center;
     padding-bottom: 1em;
 }
@@ -164,5 +169,39 @@ input[type=range]:focus {
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
     background-image: linear-gradient(to right, #7d77FF 0%, #FF9482 100%);
+}
+.dropbtn {
+  background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  bottom: -34px;    
+  background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
+  color: white;
+  z-index: 1;
+}
+.dropdown-content a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+    background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
+    color: white;
+    left:auto;
+    right:0;
+    margin-right:-10px;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 </style>
