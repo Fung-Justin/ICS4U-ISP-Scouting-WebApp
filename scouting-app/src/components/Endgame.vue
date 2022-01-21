@@ -83,24 +83,32 @@
 </template>
 
 <script>
-import { watchEffect, ref, defineComponent } from "vue";
+import {watchEffect, ref, defineComponent} from "vue";
 
 export default ({
-data(){
-    return{
-        climb: 0,
-        defense: 0,
-        scoutName: '',
-        comments: '',
-        win: false,
-        rocket: false
-}
-},
-  created(){
-watchEffect(() => {
-  this.$emit('sendData',  {climb: this.climb, defense: this.defense, scoutName: this.scoutName, comments: this.comments, win: this.win, rocket: this.rocket})
-  })
-}
+    data() {
+        return {
+            climb: 0,
+            defense: 0,
+            scoutName: '',
+            comments: '',
+            win: false,
+            rocket: false
+        }
+    },
+    created() {
+        //Emits data to parent component whenever there is a change in data
+        watchEffect(() => {
+            this.$emit('sendData', {
+                climb: this.climb,
+                defense: this.defense,
+                scoutName: this.scoutName,
+                comments: this.comments,
+                win: this.win,
+                rocket: this.rocket
+            })
+        })
+    }
 
 })
 </script>

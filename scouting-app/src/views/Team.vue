@@ -1,80 +1,85 @@
 <template>
-<div>
-    <Loading v-if="!completed"/>
-    <div class = "py-5" style = "background-image: linear-gradient(315deg, #7d77ff 0%, #ff9482 100%); height: 100%;" v-else>
-        <div class="container text-center">
-        <div class="card bg-dark text-light mx-auto pb-4 px-4" style = "border-radius: 8px; width: 95%;">
-    <h1 class = "fw-bold mt-3">{{team}}</h1>
-    <!-- Auto vs Teleop switch -->
     <div>
-        <div class = "mt-3" style = "display: inline-block; float: right;">
-            <input class="form-check-input" style = "margin-right: 0.2em; display: inline-block" type="checkbox" role="switch" id="flexSwitchCheckChecked" v-model="auto" checked :style="[auto ? 'background: #7d77FF' : 'background: #FF9482']">
-            <h5 class="form-check-label" style = "display: inline-block" for="flexSwitchCheckChecked">{{auto ? 'Auto' : 'Teleop'}}</h5>
-        </div>
-        <input class = "mt-3 bg-dark text-white" id = 'filter' type=textarea v-model="filterValue" placeholder = "Filter" v-on:keyup="filterComments">
-    </div>
-    <!-- Table of Stats NEEDS TO FILL WHOLE SCREEN-->
-    <div class="table-responsive mt-4">
-        <table class="table table-bordered table-hover table-dark" style = "border-radius: 4px;">
-            <thread>
-            <tr>
-                <th v-on:click="sort('matchNumber')">Match Number</th>
-                <th class='playback'>Playback<div class="playback-hide bg-light text-dark">Playback of all actions during a match</div></th>
-                <th v-on:click="sort(letter + 'CargoRocket')">{{letter}}-Cargo Rocket</th>
-                <th v-on:click="sort(letter + 'CargoCB')">{{letter}}-Cargo CB</th>
-                <th v-on:click="sort(letter + 'HatchRocket')">{{letter}}-HP Rocket</th>
-                <th v-on:click="sort(letter + 'HatchCB')">{{letter}}-HP CB</th>
-                <th v-on:click="sort('climb')">Climb</th>
-                <th v-on:click="sort('defense')">Defense</th>
-                <th v-on:click="sort('score')">Score</th>
-                <th>Comments</th>
-            </tr>
-            <tr v-for:each='stat in data'>
-            <td>{{stat.matchNumber}}</td>
-            <!-- THE PLAY BUTTON NEEDS TO BE CENTERED-->
-                <br style="line-height: 10px"/>
-                <router-link id = 'play-button' class="bi bi-play-fill h4 text-white" :to="`/playback?id=${stat.id}`"></router-link>
-                    <td>
-                        {{auto ? stat.ACargoRocketH : stat.TCargoRocketH}}
-                        <br>
-                        {{auto ? stat.ACargoRocketM : stat.TCargoRocketM}}
-                        <br>
-                        {{auto ? stat.ACargoRocketL : stat.TCargoRocketL}}
-                    </td>
-                    <td>
-                        {{auto ? stat.ACargoCB : stat.TCargoCB}}
-                    </td>
-                    <td>
-                        {{auto ? stat.AHatchRocketH : stat.THatchRocketH}}
-                        <br>
-                        {{auto ? stat.AHatchRocketM : stat.THatchRocketM}}
-                        <br>
-                        {{auto ? stat.AHatchRocketL : stat.THatchRocketL}}
-                    </td>
-                    <td>
-                        {{auto ? stat.AHatchCB : stat.THatchCB}}
-                    </td>
-                    <td>
-                        {{stat.climb}}
-                    </td> 
-                    <td>
-                        {{stat.defense}}
-                    </td> 
-                    <td>
-                        {{stat.score}}
-                    </td>                    
-                    <td>
-                        {{stat.comments}}
-                    </td> 
-                </tr>
+        <!-- Loading screen -->
+        <Loading v-if="!completed"/>
 
-            </thread>
-        </table>
+        <!-- main page -->
+        <div class = "py-5" style = "background-image: linear-gradient(315deg, #7d77ff 0%, #ff9482 100%); height: 100%; padding-top: 6.5em !important;" v-else>
+            <div class="container text-center">
+                <div class="card bg-dark text-light mx-auto pb-4 px-4" style = "border-radius: 8px; width: 95%;">
+                    <h1 class = "fw-bold mt-3">{{team}}</h1>
+
+        <!-- Auto vs Teleop switch -->
+                    <div>
+                        <div class = "mt-3" style = "display: inline-block; float: right;">
+                            <input class="form-check-input" style = "margin-right: 0.2em; display: inline-block" type="checkbox" role="switch" id="flexSwitchCheckChecked" v-model="auto" checked :style="[auto ? 'background: #7d77FF' : 'background: #FF9482']">
+                            <h5 class="form-check-label" style = "display: inline-block" for="flexSwitchCheckChecked">{{auto ? 'Auto' : 'Teleop'}}</h5>
+                        </div>
+                    </div>
+                
+                <!-- Table of Stats -->
+                    <div class="table-responsive mt-4">
+                        <table class="table table-bordered table-hover table-dark" style = "border-radius: 4px;">
+                            <thread>
+                                <!-- Headers -->
+                                <tr>
+                                    <th v-on:click="sort('matchNumber')" title="Number in given comp">Match Number</th>
+                                    <th class='playback' title="A playback of the match in real time!">Playback<div class="playback-hide bg-light text-dark">Playback of all actions during a match</div></th>
+                                    <th v-on:click="sort(letter + 'CargoRocket')" title="Total Cargo scored in rocket from top to bottom">Cargo Rocket</th>
+                                    <th v-on:click="sort(letter + 'CargoCB')" title="Total Cargo scored in Cargo Bay">Cargo CB</th>
+                                    <th v-on:click="sort(letter + 'HatchRocket')" title="Total Hatch Panels scored in rocket from top to bottom">HP Rocket</th>
+                                    <th v-on:click="sort(letter + 'HatchCB')" title="Total Hatch Panels scored in Cargo Bay">{{letter}}HP CB</th>
+                                    <th v-on:click="sort('climb')" title="Level of Engame climb. 1 - on field, 2 - in hab, 3 - low climb, 4 - high climb">Climb</th>
+                                    <th v-on:click="sort('defense')" title="Level of defence on a scale from 1-4, with 0 meaning not played">Defense</th>
+                                    <th v-on:click="sort('score')" title="Approximate score this bot got for it's alliance">Score</th>
+                                    <th title="Scout recorded comments of bot's performance in match">Comments</th>
+                                </tr>
+                                <!-- Table data -->
+                                <tr v-for:each='stat in data'>
+                                    <td>{{stat.matchNumber}}</td>
+                                    <br style="line-height: 10px" />
+                                    <router-link id='play-button' class="bi bi-play-fill h4 text-white" :to="`/playback?id=${stat.id}`">
+                                    </router-link>
+                                    <td>
+                                        {{auto ? stat.ACargoRocketH : stat.TCargoRocketH}}
+                                        <br>
+                                        {{auto ? stat.ACargoRocketM : stat.TCargoRocketM}}
+                                        <br>
+                                        {{auto ? stat.ACargoRocketL : stat.TCargoRocketL}}
+                                    </td>
+                                    <td>
+                                        {{auto ? stat.ACargoCB : stat.TCargoCB}}
+                                    </td>
+                                    <td>
+                                        {{auto ? stat.AHatchRocketH : stat.THatchRocketH}}
+                                        <br>
+                                        {{auto ? stat.AHatchRocketM : stat.THatchRocketM}}
+                                        <br>
+                                        {{auto ? stat.AHatchRocketL : stat.THatchRocketL}}
+                                    </td>
+                                    <td>
+                                        {{auto ? stat.AHatchCB : stat.THatchCB}}
+                                    </td>
+                                    <td>
+                                        {{stat.climb}}
+                                    </td>
+                                    <td>
+                                        {{stat.defense}}
+                                    </td>
+                                    <td>
+                                        {{stat.score}}
+                                    </td>
+                                    <td>
+                                        {{stat.comments}}
+                                    </td>
+                                    </tr>
+                            </thread>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
-    </div>
-</div>
 </template>
 
 <script>
@@ -101,6 +106,7 @@ export default({
             }
     },
     methods:{
+        //Resets match statistics for a given match
         resetStat(match){
             return{
                 matchNumber: match.matchNumber,
@@ -127,6 +133,7 @@ export default({
                 score: 0
             }
         },
+        //Calculates data for each of the matches to be displayed
         setData(){
             this.matches.forEach(match =>{
              let stats = this.resetStat(match)
@@ -147,6 +154,7 @@ export default({
             })
             this.allData = this.data
         },
+        //Sorts the data by column heading
         sort(field){
             console.log(this.high)
             console.log(field)
@@ -162,17 +170,10 @@ export default({
             else{ 
                 this.data = this.data.sort((a, b) => a[field] -  b[field]);
                 }
+            //Checks for Ascending or Descending 
             if(!this.high) this.data.reverse()
             this.currentSortField = field
-        },
-        //Filters the comments based on input in text box
-        filterComments() {
-            this.data = this.allData
-            if(this.filterValue != ''){
-            this.currentSortField = 'team'
-            this.data = this.data.filter(match => (match.comments.toLowerCase().indexOf(this.filterValue) >= 0));
-            }
-            }
+        }
         },
     watch:{
         //Sets the current position to the playback position whenever there is a change in the playback position
@@ -206,7 +207,7 @@ tbody:nth-child(even) {
 .playback-hide{
     display: none;
 }
-.playback:hover + .playback-hide {
+.playback:hover .playback-hide{
   display: block;
 }
 </style>

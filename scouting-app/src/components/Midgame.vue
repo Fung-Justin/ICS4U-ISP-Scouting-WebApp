@@ -204,6 +204,7 @@ export default {
   },
   props: ["currTime"],
   methods: {
+    //Changes a given statistic
     changeStat(stat, change) {
       if (this.currTime != 0.0 && this.currTime != 150.0) {
         if (change === 1) {

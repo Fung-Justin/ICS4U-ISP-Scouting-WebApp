@@ -3,7 +3,7 @@
 <Loading v-if="!completed"/>
   <div v-else id = 'page'>
   <div class = "container text-center mx-auto pt-4">
-    <div class="card bg-dark text-white mx-auto mt-3 pt-2 pb-3 px-4" style = "width: 95%;">
+    <div class="card bg-dark text-white mx-auto mt-3 pt-2 pb-3 px-4" style = "width: 95%; border-radius: 8px;">
     <h1 class="title m-3 mb-4">Matches</h1>
     <table class="table table-bordered text-white table-hover">
       <thead>
@@ -180,6 +180,7 @@ export default {
 #page{
   background-image: linear-gradient(315deg, #7d77FF 0%, #FF9482 100%);
   height: 100%;
+  padding-top: 4em !important;
 }
 tbody:nth-child(even) {
  background-color: #2d3034 !important;

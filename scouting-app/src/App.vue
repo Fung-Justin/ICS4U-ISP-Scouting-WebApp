@@ -1,33 +1,36 @@
 <template>
-    <transition name="fade" mode="out-in">
-  <nav id = 'nav' class="bg-dark pt-2 fixed-top" v-if="this.$route.path !== '/' && this.$route.path !== '/create-account'">
-    <div class="container">
-      <div>
-        <router-link to="/"><button id="logout-btn" class="btn mb-2 py-2 text-white" type="submit" @click="logout()">Logout
-              </button></router-link>
-        <div class = "home">
-          <router-link class = "h5 text-white" to="/home"><i class = "bi bi-house"></i>Home</router-link>
-        </div>
-        <div class = "links">
-          <router-link class = "h6 text-white dir" to="/grid">Grid</router-link>
-          <router-link class = "h6 text-white dir" to="/teams">Teams</router-link>
-          <router-link class = "h6 text-white dir" to="/matches">Matches</router-link>
-          <router-link class = "h6 text-white" to="/scout">Scout</router-link>
+
+<!-- Navbar -->
+  <transition name="fade" mode="out-in">
+    <nav id = 'nav' class="bg-dark pt-2 fixed-top" v-if="this.$route.path !== '/' && this.$route.path !== '/create-account'">
+      <div class="container">
+        <div>
+          <router-link to="/">
+            <button id="logout-btn" class="btn mb-2 py-2 text-white" type="submit" @click="logout()">Logout
+            </button>
+          </router-link>
+          <div class = "home">
+            <router-link class = "h5 text-white" to="/home"><i class = "bi bi-house"></i>Home</router-link>
+          </div>
+          <div class = "links">
+            <router-link class = "h6 text-white dir" to="/grid">Grid</router-link>
+            <router-link class = "h6 text-white dir" to="/teams">Teams</router-link>
+            <router-link class = "h6 text-white dir" to="/matches">Matches</router-link>
+            <router-link class = "h6 text-white" to="/scout">Scout</router-link>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
-    </transition>
+    </nav>
+  </transition>
 
-  <router-view v-slot="{ Component }" class="h-100" :style="[this.$route.path !== '/' && this.$route.path !== '/create-account' ? 'margin: 56px 0 0 0' : '']">
+  <!-- Router view -->
+  <router-view v-slot="{ Component }" class="h-100" :style="[this.$route.path !== '/' && this.$route.path !== '/create-account' ? 'margin: 0 0 0 0' : '']">
     <transition name="fade" mode="out-in">
       <component :is="Component"/>
           </transition>
   </router-view>
 
 </template>
-
-Check if home button actually takes you home. 
 
 <style>
 #logout-btn {
@@ -87,8 +90,6 @@ opacity:0;
   padding: 7.5em;
   height: 100%;
 }
-
-
 </style>
 
 <script>

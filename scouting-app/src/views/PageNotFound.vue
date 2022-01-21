@@ -1,4 +1,5 @@
 <template>
+<!-- Page not Found Message -->
     <div class="img d-flex justify-content-center align-items-center"> 
         <div class="card text-dark mx-auto py-5 text-center align-items-center">
             <h1>Oops! Page not found</h1>     

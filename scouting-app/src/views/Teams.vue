@@ -40,26 +40,37 @@
             </div>
             </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import TeamRow from "@/components/TeamRow.vue"
-import PostService from '../PostService'
-import Loading from '@/components/Loading.vue'
+import TeamRow from "@/components/TeamRow.vue";
+import PostService from "../PostService";
+import Loading from "@/components/Loading.vue";
 
-export default{
-    name: "Teams",
-    components: {
-        TeamRow,
-        Loading
-    },
-    data(){
-        return{
-            completed: false,
-            teams: [],
-            currentSortField: "teamNumber",
-            sortAsc: true
+export default {
+  name: "Teams",
+  components: {
+    TeamRow,
+    Loading,
+  },
+  data() {
+    return {
+      completed: false,
+      teams: [],
+      currentSortField: "teamNumber",
+      sortAsc: true,
+    };
+  },
+  methods: {
+    initTeamStats(matches) {
+      for (let i = 0; i < matches.length; i++) {
+        let match = matches[i];
+        let teamFound = false;
+        for (let j = 0; j < this.teams.length; j++) {
+          if (this.teams[j].teamNumber == match.teamNumber) teamFound = true;
         }
     },
     methods:{
@@ -142,10 +153,26 @@ export default{
                       
                 }
             }
-            this.teams.sort((a,b) => a.teamNumber-b.teamNumber)
-            for(let i = 0; i < this.teams.length; i++){
-                let team = this.teams[i]
-                team.score+=(team.CargoRocketL+team.CargoRocketM+team.CargoRocketH+team.CargoCB)*3+(team.HatchRocketL+team.HatchRocketM+team.HatchRocketH+team.HatchCB)*2
+            if (climbTotal >= 15) team.rp++;
+            if (match.win) team.rp += 2;
+            if (match.rocket) team.rp++;
+            team.climb += match.climb;
+            team.defense += match.defense;
+            if (match.climb == 1) team.score += 3;
+            else if (match.climb == 2) team.score += 6;
+            else if (match.climb == 3) team.score += 12;
+            if (match.win) team.wins++;
+            else team.losses++;
+            for (let k = 0; k < match.events.length; k++) {
+              let action = match.events[k];
+              if (action.time < 15 && action.event == "") line = true;
+              if (action.event !== "" && action.event.search("intake") < 0) {
+                let piece =
+                  action.event.search(/cargo/i) > -1 ? "Cargo" : "Hatch";
+                let index = action.event.search("Rocket");
+                let location = index > -1 ? action.event.slice(index) : "CB";
+                team[piece + location]++;
+              }
             }
         },
         // Controls the table sorting
@@ -174,16 +201,14 @@ export default{
 </script>
 
 <style scoped>
-.table-bordered{
-    border: 1px solid white !important;
+.table-bordered {
+  border: 1px solid white !important;
 }
-
-#col-heading:hover{
-    cursor:pointer;
+#col-heading:hover {
+  cursor: pointer;
 }
-
-.underline:hover{
-    text-decoration: underline;
-    cursor: pointer;
+.underline:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>
