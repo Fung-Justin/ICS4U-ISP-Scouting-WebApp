@@ -13,8 +13,8 @@
           <th scope="col">B1</th>
           <th scope="col">B2</th>
           <th scope="col">B3</th>
-          <th scope="col">R Climb Total</th>
-          <th scope="col">B Climb Total</th>
+          <th scope="col">R Climb Points</th>
+          <th scope="col">B Climb Points</th>
           <th scope="col">Red RP</th>
           <th scope="col">Blue RP</th>
           <th scope="col">Winner</th>
@@ -24,34 +24,34 @@
         <td>
           <h6>{{ data.matchNumber }}</h6>
         </td>
-        <td>
+        <td class="bg-danger">
           <h6>{{ data.r1 }}</h6>
         </td>
-         <td>
+         <td class="bg-danger">
           <h6>{{ data.r2 }}</h6>
         </td>
-         <td>
+         <td class="bg-danger">
           <h6>{{ data.r3 }}</h6>
         </td>
-         <td>
+         <td class="bg-primary">
           <h6>{{ data.b1 }}</h6>
         </td>
-         <td>
+         <td class="bg-primary">
           <h6>{{ data.b2 }}</h6>
         </td>
-         <td>
+         <td class="bg-primary">
           <h6>{{ data.b3 }}</h6>
         </td>
-         <td>
+         <td class="bg-danger">
           <h6>{{ data.redClimb }}</h6>
         </td>
-         <td>
+         <td class="bg-primary">
           <h6>{{ data.blueClimb }}</h6>
         </td>
-        <td>
+        <td class="bg-danger">
           <h6>{{ data.rRp }}</h6>
         </td>
-        <td>
+        <td class="bg-primary">
           <h6>{{ data.bRp }}</h6>
         </td>
         <td>
@@ -124,13 +124,13 @@ export default {
       let b2 = teamBlue[1].teamNumber;
       let b3 = teamBlue[2].teamNumber;
   if(teamRed[0].win){
-        winner = "red";
+        winner = "Red";
         rRP += 2;
      }else if(teamBlue[0].win){
-         winner = "blue";
+         winner = "Blue";
          bRP +=2;
      }else{
-         winner = "tie";
+         winner = "Tie";
          bRP += 1;
          rRP += 1;
      }
