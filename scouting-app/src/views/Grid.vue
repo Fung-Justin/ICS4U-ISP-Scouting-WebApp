@@ -16,7 +16,7 @@ export default{
 
 <style scoped>
 .grid{
-  padding-top: 5em;
+  padding-top: 2em;
 }
 </style>
 

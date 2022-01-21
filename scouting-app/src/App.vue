@@ -1,13 +1,12 @@
 <template>
     <transition name="fade" mode="out-in">
-  <nav class="bg-dark pt-2 fixed-top" v-if="this.$route.path !== '/'">
+  <nav id = 'nav' class="bg-dark pt-2 fixed-top" v-if="this.$route.path !== '/'">
     <div class="container">
       <div>
         <router-link to="/"><button id="logout-btn" class="btn mb-2 py-2 text-white" type="submit" @click="logout()">Logout
               </button></router-link>
         <div class = "home">
-          <router-link to="/"><i class = "bi bi-house text-white"></i></router-link>
-          <router-link class = "h5 text-white" to="/home">Home</router-link>
+          <router-link class = "h5 text-white" to="/home"><i class = "bi bi-house"></i>Home</router-link>
         </div>
         <div class = "links">
           <router-link class = "h6 text-white dir" to="/grid">Grid</router-link>
@@ -69,7 +68,19 @@ opacity:0;
 .fade-leave-active {
   transition: opacity 0.5s ease-out;
 }
+.bi-house{
+  text-decoration: none;
 
+}
+#nav a {
+  color: white;
+  text-decoration: none;
+}
+#nav a.router-link-exact-active {
+  background: -webkit-linear-gradient(315deg, #7d77ff 0%, #ff9482 100%) !important;
+  -webkit-background-clip: text !important; 
+  -webkit-text-fill-color: transparent !important;
+}
 </style>
 
 <script>
