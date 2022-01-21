@@ -203,11 +203,9 @@ export default({
 tbody:nth-child(even) {
  background-color: #2d3034 !important;
 }
-
 .playback-hide{
     display: none;
 }
-
 .playback:hover + .playback-hide {
   display: block;
 }

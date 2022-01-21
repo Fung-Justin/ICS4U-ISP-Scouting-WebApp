@@ -1,9 +1,12 @@
 <template>
     <div>
         <Loading v-if="!completed"/>
-        <section v-else>
-            <table id="main-table" class="table table-bordered table-hover table-dark" style = "border-radius: 4px;">
-                <tbody id="col-heading">
+        <div class = "py-5" v-else style = "background-image: linear-gradient(315deg, #7d77ff 0%, #ff9482 100%);">
+            <div class="container text-center">
+                <div class="card bg-dark text-light mx-auto pb-4 px-4" style = "border-radius: 8px; width: 80%;">
+                    <h1 class = "my-4">Teams</h1>
+            <table id="main-table" class="table table-bordered table-hover table-dark table-striped" style = "border-radius: 4px;">
+                <thead id="col-heading">
                     <tr>
                         <th>Team Number</th>
                         <th>Avg Score</th>
@@ -17,8 +20,10 @@
                         <th>Avg Climb</th>
                         <th>Avg Defense</th>
                     </tr>
+                </thead>
                     <!-- Feel free to change the headings to make them consistent with Maya's -->
-                <tr v-for="stats in teams">
+                <tbody>
+                <tr id = 'tr-striped' v-for="stats in teams">
                     <td><h6 v-on:click="this.$router.push(`team?team=${stats.teamNumber}`)">{{stats.teamNumber}}</h6></td>
                     <td><h6>{{stats.score/stats.matchesPlayed}}</h6></td>
                     <td><h6>{{stats.wins}}</h6></td>
@@ -33,7 +38,9 @@
                 </tr>
                 </tbody>
             </table>
-        </section>
+            </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -146,3 +153,9 @@ export default{
     }
 }
 </script>
+
+<style scoped>
+.table-bordered{
+    border: 2px solid white;
+}
+</style>
