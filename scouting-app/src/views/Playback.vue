@@ -4,7 +4,7 @@
     <!-- Displays Loading Wheel -->
     <Loading v-if="!completed"/>
     <!-- Displays page once loaded -->
-    <section id = "top" v-else>
+    <section id = "page" v-else>
         <h2 class = "fw-bold text-center">Team {{match.teamNumber}}</h2>
         <h2 class = "fw-bold text-center mb-3">Match {{match.matchNumber}}</h2>
         <Timer class = "mb-3" @getTime='timeChange($event)' :paused='paused' :sliderTime='time' :speed='speed' @resetSlider='time=0'/>
@@ -125,8 +125,8 @@ export default ({
   padding: 7.5em;
   height: 100%;
 }
-#top {
-    margin-top: 4em;
+#page {
+    margin-top: 4.5em;
 }
 .btn {
     border-radius: 4px;

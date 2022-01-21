@@ -19,7 +19,7 @@
   </nav>
     </transition>
 
-  <router-view v-slot="{ Component }" class="h-100" :style="[this.$route.path !== '/' && this.$route.path !== '/create-account' ? 'margin: 56px 0 0 0' : '']">
+  <router-view v-slot="{ Component }" class="h-100" :style="[this.$route.path !== '/' && this.$route.path !== '/create-account' ? 'margin: 0 0 0 0' : '']">
     <transition name="fade" mode="out-in">
       <component :is="Component"/>
           </transition>

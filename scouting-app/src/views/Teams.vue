@@ -1,7 +1,7 @@
 <template>
     <div>
         <Loading v-if="!completed"/>
-        <div class = "py-5" v-else style = "background-image: linear-gradient(315deg, #7d77ff 0%, #ff9482 100%);">
+        <div class = "py-5" v-else style = "background-image: linear-gradient(315deg, #7d77ff 0%, #ff9482 100%); padding-top: 6.5em !important;">
             <div class="container text-center">
                 <div class="card bg-dark text-light mx-auto pb-4 px-4" style = "border-radius: 8px; width: 80%;">
                     <h1 class = "my-4">Teams</h1>
@@ -178,11 +178,9 @@ export default{
 .table-bordered{
     border: 1px solid white !important;
 }
-
 #col-heading:hover{
     cursor:pointer;
 }
-
 .underline:hover{
     text-decoration: underline;
     cursor: pointer;

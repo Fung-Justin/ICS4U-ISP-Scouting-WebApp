@@ -162,6 +162,7 @@ div{
 }
 #page{
   height:100%;
+  padding-top: 7em;
 }
 #error-list{
   line-height: 0.9;
