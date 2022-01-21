@@ -25,12 +25,6 @@ const routes = [{
             import ('../views/Scout.vue')
     },
     {
-        path: '/register',
-        name: 'Register',
-        component: () =>
-            import ('../views/RegisterUser.vue')
-    },
-    {
         path: '/playback',
         name: 'Playback',
         component: () =>
