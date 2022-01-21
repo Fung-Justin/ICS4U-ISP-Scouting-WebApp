@@ -180,7 +180,7 @@ export default {
             team.matchesPlayed++;
             let climbTotal = 0;
             for (let k = 0; k < matches.length; k++) {
-              if (matches[k].matchNumber == match.matchNumber) {
+              if (matches[k].matchNumber == match.matchNumber&&matches[k].team==match.team) {
                 if (matches[k].climb == 1) climbTotal += 3;
                 else if (matches[k].climb == 2) climbTotal += 6;
                 else if (matches[k].climb == 3) climbTotal += 12;

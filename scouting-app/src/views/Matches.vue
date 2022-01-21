@@ -96,6 +96,7 @@ export default {
                   num.push(match.matchNumber);
               }
           });
+          this.matchData.sort((a,b)=> a.matchNumber-b.matchNumber)
       },
   /**
    gets individual match reports on each team in a match and compiles the data into a match object
