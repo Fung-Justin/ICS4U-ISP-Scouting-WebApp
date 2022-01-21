@@ -1,5 +1,6 @@
 <template>
 <div id = "page">
+  <!--Background and Welcome messsage plus a small set of sentences--> 
     <section id="showcase" class="text-light text-center text-small-center">
       <div class="container">
         <div class="d-sm-flex text-center" style = "display: flex; justify-content: center;">
@@ -13,6 +14,7 @@
       </div>
     </section>
 
+  <!--Cards with descriptions under the showcase-->
     <section class="px-5 pt-5">
         <div class="row text-center">
           <div  class="col-md ">
