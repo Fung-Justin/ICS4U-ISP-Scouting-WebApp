@@ -38,7 +38,7 @@
         <section class="mb-2">
             <div class="pt-1">
                 <input class="form-check-input mx-auto" type="checkbox" id="flexSwitchCheckChecked" v-model="win" checked>
-                <label class="form-check-label mx-auto">win</label>
+                <label class="form-check-label mx-auto">Win</label>
             </div>
             <div class="pt-2">
                 <input class="form-check-input mx-auto" type="checkbox" id="flexSwitchCheckChecked" v-model="rocket" checked>

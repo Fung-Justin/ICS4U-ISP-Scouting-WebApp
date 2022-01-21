@@ -24,7 +24,7 @@
                     <!-- Feel free to change the headings to make them consistent with Maya's -->
                 <tbody>
                 <tr id = 'tr-striped' v-for="stats in teams">
-                    <td><h6 v-on:click="this.$router.push(`team?team=${stats.teamNumber}`)">{{stats.teamNumber}}</h6></td>
+                    <td><h4 class="underline" v-on:click="this.$router.push(`team?team=${stats.teamNumber}`)">{{stats.teamNumber}}</h4></td>
                     <td><h6>{{stats.score/stats.matchesPlayed}}</h6></td>
                     <td><h6>{{stats.wins}}</h6></td>
                     <td><h6>{{stats.matchesPlayed-stats.wins}}</h6></td>
@@ -177,5 +177,14 @@ export default{
 <style scoped>
 .table-bordered{
     border: 1px solid white !important;
+}
+
+#col-heading:hover{
+    cursor:pointer;
+}
+
+.underline:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
 </style>

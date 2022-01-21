@@ -15,8 +15,8 @@
           <th scope="col">B1</th>
           <th scope="col">B2</th>
           <th scope="col">B3</th>
-          <th scope="col">R Climb Points</th>
-          <th scope="col">B Climb Points</th>
+          <th scope="col">Red Climb Points</th>
+          <th scope="col">Blue Climb Points</th>
           <th scope="col">Red RP</th>
           <th scope="col">Blue RP</th>
           <th scope="col">Winner</th>
@@ -27,7 +27,7 @@
           <h6>{{ data.matchNumber }}</h6>
         </td>
         <td class="R-red-start">
-          <h6 v-on:click="this.$router.push(`team?team=${data.r1}`)">{{ data.r1 }}</h6>
+          <h6 class="underline" v-on:click="this.$router.push(`team?team=${data.r1}`)">{{ data.r1 }}</h6>
         </td>
          <td class="R-red-mid">
           <h6 v-on:click="this.$router.push(`team?team=${data.r2}`)">{{ data.r2 }}</h6>
@@ -207,5 +207,9 @@ tbody:nth-child(even) {
 }
 .B-blue-end{
   background-image: linear-gradient(to right, #0C3BAA 0%, #135CC5 100%); 
+}
+.underline:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
 </style>
