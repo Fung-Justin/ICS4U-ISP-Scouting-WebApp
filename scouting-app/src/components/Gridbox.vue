@@ -23,33 +23,33 @@
 export default {
   name: "Grid",
     props: ['flipped', 'playbackPos', 'time'],
-    data(){
-      return{
+    data() {
+      return {
         currentPos: Number
       }
-      },
+    },
     methods: {
-    //Sets the current position of the bot
-    setPosition(position){
-      if(this.playbackPos === undefined && (this.time !== 0.0 || position === 5 || position === 8)){
-      this.currentPos = position
-      this.$emit('getPosition', this.currentPos);
+      //Sets the current position of the bot
+      setPosition(position) {
+        if (this.playbackPos === undefined && (this.time !== 0.0 || position === 5 || position === 8)) {
+          this.currentPos = position
+          this.$emit('getPosition', this.currentPos);
         }
+      }
+    },
+    watch: {
+      //Sets the current position to the playback position whenever there is a change in the playback position
+      playbackPos(newVal) {
+        this.currentPos = newVal
+      }
+    },
+    created() {
+      if (this.playbackPos !== undefined)
+        this.currentPos = this.playbackPos
     }
-  },
-  watch:{
-    //Sets the current position to the playback position whenever there is a change in the playback position
-    playbackPos(newVal){
-      this.currentPos = newVal
-    }
-  }, created(){
-    if(this.playbackPos !== undefined)
-      this.currentPos = this.playbackPos
   }
-    }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .cols {
   display: grid;
@@ -57,10 +57,6 @@ export default {
   grid-column-gap: 1px;
   grid-row-gap: 1px;
 }
-/** .img {
-  background-image: url("../image.jpg");
-}
-*/
 .bor {
   border: 1px solid white;
   padding-bottom: 4em;
