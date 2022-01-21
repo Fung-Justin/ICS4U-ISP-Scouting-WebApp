@@ -112,7 +112,11 @@ export default {
   background-color: white;
   color: black;
 }
-
+@media(max-width: 1024px){
+  .card {
+    width: 100%;
+  }
+}
 </style>
 
 
