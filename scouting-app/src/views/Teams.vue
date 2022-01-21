@@ -12,16 +12,15 @@
                         <th v-on:click="sort('score')">Avg Score</th>
                         <th v-on:click="sort('wins')">Wins</th>
                         <th v-on:click="sort('losses')">Losses</th>
-                        <th v-on:click="sort('rp')">RP</th>
-                        <th v-on:click="sort('CargoRocket')">Avg Rocket Cargo</th>
-                        <th v-on:click="sort('CargoCB')">Avg CB Cargo</th>
-                        <th v-on:click="sort('HatchRocket')">Avg Rocket HP</th>
-                        <th v-on:click="sort('HatchCB')">Avg CB HP</th>
-                        <th v-on:click="sort('climb')">Avg Climb</th>
-                        <th v-on:click="sort('defense')">Avg Defense</th>
+                        <th title="Ranking Points" v-on:click="sort('rp')">RP</th>
+                        <th title="Total cargo scored in rocket from top to bottom" v-on:click="sort('CargoRocket')">Avg Rocket Cargo</th>
+                        <th title="Total cargo scored in Cargo Bay" v-on:click="sort('CargoCB')">Avg CB Cargo</th>
+                        <th title="Total Hatch Panels scored in rocket from top to bottom" v-on:click="sort('HatchRocket')">Avg Rocket HP</th>
+                        <th title="Total Hatch Panels scored in Cargo Bay" v-on:click="sort('HatchCB')">Avg CB HP</th>
+                        <th title="Level of endgame climb. 0 - on field, 1 - in hab, 2 - low climb, 3 - high climb" v-on:click="sort('climb')">Avg Climb</th>
+                        <th title="Level of defense on a scale from 1-4, with 0 meaning not played" v-on:click="sort('defense')">Avg Defense</th>
                     </tr>
                 </thead>
-                    <!-- Feel free to change the headings to make them consistent with Maya's -->
                 <tbody>
                 <tr id = 'tr-striped' v-for="stats in teams">
                     <td><h4 class="underline" v-on:click="this.$router.push(`team?team=${stats.teamNumber}`)">{{stats.teamNumber}}</h4></td>
@@ -64,6 +63,7 @@ export default{
         }
     },
     methods:{
+        // Uses match data to create stats for each team
         initTeamStats(matches){
             for (let i = 0; i < matches.length; i++) {
                 let match = matches[i]
@@ -72,6 +72,7 @@ export default{
                     if(this.teams[j].teamNumber == match.teamNumber)
                         teamFound = true
                 }
+                // If the team in the match report does not already exist in the array, create it
                 if(!teamFound){
                     this.teams.push({
                         teamNumber: match.teamNumber,
@@ -93,10 +94,10 @@ export default{
                         score: 0
                     })
                 }
+                // Update team stats with match stats
                 for(let j = 0; j < this.teams.length; j++){
                     if(this.teams[j].teamNumber == match.teamNumber){
                         let team = this.teams[j]
-                        let line = false
                         team.matchesPlayed++
                         let climbTotal = 0
                         for(let k = 0; k < matches.length; k++){
@@ -127,10 +128,9 @@ export default{
                             team.wins++
                         else    
                             team.losses++
+                        // Goes through events for stats
                         for(let k = 0; k<match.events.length; k++){
                             let action = match.events[k]
-                            if(action.time<15&&action.event=="")
-                                line = true
                             if(action.event !== '' && action.event.search('intake') < 0){
                                 let piece = action.event.search(/cargo/i) > -1 ? 'Cargo' : 'Hatch'
                                 let index = action.event.search('Rocket')
@@ -138,7 +138,6 @@ export default{
                                 team[piece+location]++
                             }
                         }
-                        teamFound = true
                     }
                       
                 }
@@ -149,6 +148,7 @@ export default{
                 team.score+=(team.CargoRocketL+team.CargoRocketM+team.CargoRocketH+team.CargoCB)*3+(team.HatchRocketL+team.HatchRocketM+team.HatchRocketH+team.HatchCB)*2
             }
         },
+        // Controls the table sorting
         sort(field){
             if (field === this.currentSortField) this.sortAsc = !this.sortAsc
             else this.sortAsc = true
@@ -168,7 +168,6 @@ export default{
     async created(){
         const matches = await PostService.getPosts()
         this.initTeamStats(matches)
-        console.log(this.teams)
         this.completed = true
     }
 }
