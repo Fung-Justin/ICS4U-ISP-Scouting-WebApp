@@ -2,7 +2,7 @@
     <div>
         <Loading v-if="!completed"/>
         <section v-else>
-            <table id="main-table">
+            <table id="main-table" class="table table-bordered table-hover table-dark" style = "border-radius: 4px;">
                 <thead id="col-heading">
                     <tr>
                         <th>Team Number</th>
@@ -18,10 +18,10 @@
                         <th>Avg Defense</th>
                     </tr>
                     <!-- Feel free to change the headings to make them consistent with Maya's -->
+                <tr v-for="stats in teams">
+                    <TeamRow :stats='stats'>
+                </tr>
                 </thead>
-                <tbody>
-                    <TeamRow v-for="team in teams" :key="team.teamNumber" :stats="team"/>
-                </tbody>
             </table>
         </section>
     </div>
