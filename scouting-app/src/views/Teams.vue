@@ -156,6 +156,6 @@ export default{
 
 <style scoped>
 .table-bordered{
-    border: 2px solid white;
+    border: 1px solid white !important;
 }
 </style>
